@@ -23,6 +23,19 @@ namespace Alarm_Clock
         public MainWindow()
         {
             InitializeComponent();
+
+            this.KeyUp += MainWindow_KeyUp;
+
+        }
+
+        private void MainWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape)
+            {
+                Application.Current.Shutdown();
+            }
+
+            
         }
     }
 }
