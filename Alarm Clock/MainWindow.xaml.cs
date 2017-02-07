@@ -23,6 +23,7 @@ namespace Alarm_Clock
         public MainWindow()
         {
             InitializeComponent();
+            digitalTime.Content = DateTime.Now.ToShortTimeString();
         }
     }
 }
