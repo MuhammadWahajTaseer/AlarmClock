@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alarm_Clock"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="1200" Width="1920" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized">
     <Grid>
-        <Label x:Name="digitalTime" Content="00:00:00" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" FontSize="36"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label x:Name="digitalTime" Content="00:00:00" Margin="173,147,1311,911" FontSize="108" FontFamily="Century Gothic" Grid.RowSpan="2"/>
+        <Label x:Name="date" Content="MMM DD, YYYY" HorizontalAlignment="Left" Margin="173,103,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="56" Width="276" FontSize="36"/>
+        <Label x:Name="amORpm" Content="AM" HorizontalAlignment="Left" Margin="609,215,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="54" Width="118" FontSize="36"/>
 
     </Grid>
 </Window>
