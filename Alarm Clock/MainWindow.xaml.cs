@@ -18,18 +18,34 @@ namespace Alarm_Clock
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    
+
     public partial class MainWindow : Window
     {
+        public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
+        public event AlarmEventHandler Alarm;
         public MainWindow()
         {
             InitializeComponent();
-
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
+            AlarmEventArgs e = new AlarmEventArgs();
+            OnAlarm(e);
+
             this.KeyUp += MainWindow_KeyUp;
+        }
+
+        
+        private void MainWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Escape)
+            {
+                Application.Current.Shutdown();
+            } 
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -39,12 +55,12 @@ namespace Alarm_Clock
             date.Content = DateTime.Now.ToString("MMM dd, yyyy");
         }
 
-        private void MainWindow_KeyUp(object sender, KeyEventArgs e)
+       
+
+        protected virtual void OnAlarm(AlarmEventArgs e)
         {
-            if(e.Key == Key.Escape)
-            {
-                Application.Current.Shutdown();
-            } 
+            if (Alarm != null)
+                Alarm(this, e);
         }
     }
 }
