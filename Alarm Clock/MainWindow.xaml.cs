@@ -62,5 +62,19 @@ namespace Alarm_Clock
             if (Alarm != null)
                 Alarm(this, e);
         }
+
+        private void plusButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (slideMenu.IsVisible)
+            {
+                slideMenu.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                slideMenu.Visibility = System.Windows.Visibility.Visible;
+            }
+            
+        }
+
     }
 }
