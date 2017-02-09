@@ -18,13 +18,73 @@
             <Label x:Name="setAlarm_hours" Content="00" Canvas.Left="116" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
             <Label x:Name="setAlarm_minutes" Content="00" Canvas.Left="305" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
             <Label x:Name="setAlarm_colon" Content=":" Canvas.Left="209" Canvas.Top="140" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
-            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="#FF8723FF" BorderBrush="#FF8723FF" Foreground="Black"/>
-            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="#FF8723FF" BorderBrush="#FF8723FF" Foreground="Black"/>
-            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="#FF8723FF" BorderBrush="#FF8723FF" Foreground="Black"/>
-            <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="#FF8723FF" BorderBrush="#FF8723FF" Foreground="Black"/>
+            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
+            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
+            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
+            <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decMinutes_Click"/>
             <Label x:Name="setAlarm_amORpm" Content="AM" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Height="90" Width="100" FontSize="55" RenderTransformOrigin="0.454,1.889" Canvas.Left="448" Canvas.Top="194"/>
         </Canvas>
-        <Button x:Name="plusButton" Content="＋" HorizontalAlignment="Right" Margin="0,0,99,85" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="130" Click="plusButton_Click" BorderBrush="#008723FF" Foreground="Black" Height="130" FontSize="108" Background="#008723FF" RenderTransformOrigin="0.5,0.5" FontFamily="Century Gothic" FontWeight="Bold"/>
+        <Button x:Name="plusButton" Content="＋" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
+        <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
+            <Ellipse.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+            <Ellipse.Fill>
+                <RadialGradientBrush GradientOrigin="0.203,0.78">
+                    <GradientStop Color="#FF0016EE" Offset="1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,168" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FF140E95">
+            <Ellipse.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+        </Ellipse>
+        <Ellipse x:Name="Circle3" HorizontalAlignment="Left" Margin="127,413,0,187" Grid.RowSpan="2" Width="600" OpacityMask="Black" Fill="White">
+            <Ellipse.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+        </Ellipse>
+        <Ellipse x:Name="Circle4" HorizontalAlignment="Left" Margin="395,0,0,455" Grid.RowSpan="2" Width="64" Fill="#FF000C59" Height="64" VerticalAlignment="Bottom" Stroke="#FF000C59" OpacityMask="#FF000C59"/>
+        <Rectangle x:Name="SecondHand" HorizontalAlignment="Left" Margin="425,440,0,487" Grid.RowSpan="2" Width="4" Height="270" Fill="Black" RenderTransformOrigin="0.5,1">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Rectangle x:Name="MinuteHand" Fill="#FFFF2828" HorizontalAlignment="Left" Margin="415,492,0,487" Grid.RowSpan="2" Width="24" RenderTransformOrigin="0.5,1">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Rectangle x:Name="HourHand" Fill="#FF000C59" HorizontalAlignment="Left" Margin="415,558,0,487" Grid.RowSpan="2" Width="24" RenderTransformOrigin="0.5,1">
+            <Rectangle.Stroke>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Stroke>
+        </Rectangle>
+        <Label x:Name="Label12" Content="12" HorizontalAlignment="Left" Margin="397,403,0,0" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Top"/>
+        <Label x:Name="Label3" Content="3" HorizontalAlignment="Left" Margin="682,0,0,461" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Label x:Name="Label6" Content="6" HorizontalAlignment="Left" Margin="409,0,0,187" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Label x:Name="Label9" Content="9" HorizontalAlignment="Left" Margin="127,0,0,459" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
 
 
     </Grid>
