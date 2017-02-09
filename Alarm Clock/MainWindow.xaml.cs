@@ -43,8 +43,8 @@ namespace Alarm_Clock
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            AlarmEventArgs e = new AlarmEventArgs();
-            OnAlarm(e);
+            
+            
 
             this.KeyUp += MainWindow_KeyUp;
         }
@@ -103,7 +103,11 @@ namespace Alarm_Clock
             if(e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
-
+            }
+            else if (e.Key == Key.B)
+            {
+                AlarmEventArgs ev = new AlarmEventArgs();
+                OnAlarm(ev);
             }
             
         }
