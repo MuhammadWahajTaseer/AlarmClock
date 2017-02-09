@@ -60,5 +60,9 @@ namespace Alarm_Clock
             
         }
 
+        private void setAlarm_incHours_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
