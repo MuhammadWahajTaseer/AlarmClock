@@ -20,8 +20,13 @@ namespace Alarm_Clock
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    
+
     public partial class MainWindow : Window
     {
+        public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
+        public event AlarmEventHandler Alarm;
         //these are the objects of the min, hour, and second hand
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
@@ -32,14 +37,15 @@ namespace Alarm_Clock
             //initalizes the clock  
             InitializeComponent();
 
-
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            //takes in the keyboard input and if it's "esc" it closes the program down
+            AlarmEventArgs e = new AlarmEventArgs();
+            OnAlarm(e);
+
             this.KeyUp += MainWindow_KeyUp;
         }
 
@@ -71,6 +77,25 @@ namespace Alarm_Clock
             SecondHand.RenderTransform = SecHandTr;
         }
 
+       
+
+        protected virtual void OnAlarm(AlarmEventArgs e)
+        {
+            if (Alarm != null)
+                Alarm(this, e);
+        }
+
+        private void plusButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (slideMenu.IsVisible)
+            {
+                slideMenu.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                slideMenu.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
         /* This method closes the program down if the escape key is hit
          */ 
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
@@ -78,7 +103,9 @@ namespace Alarm_Clock
             if(e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
-            } 
+
+            }
+            
         }
 
     }
