@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Threading;
 
+
 namespace Alarm_Clock
 {
     /// <summary>
@@ -31,6 +32,12 @@ namespace Alarm_Clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
+
+
+
+        private int createAlarmHour = 0; 
+        private int createAlarmMin = 0;
+        private int createAlarmAMPM = 0;
 
         public MainWindow()
         {
@@ -89,11 +96,28 @@ namespace Alarm_Clock
         {
             if (slideMenu.IsVisible)
             {
+                //hide the slideMenu
                 slideMenu.Visibility = System.Windows.Visibility.Hidden;
+                //update the button to open/close the window
+                plusButton.Content = " + ";
+
+                //reset the create alarm to inital values
+                createAlarmAMPM = 0;
+                createAlarmHour = 0;
+                createAlarmMin = 0;
+                //update the visuals for the reset values
+                setAlarm_minutes.Content = "0" + "0";
+                setAlarm_hours.Content = "0" + "0";
+                setAlarm_amORpm.Content = "AM";
+
+                
+
             }
             else
             {
                 slideMenu.Visibility = System.Windows.Visibility.Visible;
+                //update the button to open/close the window
+                plusButton.Content = " - ";
             }
         }
         /* This method closes the program down if the escape key is hit
@@ -117,9 +141,138 @@ namespace Alarm_Clock
 
         }
 
+        //**When creating a new alarm** - decriment of the mins button  
         private void setAlarm_decMinutes_Click(object sender, RoutedEventArgs e)
         {
 
+            //if there are 0 mins in the label clicking up will change it to 59 mins
+            if (createAlarmMin == 0)
+            {
+                createAlarmMin = 59;
+                setAlarm_minutes.Content = createAlarmMin.ToString();
+            }
+            //if the minutes are inbetween or equal to 0 and 9 then add an extra "0" to format it 
+            else if (createAlarmMin >= 0 && createAlarmMin < 11)
+            {
+                createAlarmMin -= 1;
+                setAlarm_minutes.Content = "0" + createAlarmMin.ToString();
+
+            }
+            //otherwise just update the current minutes and update the label 
+            else
+            {
+                createAlarmMin -= 1;
+                setAlarm_minutes.Content = createAlarmMin.ToString();
+
+            }
+
         }
+
+
+        //**When creating a new alarm** - increment of the the mins button
+        private void setAlarm_incMinutes_Click(object sender, RoutedEventArgs e)
+        {
+            
+            //if there are 59 mins in the label clicking up will change it to 00 mins
+            if (createAlarmMin == 59)
+            {
+                createAlarmMin = 0;
+                setAlarm_minutes.Content = "0" + createAlarmMin.ToString();
+            }
+            //if the minutes are inbetween or equal to 0 and 9 then add an extra "0" to format it 
+            else if (createAlarmMin >= 0 && createAlarmMin<9)
+            {
+                createAlarmMin += 1;
+                setAlarm_minutes.Content = "0" + createAlarmMin.ToString();
+
+            }
+            //otherwise just update the current minutes and update the label 
+            else
+            {
+                createAlarmMin += 1;
+                setAlarm_minutes.Content = createAlarmMin.ToString();
+
+            }
+        }
+
+
+        //**When creating a new alarm** - decriment of the the hours button 
+        private void setAlarm_decHours_Click(object sender, RoutedEventArgs e)
+        {
+            //if there are 0 hours in the label clicking down will change it to 12 mins
+            if (createAlarmHour == 0 || createAlarmHour == 1)
+            {
+                createAlarmHour = 12;
+                setAlarm_hours.Content = createAlarmHour.ToString();
+            }
+            /*
+            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it 
+            else if (createAlarmHour >= 0 && createAlarmHour < 11)
+            {
+                createAlarmHour -= 1;
+                setAlarm_hours.Content = "0" + createAlarmHour.ToString();
+
+            }
+            */
+            //otherwise just update the current hours and update the label 
+            else
+            {
+                createAlarmHour -= 1;
+                setAlarm_hours.Content = createAlarmHour.ToString();
+
+            }
+        }
+
+        //**When creating a new alarm** - increment of the hours button
+        private void setAlarm_incHours_Click_1(object sender, RoutedEventArgs e)
+        {
+
+            //if there are 12 hours in the label clicking up will change it to 00 mins
+            if (createAlarmHour == 12)
+            {
+                createAlarmHour = 1;
+
+                //setAlarm_hours.Content = "0" + createAlarmHour.ToString();
+                setAlarm_hours.Content = createAlarmHour.ToString();
+            }
+            /*
+            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it 
+            else if (createAlarmHour >= 0 && createAlarmHour < 9)
+            {
+                createAlarmHour += 1;
+                setAlarm_hours.Content = "0" + createAlarmHour.ToString();
+
+            }
+            */
+
+            //otherwise just update the current hours and update the label 
+            else
+            {
+                createAlarmHour += 1;
+                setAlarm_hours.Content = createAlarmHour.ToString();
+
+            }
+
+        }
+
+        //**When creating a new alarm** - changing from "am -> pm" or "pm -> am"
+        private void setAlarm_amORpm_Click(object sender, RoutedEventArgs e)
+        {
+            //if the button is on AM it will change to PM
+            if(createAlarmAMPM == 0)
+            {
+                createAlarmAMPM = 1;
+                setAlarm_amORpm.Content = "PM";
+            }
+
+            //otherwise the button is on PM and it will change to AM
+            else
+            {
+                createAlarmAMPM = 0;
+                setAlarm_amORpm.Content = "AM";
+            }
+
+        }
+
     }
 }

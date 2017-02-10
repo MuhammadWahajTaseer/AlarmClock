@@ -6,6 +6,14 @@
         xmlns:local="clr-namespace:Alarm_Clock"
         mc:Ignorable="d"
         Title="MainWindow" Height="1200" Width="1920" WindowStyle="None" ResizeMode="NoResize" WindowState="Maximized">
+    <Window.Resources>
+        <Storyboard x:Key="OnLoaded1"/>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="SecondHand">
+            <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"/>
@@ -18,13 +26,13 @@
             <Label x:Name="setAlarm_hours" Content="00" Canvas.Left="116" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
             <Label x:Name="setAlarm_minutes" Content="00" Canvas.Left="305" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
             <Label x:Name="setAlarm_colon" Content=":" Canvas.Left="209" Canvas.Top="140" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
-            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
-            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
-            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black"/>
+            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_incHours_Click_1"/>
+            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_incMinutes_Click"/>
+            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decHours_Click"/>
             <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decMinutes_Click"/>
-            <Label x:Name="setAlarm_amORpm" Content="AM" HorizontalAlignment="Left" Grid.RowSpan="2" VerticalAlignment="Top" Height="90" Width="100" FontSize="55" RenderTransformOrigin="0.454,1.889" Canvas.Left="448" Canvas.Top="194"/>
+            <Button x:Name="setAlarm_amORpm" Content="AM" Height="89" Canvas.Left="462" Canvas.Top="186" Width="100" FontSize="55" Background="{x:Null}" Click="setAlarm_amORpm_Click"/>
         </Canvas>
-        <Button x:Name="plusButton" Content="＋" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
+        <Button x:Name="plusButton" Content="-" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
         <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
             <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
