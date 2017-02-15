@@ -32,7 +32,7 @@ namespace Alarm_Clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
-
+        
 
 
         private int createAlarmHour = 0; 
