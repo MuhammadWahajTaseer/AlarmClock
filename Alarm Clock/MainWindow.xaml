@@ -79,26 +79,13 @@
                 </LinearGradientBrush>
             </Rectangle.Stroke>
         </Rectangle>
-        <Rectangle x:Name="MinuteHand" Fill="#FFFF2828" HorizontalAlignment="Left" Margin="415,492,0,487" Grid.RowSpan="2" Width="24" RenderTransformOrigin="0.5,1">
-            <Rectangle.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Stroke>
-        </Rectangle>
-        <Rectangle x:Name="HourHand" Fill="#FF000C59" HorizontalAlignment="Left" Margin="415,558,0,487" Grid.RowSpan="2" Width="24" RenderTransformOrigin="0.5,1">
-            <Rectangle.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Stroke>
-        </Rectangle>
+
         <Label x:Name="Label12" Content="12" HorizontalAlignment="Left" Margin="397,403,0,0" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Top"/>
         <Label x:Name="Label3" Content="3" HorizontalAlignment="Left" Margin="682,0,0,461" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
         <Label x:Name="Label6" Content="6" HorizontalAlignment="Left" Margin="409,0,0,187" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
         <Label x:Name="Label9" Content="9" HorizontalAlignment="Left" Margin="127,0,0,459" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Image x:Name="HourHand" Margin="143.06,464,0,235.34" Grid.RowSpan="2" Source="minuteHand.png" Stretch="Fill" RenderTransformOrigin="0.494,0.501" HorizontalAlignment="Left" Width="583.94" />
+        <Image x:Name="MinuteHand" Margin="402.01,469,0,481.496" Grid.RowSpan="2" Source="minute-hand-mitchell-joh-.png" Stretch="Fill" HorizontalAlignment="Left" Width="46.99" RenderTransformOrigin="0.5,1"/>
 
 
     </Grid>
