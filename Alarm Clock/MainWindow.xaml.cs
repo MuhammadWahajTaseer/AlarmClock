@@ -28,6 +28,7 @@ namespace Alarm_Clock
     {
         public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
         public event AlarmEventHandler Alarm;
+
         //these are the objects of the min, hour, and second hand
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
@@ -35,9 +36,12 @@ namespace Alarm_Clock
 
 
 
-        private int createAlarmHour = 0; 
+        private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
+
+        LinkedList<String> alarms = new LinkedList<String>();
+        int index = 0;
 
         public MainWindow()
         {
@@ -82,6 +86,8 @@ namespace Alarm_Clock
             MinuteHand.RenderTransform = MinHandTr; 
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
+
+            alarmCheck();
         }
 
        
@@ -273,6 +279,50 @@ namespace Alarm_Clock
             }
 
         }
+
+        private void setAlarm_save_Click(object sender, RoutedEventArgs e)
+        {
+            String alarmMin = createAlarmMin.ToString();
+            if(alarmMin.Length == 1)
+            {
+                alarmMin = "0" + createAlarmMin.ToString();
+            }
+
+            String alarmAMPM = createAlarmAMPM == 0 ? "AM" : "PM"; 
+            alarms.AddLast(createAlarmHour.ToString() + ":" + alarmMin + " " + alarmAMPM);
+            index++;
+
+            // Prints out the alarm on the label
+            if (label_alarm.Content.ToString() == "") {
+                label_alarm.Content = alarms.Last();
+            }
+            else
+            {
+                // Add new label.. We will probably need to make a new linked list or array list for this
+            }
+            
+        }
+
+
+        private void alarmCheck()
+        {
+            // Getting the alarm itme in "hh:mm" format
+            String checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1];                                       // Problem
+
+            // Comparing real time to alarm time 
+            if (checker == (DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString()))
+            {
+                AlarmEventArgs ev = new AlarmEventArgs();
+                OnAlarm(ev);
+            }
+        }
+
+
+
+
+
+
+
 
     }
 }
