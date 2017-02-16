@@ -330,9 +330,18 @@ namespace Alarm_Clock
             slideMenu.Visibility = System.Windows.Visibility.Visible;
             setAlarm_hours.Content = alarms.Last().Split(':')[0];
             setAlarm_minutes.Content = alarms.Last().Split(':')[1].Split(' ')[0];
+            setAlarm_amORpm.Content = alarms.Last().Split(':')[1].Split(' ')[1];
 
             createAlarmHour = Int32.Parse(alarms.Last().Split(':')[0]);
             createAlarmMin = Int32.Parse(alarms.Last().Split(':')[1].Split(' ')[0]);
+            if(alarms.Last().Split(':')[1].Split(' ')[1] == "PM")
+            {
+                createAlarmAMPM = 1;
+            }else
+            {
+                createAlarmAMPM = 0;
+
+            }
         }
     }
 }
