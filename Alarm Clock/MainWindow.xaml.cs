@@ -32,11 +32,15 @@ namespace Alarm_Clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
+        
 
-        //this is for creating a new "alarm"
-        private int createAlarmHour = 0;
+
+        private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
+
+        LinkedList<String> alarms = new LinkedList<String>();
+        int index = 0;
 
         //private Boolean Manual = false;
        // private int HHours;
@@ -79,13 +83,12 @@ namespace Alarm_Clock
                 HourHandTr.Angle = (myDate.Hour * 30) + (myDate.Minute * 0.5);
                 SecHandTr.Angle = (myDate.Second * 6);
 
-                //moves the minute, second and hour hand  
-                MinuteHand.RenderTransform = MinHandTr;
-                HourHand.RenderTransform = HourHandTr;
-                SecondHand.RenderTransform = SecHandTr;
+            //moves the minute, second and hour hand  
+            MinuteHand.RenderTransform = MinHandTr; 
+            HourHand.RenderTransform = HourHandTr;
+            SecondHand.RenderTransform = SecHandTr;
 
-            
-
+            alarmCheck();
         }
 
 
@@ -276,7 +279,46 @@ namespace Alarm_Clock
 
         }
 
+        private void setAlarm_save_Click(object sender, RoutedEventArgs e)
+        {
+            String alarmMin = createAlarmMin.ToString();
+            if(alarmMin.Length == 1)
+            {
+                alarmMin = "0" + createAlarmMin.ToString();
+            }
 
-     
+            String alarmAMPM = createAlarmAMPM == 0 ? "AM" : "PM"; 
+            alarms.AddLast(createAlarmHour.ToString() + ":" + alarmMin + " " + alarmAMPM);
+            index++;
+
+            // Prints out the alarm on the label
+            if (label_alarm.Content.ToString() == "") {
+                label_alarm.Content = alarms.Last();
+                
+            }
+            else
+            {
+                // Add new label.. We will probably need to make a new linked list or array list for this
+            }
+            
+        }
+
+
+        private void alarmCheck()
+        {
+            // Getting the alarm itme in "hh:mm" format
+            if (alarms.Last != null) {
+                String checker = "";
+                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
+                if (checker == DateTime.Now.ToString("h:mm"))
+                {
+                    AlarmEventArgs ev = new AlarmEventArgs();
+                    OnAlarm(ev);
+                }
+                
+            }
+
+        }
+
     }
 }
