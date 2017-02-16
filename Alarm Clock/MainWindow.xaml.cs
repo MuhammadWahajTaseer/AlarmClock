@@ -54,8 +54,6 @@ namespace Alarm_Clock
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            
-            
 
             this.KeyUp += MainWindow_KeyUp;
         }
@@ -86,6 +84,7 @@ namespace Alarm_Clock
             MinuteHand.RenderTransform = MinHandTr; 
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
+
 
             alarmCheck();
         }
@@ -310,11 +309,15 @@ namespace Alarm_Clock
             // Getting the alarm itme in "hh:mm" format
             if (alarms.Last != null) {
                 String checker = "";
-                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
-                if (checker == DateTime.Now.ToString("h:mm"))
+                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0] + " " + alarms.Last().Split(':')[1].Split(' ')[1];
+                if (checker == DateTime.Now.ToString("h:mm tt"))
                 {
                     AlarmEventArgs ev = new AlarmEventArgs();
                     OnAlarm(ev);
+
+                    alarmEventCanvas.Visibility = System.Windows.Visibility.Visible;
+                    alarmTimeLabel.Content = checker;
+
                 }
                 
             }
