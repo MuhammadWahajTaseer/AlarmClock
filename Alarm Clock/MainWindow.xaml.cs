@@ -108,11 +108,11 @@ namespace Alarm_Clock
 
                 //reset the create alarm to inital values
                 createAlarmAMPM = 0;
-                createAlarmHour = 0;
+                createAlarmHour = 12;
                 createAlarmMin = 0;
                 //update the visuals for the reset values
                 setAlarm_minutes.Content = "0" + "0";
-                setAlarm_hours.Content = "0" + "0";
+                setAlarm_hours.Content = 12;
                 setAlarm_amORpm.Content = "AM";
 
                 
@@ -141,10 +141,6 @@ namespace Alarm_Clock
             
         }
 
-        private void setAlarm_incHours_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         //**When creating a new alarm** - decriment of the mins button  
         private void setAlarm_decMinutes_Click(object sender, RoutedEventArgs e)
@@ -300,7 +296,9 @@ namespace Alarm_Clock
             {
                 // Add new label.. We will probably need to make a new linked list or array list for this
             }
-            
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+
+
         }
 
 
@@ -324,12 +322,17 @@ namespace Alarm_Clock
 
         }
 
+        private void alarm_change(object sender, MouseButtonEventArgs e)
+        {
+           
+            String checker = "";
+            checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
+            slideMenu.Visibility = System.Windows.Visibility.Visible;
+            setAlarm_hours.Content = alarms.Last().Split(':')[0];
+            setAlarm_minutes.Content = alarms.Last().Split(':')[1].Split(' ')[0];
 
-
-
-
-
-
-
+            createAlarmHour = Int32.Parse(alarms.Last().Split(':')[0]);
+            createAlarmMin = Int32.Parse(alarms.Last().Split(':')[1].Split(' ')[0]);
+        }
     }
 }
