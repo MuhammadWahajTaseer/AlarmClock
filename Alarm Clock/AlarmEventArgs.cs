@@ -12,7 +12,7 @@ namespace Alarm_Clock
     {
         public AlarmEventArgs()
         {
-            SoundPlayer player = new SoundPlayer(@"C:\Users\hannah.rueb\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            SoundPlayer player = new SoundPlayer(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             player.Load();
             player.Play();
         }

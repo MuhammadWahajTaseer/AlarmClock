@@ -295,6 +295,7 @@ namespace Alarm_Clock
             // Prints out the alarm on the label
             if (label_alarm.Content.ToString() == "") {
                 label_alarm.Content = alarms.Last();
+                
             }
             else
             {
@@ -307,14 +308,17 @@ namespace Alarm_Clock
         private void alarmCheck()
         {
             // Getting the alarm itme in "hh:mm" format
-            String checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1];                                       // Problem
-
-            // Comparing real time to alarm time 
-            if (checker == (DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString()))
-            {
-                AlarmEventArgs ev = new AlarmEventArgs();
-                OnAlarm(ev);
+            if (alarms.Last != null) {
+                String checker = "";
+                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
+                if (checker == DateTime.Now.ToString("h:mm"))
+                {
+                    AlarmEventArgs ev = new AlarmEventArgs();
+                    OnAlarm(ev);
+                }
+                
             }
+
         }
 
 
