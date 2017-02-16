@@ -22,22 +22,26 @@ namespace Alarm_Clock
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    
+
 
     public partial class MainWindow : Window
     {
         public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
         public event AlarmEventHandler Alarm;
-        //these are the objects of the min, hour, and second hand
+        //these are the objects of the min, hour, and second hand for the analog clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
 
-
-
-        private int createAlarmHour = 0; 
+        //this is for creating a new "alarm"
+        private int createAlarmHour = 0;
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
+
+        //private Boolean Manual = false;
+       // private int HHours;
+        //private int HMins;
+       // private int HAM_PM;
 
         public MainWindow()
         {
@@ -46,12 +50,9 @@ namespace Alarm_Clock
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            
+
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
-
-            
-            
 
             this.KeyUp += MainWindow_KeyUp;
         }
@@ -62,29 +63,32 @@ namespace Alarm_Clock
          */
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
+            var myDate = DateTime.Now;
 
-            /* digital clock
-             * displays the time, date and am
-             */ 
-            digitalTime.Content = DateTime.Now.ToString("hh:mm:ss"); //hours:minutes: seconds   
-            amORpm.Content = DateTime.Now.ToString("tt"); //AM or PM 
-            date.Content = DateTime.Now.ToString("MMM dd, yyyy"); //month day, year 
+                /* digital clock
+                 * displays the time, date and am
+                 */
+                digitalTime.Content = myDate.ToString("hh:mm:ss"); //hours:minutes: seconds   
+                amORpm.Content = myDate.ToString("tt"); //AM or PM 
+                date.Content = myDate.ToString("MMM dd, yyyy"); //month day, year 
 
 
+                //analog clock
+                //calculates angles for the minute, hour and second hand 
+                MinHandTr.Angle = (myDate.Minute * 6);
+                HourHandTr.Angle = (myDate.Hour * 30) + (myDate.Minute * 0.5);
+                SecHandTr.Angle = (myDate.Second * 6);
 
-            //analog clock
-            //calculates angles for the minute, hour and second hand 
-            MinHandTr.Angle = (DateTime.Now.Minute * 6); 
-            HourHandTr.Angle = (DateTime.Now.Hour * 30) + (DateTime.Now.Minute * 0.5); 
-            SecHandTr.Angle = (DateTime.Now.Second * 6); 
+                //moves the minute, second and hour hand  
+                MinuteHand.RenderTransform = MinHandTr;
+                HourHand.RenderTransform = HourHandTr;
+                SecondHand.RenderTransform = SecHandTr;
 
-            //moves the minute, second and hour hand  
-            MinuteHand.RenderTransform = MinHandTr; 
-            HourHand.RenderTransform = HourHandTr;
-            SecondHand.RenderTransform = SecHandTr;
+            
+
         }
 
-       
+
 
         protected virtual void OnAlarm(AlarmEventArgs e)
         {
@@ -110,8 +114,6 @@ namespace Alarm_Clock
                 setAlarm_hours.Content = "0" + "0";
                 setAlarm_amORpm.Content = "AM";
 
-                
-
             }
             else
             {
@@ -121,10 +123,10 @@ namespace Alarm_Clock
             }
         }
         /* This method closes the program down if the escape key is hit
-         */ 
+         */
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
             }
@@ -133,7 +135,7 @@ namespace Alarm_Clock
                 AlarmEventArgs ev = new AlarmEventArgs();
                 OnAlarm(ev);
             }
-            
+
         }
 
         private void setAlarm_incHours_Click(object sender, RoutedEventArgs e)
@@ -172,7 +174,7 @@ namespace Alarm_Clock
         //**When creating a new alarm** - increment of the the mins button
         private void setAlarm_incMinutes_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //if there are 59 mins in the label clicking up will change it to 00 mins
             if (createAlarmMin == 59)
             {
@@ -180,7 +182,7 @@ namespace Alarm_Clock
                 setAlarm_minutes.Content = "0" + createAlarmMin.ToString();
             }
             //if the minutes are inbetween or equal to 0 and 9 then add an extra "0" to format it 
-            else if (createAlarmMin >= 0 && createAlarmMin<9)
+            else if (createAlarmMin >= 0 && createAlarmMin < 9)
             {
                 createAlarmMin += 1;
                 setAlarm_minutes.Content = "0" + createAlarmMin.ToString();
@@ -259,7 +261,7 @@ namespace Alarm_Clock
         private void setAlarm_amORpm_Click(object sender, RoutedEventArgs e)
         {
             //if the button is on AM it will change to PM
-            if(createAlarmAMPM == 0)
+            if (createAlarmAMPM == 0)
             {
                 createAlarmAMPM = 1;
                 setAlarm_amORpm.Content = "PM";
@@ -274,5 +276,7 @@ namespace Alarm_Clock
 
         }
 
+
+     
     }
 }
