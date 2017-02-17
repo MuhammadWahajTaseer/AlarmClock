@@ -40,8 +40,8 @@ namespace Alarm_Clock
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        LinkedList<String> alarms = new LinkedList<String>();
-        int index = 0;
+        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        //int index = 0;
 
         public MainWindow()
         {
@@ -54,8 +54,6 @@ namespace Alarm_Clock
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            
-            
 
             this.KeyUp += MainWindow_KeyUp;
         }
@@ -87,7 +85,8 @@ namespace Alarm_Clock
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
 
-            alarmCheck();
+
+           // alarmCheck();
         }
 
        
@@ -278,15 +277,24 @@ namespace Alarm_Clock
 
         private void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
+            // ** Need to also check if it's repeating and send the last bool acordingly
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+
+            alarms.AddLast(myAlarm);
+
+
+            /**
             String alarmMin = createAlarmMin.ToString();
             if(alarmMin.Length == 1)
             {
                 alarmMin = "0" + createAlarmMin.ToString();
             }
-
+            
             String alarmAMPM = createAlarmAMPM == 0 ? "AM" : "PM"; 
             alarms.AddLast(createAlarmHour.ToString() + ":" + alarmMin + " " + alarmAMPM);
-            index++;
+            index++; 
+
+
 
             // Prints out the alarm on the label
             if (label_alarm.Content.ToString() == "") {
@@ -297,22 +305,53 @@ namespace Alarm_Clock
             {
                 // Add new label.. We will probably need to make a new linked list or array list for this
             }
-            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+            slideMenu.Visibility = System.Windows.Visibility.Hidden; */
+
+            if (label_alarm.Content.ToString() == "")
+            {
+                Alarm latest = alarms.Last();
+                String tempMin = latest.getMin().ToString();
+
+                if (tempMin.Length == 1)
+                {
+                    tempMin = "0" + tempMin;
+                }
 
 
+                if (latest.getAMPM() == 0) {
+                    label_alarm.Content = (latest.getHour() + ":" + tempMin + " AM");
+                }
+                else
+                {
+                    label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
+                }
+                slideMenu.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
 
+        private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (alarms.Count != 0)
+            {
 
+            }
+        }
+
+        /**
         private void alarmCheck()
         {
             // Getting the alarm itme in "hh:mm" format
             if (alarms.Last != null) {
                 String checker = "";
-                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
-                if (checker == DateTime.Now.ToString("h:mm"))
+                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0] + " " + alarms.Last().Split(':')[1].Split(' ')[1];
+                if (checker == DateTime.Now.ToString("h:mm tt"))
                 {
                     AlarmEventArgs ev = new AlarmEventArgs();
                     OnAlarm(ev);
+
+                    alarmEventCanvas.Visibility = System.Windows.Visibility.Visible;
+                    alarmTimeLabel.Content = checker;
+
                 }
                 
             }
@@ -327,14 +366,21 @@ namespace Alarm_Clock
             slideMenu.Visibility = System.Windows.Visibility.Visible;
             setAlarm_hours.Content = alarms.Last().Split(':')[0];
             setAlarm_minutes.Content = alarms.Last().Split(':')[1].Split(' ')[0];
+            setAlarm_amORpm.Content = alarms.Last().Split(':')[1].Split(' ')[1];
 
             createAlarmHour = Int32.Parse(alarms.Last().Split(':')[0]);
             createAlarmMin = Int32.Parse(alarms.Last().Split(':')[1].Split(' ')[0]);
-        }
+            if(alarms.Last().Split(':')[1].Split(' ')[1] == "PM")
+            {
+                createAlarmAMPM = 1;
+            }else
+            {
+                createAlarmAMPM = 0;
 
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            }
+        }*/
 
-        }
+        private void alarm_change(object sender, MouseButtonEventArgs e) { }
     }
 }
+
