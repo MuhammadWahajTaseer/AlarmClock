@@ -331,5 +331,10 @@ namespace Alarm_Clock
             createAlarmHour = Int32.Parse(alarms.Last().Split(':')[0]);
             createAlarmMin = Int32.Parse(alarms.Last().Split(':')[1].Split(' ')[0]);
         }
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

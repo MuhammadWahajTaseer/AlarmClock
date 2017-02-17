@@ -19,8 +19,8 @@
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="1200" Margin="1320,0,0,0" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="600" Background="#FFB9AFAF">
-            <Label x:Name="label_alarm" Content="" Height="119" Width="580" FontSize="72" ScrollViewer.VerticalScrollBarVisibility="Auto" MouseDoubleClick="alarm_change"/>
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="1320,12,0,0" Grid.RowSpan="2" Width="600" BorderBrush="{x:Null}" Height="1200" VerticalAlignment="Bottom" SelectionChanged="listBox_SelectionChanged" Background="White">
+            <Label x:Name="label_alarm" Content="" Height="120" Width="582" FontSize="72" ScrollViewer.VerticalScrollBarVisibility="Auto" MouseDoubleClick="alarm_change" Background="#FFECECEC"/>
 
         </ListBox>
 
@@ -39,7 +39,10 @@
             <Button x:Name="setAlarm_amORpm" Content="AM" Height="89" Canvas.Left="462" Canvas.Top="186" Width="100" FontSize="55" Background="{x:Null}" Click="setAlarm_amORpm_Click" BorderBrush="{x:Null}"/>
             <Button x:Name="setAlarm_save" Content="SAVE" Height="89" Canvas.Left="305" Canvas.Top="426" Width="257" FontSize="55" Background="Black" Click="setAlarm_save_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Century Gothic"/>
         </Canvas>
-        <Button x:Name="plusButton" Content="-" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
+
+
+
+        <Button x:Name="plusButton" Content="+" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
         <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
             <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -81,10 +84,10 @@
             </Rectangle.Stroke>
         </Rectangle>
 
-        <Label x:Name="Label12" Content="12" HorizontalAlignment="Left" Margin="397,403,0,0" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Top"/>
-        <Label x:Name="Label3" Content="3" HorizontalAlignment="Left" Margin="682,0,0,461" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
-        <Label x:Name="Label6" Content="6" HorizontalAlignment="Left" Margin="409,0,0,187" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
-        <Label x:Name="Label9" Content="9" HorizontalAlignment="Left" Margin="127,0,0,459" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Showcard Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Label x:Name="Label12" Content="12" HorizontalAlignment="Left" Margin="397,403,0,0" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Top"/>
+        <Label x:Name="Label3" Content="3" HorizontalAlignment="Left" Margin="682,0,0,461" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Label x:Name="Label6" Content="6" HorizontalAlignment="Left" Margin="409,0,0,187" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
+        <Label x:Name="Label9" Content="9" HorizontalAlignment="Left" Margin="127,0,0,459" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
         <Image x:Name="HourHand" Margin="143.06,464,0,235.34" Grid.RowSpan="2" Source="minuteHand.png" Stretch="Fill" RenderTransformOrigin="0.494,0.501" HorizontalAlignment="Left" Width="583.94" />
         <Image x:Name="MinuteHand" Margin="402.01,469,0,481.496" Grid.RowSpan="2" Source="minute-hand-mitchell-joh-.png" Stretch="Fill" HorizontalAlignment="Left" Width="46.99" RenderTransformOrigin="0.5,1"/>
 
