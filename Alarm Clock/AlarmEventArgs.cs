@@ -10,12 +10,24 @@ namespace Alarm_Clock
 {
     public class AlarmEventArgs : EventArgs
     {
-        public AlarmEventArgs()
+        private bool dismissed = false;
+        SoundPlayer player;
+        public AlarmEventArgs(bool ring)
         {
-            SoundPlayer player = new SoundPlayer(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            player = new SoundPlayer(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             player.Load();
+          
+        }
+        private void playSound()
+        {
             player.Play();
         }
+
+        private void stopSound()
+        {
+            player.Stop();
+        }
+ 
       
     }
 

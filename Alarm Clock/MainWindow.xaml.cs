@@ -54,8 +54,14 @@ namespace Alarm_Clock
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
+            this.Alarm += MainWindow_Alarm;
 
             this.KeyUp += MainWindow_KeyUp;
+        }
+
+        private void MainWindow_Alarm(object sender, AlarmEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /* this method is an event driven system for analog and digital clock
@@ -124,6 +130,13 @@ namespace Alarm_Clock
                 //update the button to open/close the window
                 plusButton.Content = " - ";
             }
+        }
+        private void dismissButton_Click(object sender, RoutedEventArgs e)
+        {
+            AlarmEventArgs ev = new AlarmEventArgs();
+            OnAlarm(ev);
+
+            alarmEventCanvas.Visibility = System.Windows.Visibility.Hidden;
         }
         /* This method closes the program down if the escape key is hit
          */ 
