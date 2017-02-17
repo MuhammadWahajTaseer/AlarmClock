@@ -279,6 +279,7 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            myAlarm.setID(alarms.Count+1);
 
             alarms.AddLast(myAlarm);
 
@@ -380,7 +381,36 @@ namespace Alarm_Clock
             }
         }*/
 
-        private void alarm_change(object sender, MouseButtonEventArgs e) { }
+        private void alarm_change(object sender, MouseButtonEventArgs e) {
+            if (alarms.Count == 0)
+            {
+                return;
+            }
+            Alarm edited = alarms.Last();
+            slideMenu.Visibility = Visibility.Visible;
+            setAlarm_hours.Content = edited.getHour();
+            setAlarm_minutes.Content = edited.getMin();
+            if(edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }else {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+            createAlarmHour = edited.getHour();
+
+            createAlarmMin = edited.getMin();
+            if (edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }
+            else
+            {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+
+        }
     }
 }
 

@@ -8,6 +8,7 @@ namespace Alarm_Clock
 {
     class Alarm
     {
+        private int id;
         private int hour;
         private int minute;
         private int ampm;
@@ -54,6 +55,11 @@ namespace Alarm_Clock
         }
 
         // Getters
+        public int getID()
+        {
+            return id;
+        }
+
         public int getHour()
         {
             return hour;
@@ -85,10 +91,25 @@ namespace Alarm_Clock
         }
 
 
+
         // Setters
+        public void setID(int id)
+        {
+            this.id = id;
+        }
+
         public void setHour(int hour)
         {
             this.hour = hour;
+        }
+
+        public void setMin(int mins)
+        {
+            this.minute = mins;
+        }
+        public void setAMPM(int amopm)
+        {
+            this.ampm = amopm;
         }
         //....................
 
