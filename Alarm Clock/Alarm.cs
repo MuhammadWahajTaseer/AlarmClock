@@ -90,6 +90,15 @@ namespace Alarm_Clock
         {
             this.hour = hour;
         }
+
+        public void setMin(int mins)
+        {
+            this.minute = mins;
+        }
+        public void setAMPM(int amopm)
+        {
+            this.ampm = amopm;
+        }
         //....................
 
 

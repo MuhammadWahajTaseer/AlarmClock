@@ -374,6 +374,30 @@ namespace Alarm_Clock
             }
         }*/
 
-        private void alarm_change(object sender, MouseButtonEventArgs e) { }
+        private void alarm_change(object sender, MouseButtonEventArgs e) {
+            Alarm edited = alarms.Last();
+            slideMenu.Visibility = Visibility.Visible;
+            setAlarm_hours.Content = edited.getHour();
+            setAlarm_minutes.Content = edited.getMin();
+            if(edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }else {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+            createAlarmHour = edited.getHour();
+            createAlarmMin = edited.getMin();
+            if (edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }
+            else
+            {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+
+        }
     }
 }
