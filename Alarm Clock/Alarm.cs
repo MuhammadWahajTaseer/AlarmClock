@@ -53,5 +53,45 @@ namespace Alarm_Clock
             this.ringerPath = ringerPath;
         }
 
+        // Getters
+        public int getHour()
+        {
+            return hour;
+        }
+
+        public int getMin()
+        {
+            return minute;
+        }
+
+        public int getAMPM()
+        {
+            return ampm;
+        }
+
+        public bool getRepeating()
+        {
+            return repeating;
+        }
+
+        public bool[] getDays()
+        {
+            return days;
+        }
+
+        public String getRingerPath()
+        {
+            return ringerPath;
+        }
+
+
+        // Setters
+        public void setHour(int hour)
+        {
+            this.hour = hour;
+        }
+        //....................
+
+
     }
 }
