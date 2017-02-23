@@ -304,10 +304,10 @@ namespace Alarm_Clock
             // Updating Stack Panel
             stacky.Children.Add(userAlarm);
 
-            if (userAlarm.alarm_button.IsPressed)
-            {
-                slideMenu.Visibility = Visibility.Visible;
-            }
+            // Linking the user alarm to the alarm object
+            myAlarm.setUserAlarm(userAlarm);
+            userAlarm.setAlarm(myAlarm);
+            
             //listBox.Items.Add(temp);
 
             // Source of list box will be linked list
@@ -430,6 +430,11 @@ namespace Alarm_Clock
                 setAlarm_amORpm.Content = " PM";
             }
 
+
+        }
+
+        private void editAlarm_save_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }
