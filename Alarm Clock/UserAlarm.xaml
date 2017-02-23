@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Alarm_Clock.UserAlarm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Alarm_Clock"
+             mc:Ignorable="d" Height="53.18" Width="380.925">
+    <Grid Margin="0,0,0,263">
+        <Button x:Name="alarm_button" Content="TI : ME AM" HorizontalAlignment="Left" Height="51" Margin="0,0,0,-51" VerticalAlignment="Top" Width="380" FontSize="36" Click="alarm_button_Click" />
+    </Grid>
+</UserControl>

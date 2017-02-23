@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Alarm_Clock
 {
-    class Alarm
+    public class Alarm
     {
+        private int id;
         private int hour;
         private int minute;
         private int ampm;
@@ -19,6 +20,9 @@ namespace Alarm_Clock
 
         // path for the ringer sound file
         private String ringerPath = null;
+
+        // Linnking to user conrol (user alarm)
+        private UserAlarm  userAlarm =  null;
 
 
         // Constructor initializes the time
@@ -54,6 +58,11 @@ namespace Alarm_Clock
         }
 
         // Getters
+        public int getID()
+        {
+            return id;
+        }
+
         public int getHour()
         {
             return hour;
@@ -84,11 +93,51 @@ namespace Alarm_Clock
             return ringerPath;
         }
 
+        public String getString()
+        {
+
+            String tempMin = minute.ToString();
+            if (minute < 10)
+            {
+                tempMin = "0" + tempMin;
+            }
+           
+            String temp = this.getHour() + ":" + tempMin;
+               
+            if (this.getAMPM() == 0)
+            {
+                temp += " AM";
+            }
+            else
+            {
+                temp += " PM";
+            }
+            return temp;
+        }
 
         // Setters
+        public void setUserAlarm(UserAlarm userAlarm)
+        {
+            this.userAlarm = userAlarm;
+        }
+
+        public void setID(int id)
+        {
+            this.id = id;
+        }
+
         public void setHour(int hour)
         {
             this.hour = hour;
+        }
+
+        public void setMin(int mins)
+        {
+            this.minute = mins;
+        }
+        public void setAMPM(int amopm)
+        {
+            this.ampm = amopm;
         }
         //....................
 
