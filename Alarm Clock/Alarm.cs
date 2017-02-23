@@ -90,7 +90,23 @@ namespace Alarm_Clock
             return ringerPath;
         }
 
+        public String getString()
+        {
 
+            String temp = this.getHour() + ":" + this.getMin();
+               
+
+           
+            if (this.getAMPM() == 0)
+            {
+                temp += " " + "AM";
+            }
+            else
+            {
+                temp += " " + "PM";
+            }
+            return temp;
+        }
 
         // Setters
         public void setID(int id)

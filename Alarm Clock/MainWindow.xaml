@@ -19,16 +19,20 @@
             <RowDefinition Height="0*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView x:Name="lbTodoList" HorizontalAlignment="Left" Margin="1320,0,0,0" Grid.RowSpan="2" Width="600" BorderBrush="{x:Null}" Height="1200" VerticalAlignment="Bottom"  Background="White" SelectionChanged="lbTodoList">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="1320,0,0,0" Grid.RowSpan="2" Width="600" BorderBrush="{x:Null}" Height="1190" VerticalAlignment="Bottom"  Background="White">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                       
+                        <TextBlock Text="{Binding hour}" />
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
 
 
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="CURRENT ALARMS" Width="500" DisplayMemberBinding="{Binding Name}" />
 
-                </GridView>
-            </ListView.View>
-        </ListView>
+        </ListBox>
 
 
         <Label x:Name="digitalTime" Content="00:00:00" Margin="173,147,1311,911" FontSize="108" FontFamily="Century Gothic" Grid.RowSpan="2"/>

@@ -32,14 +32,16 @@ namespace Alarm_Clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
-        
+
+        private Alarm previousAlarm;
+       
 
 
         private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        List<Alarm> alarms = new List<Alarm>();
         //int index = 0;
 
         //private Boolean Manual = false;
@@ -282,61 +284,45 @@ namespace Alarm_Clock
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
 
-            alarms.AddLast(myAlarm);
+            listBox.FontSize = 60;
+
+            //Getting the String and putting it in the lilnked list
+            String temp = myAlarm.getString();
+            alarms.Add(myAlarm);
 
 
-            /**
-            String alarmMin = createAlarmMin.ToString();
-            if(alarmMin.Length == 1)
-            {
-                alarmMin = "0" + createAlarmMin.ToString();
-            }
+            //listBox.Items.Add(temp);
+
+            // Source of list box will be linked list
+            listBox.ItemsSource = alarms;
+
+
             
-            String alarmAMPM = createAlarmAMPM == 0 ? "AM" : "PM"; 
-            alarms.AddLast(createAlarmHour.ToString() + ":" + alarmMin + " " + alarmAMPM);
-            index++; 
 
 
 
-            // Prints out the alarm on the label
-            if (label_alarm.Content.ToString() == "") {
-                label_alarm.Content = alarms.Last();
-                
+            /**Alarm latest = alarms.Last();
+            String tempMin = latest.getMin().ToString();
+
+            if (tempMin.Length == 1)
+            {
+                tempMin = "0" + tempMin;
+            }
+
+
+            if (latest.getAMPM() == 0) {
+                label_alarm.Content = (latest.getHour() + ":" + tempMin + " AM");
             }
             else
             {
-                // Add new label.. We will probably need to make a new linked list or array list for this
-            }
-            slideMenu.Visibility = System.Windows.Visibility.Hidden; */
+                label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
+            }**/
 
 
+            slideMenu.Visibility = System.Windows.Visibility.Hidden; 
+            
 
-
-
-
-            //*******************************************************************************
-            /*
-            if (.Content.ToString() == "")
-            {
-                Alarm latest = alarms.Last();
-                String tempMin = latest.getMin().ToString();
-
-                if (tempMin.Length == 1)
-                {
-                    tempMin = "0" + tempMin;
-                }
-
-
-                if (latest.getAMPM() == 0) {
-                    label_alarm.Content = (latest.getHour() + ":" + tempMin + " AM");
-                }
-                else
-                {
-                    label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
-                }
-                slideMenu.Visibility = System.Windows.Visibility.Hidden;
-            }*/
-            //*********************************************************************************
+            
         }
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
@@ -396,10 +382,20 @@ namespace Alarm_Clock
                 return;
             }
             Alarm edited = alarms.Last();
+            
             slideMenu.Visibility = Visibility.Visible;
             setAlarm_hours.Content = edited.getHour();
-            setAlarm_minutes.Content = edited.getMin();
-            if(edited.getAMPM() == 0)
+
+            int getmin = edited.getMin();
+            if(getmin < 10)
+            {
+                setAlarm_minutes.Content = "0" + edited.getMin();
+            }else {
+                setAlarm_minutes.Content = edited.getMin();
+            }
+
+
+            if (edited.getAMPM() == 0)
             {
                 setAlarm_amORpm.Content = " AM";
             }else {
@@ -412,31 +408,13 @@ namespace Alarm_Clock
             if (edited.getAMPM() == 0)
             {
                 setAlarm_amORpm.Content = " AM";
-            }
-            else
+            } else
             {
                 setAlarm_amORpm.Content = " PM";
             }
 
 
         }
-
-    }
-    public void ListViewGridViewSample()
-    {
-
-        List<Alarm> items = new List<Alarm>();
-
-        Alarm test = new Alarm(12, 00, 0, false);
-
-
-        items.Add(test { getHour(), getMin(),  });
-        items.Add(new User() { Name = "Jane Doe", Age = 39, Mail = "jane@doe-family.com" });
-        items.Add(new User() { Name = "Sammy Doe", Age = 7, Mail = "sammy.doe@gmail.com" });
-        alarm_list.ItemsSource = items;
-     
     }
 }
- 
-
 
