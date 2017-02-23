@@ -280,6 +280,7 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            myAlarm.setID(alarms.Count+1);
 
             alarms.AddLast(myAlarm);
 
@@ -308,7 +309,14 @@ namespace Alarm_Clock
             }
             slideMenu.Visibility = System.Windows.Visibility.Hidden; */
 
-            if (label_alarm.Content.ToString() == "")
+
+
+
+
+
+            //*******************************************************************************
+            /*
+            if (.Content.ToString() == "")
             {
                 Alarm latest = alarms.Last();
                 String tempMin = latest.getMin().ToString();
@@ -327,9 +335,16 @@ namespace Alarm_Clock
                     label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
                 }
                 slideMenu.Visibility = System.Windows.Visibility.Hidden;
+            }*/
+            //*********************************************************************************
+        }
+
+        private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (alarms.Count != 0)
+            {
+
             }
-
-
         }
 
         /**
@@ -375,6 +390,53 @@ namespace Alarm_Clock
             }
         }*/
 
-        private void alarm_change(object sender, MouseButtonEventArgs e) { }
+        private void alarm_change(object sender, MouseButtonEventArgs e) {
+            if (alarms.Count == 0)
+            {
+                return;
+            }
+            Alarm edited = alarms.Last();
+            slideMenu.Visibility = Visibility.Visible;
+            setAlarm_hours.Content = edited.getHour();
+            setAlarm_minutes.Content = edited.getMin();
+            if(edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }else {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+            createAlarmHour = edited.getHour();
+
+            createAlarmMin = edited.getMin();
+            if (edited.getAMPM() == 0)
+            {
+                setAlarm_amORpm.Content = " AM";
+            }
+            else
+            {
+                setAlarm_amORpm.Content = " PM";
+            }
+
+
+        }
+
+    }
+    public void ListViewGridViewSample()
+    {
+
+        List<Alarm> items = new List<Alarm>();
+
+        Alarm test = new Alarm(12, 00, 0, false);
+
+
+        items.Add(test { getHour(), getMin(),  });
+        items.Add(new User() { Name = "Jane Doe", Age = 39, Mail = "jane@doe-family.com" });
+        items.Add(new User() { Name = "Sammy Doe", Age = 7, Mail = "sammy.doe@gmail.com" });
+        alarm_list.ItemsSource = items;
+     
     }
 }
+ 
+
+
