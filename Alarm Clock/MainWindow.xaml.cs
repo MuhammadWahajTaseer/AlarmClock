@@ -48,21 +48,25 @@ namespace Alarm_Clock
             //initalizes the clock  
             InitializeComponent();
 
+            AlarmRing ring = new AlarmRing();
+
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            this.Alarm += MainWindow_Alarm;
+            ring.AlarmRings += Ring_AlarmRings;
 
             this.KeyUp += MainWindow_KeyUp;
         }
 
-        private void MainWindow_Alarm(object sender, AlarmEventArgs e)
+        private void Ring_AlarmRings(object sender, EventArgs e)
         {
             throw new NotImplementedException();
         }
+
+        
 
         /* this method is an event driven system for analog and digital clock
          * event is called every "tick" which is one second
@@ -295,31 +299,6 @@ namespace Alarm_Clock
 
             alarms.AddLast(myAlarm);
 
-
-            /**
-            String alarmMin = createAlarmMin.ToString();
-            if(alarmMin.Length == 1)
-            {
-                alarmMin = "0" + createAlarmMin.ToString();
-            }
-            
-            String alarmAMPM = createAlarmAMPM == 0 ? "AM" : "PM"; 
-            alarms.AddLast(createAlarmHour.ToString() + ":" + alarmMin + " " + alarmAMPM);
-            index++; 
-
-
-
-            // Prints out the alarm on the label
-            if (label_alarm.Content.ToString() == "") {
-                label_alarm.Content = alarms.Last();
-                
-            }
-            else
-            {
-                // Add new label.. We will probably need to make a new linked list or array list for this
-            }
-            slideMenu.Visibility = System.Windows.Visibility.Hidden; */
-
             if (label_alarm.Content.ToString() == "")
             {
                 Alarm latest = alarms.Last();
@@ -344,27 +323,20 @@ namespace Alarm_Clock
 
         }
 
-        /**
-        private void alarmCheck()
+        
+        private void alarmCheck(AlarmRing ring)
         {
             // Getting the alarm itme in "hh:mm" format
             if (alarms.Last != null) {
-                String checker = "";
-                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0] + " " + alarms.Last().Split(':')[1].Split(' ')[1];
-                if (checker == DateTime.Now.ToString("h:mm tt"))
+              foreach(Alarm alarm in alarms)
                 {
-                    AlarmEventArgs ev = new AlarmEventArgs();
-                    OnAlarm(ev);
-
-                    alarmEventCanvas.Visibility = System.Windows.Visibility.Visible;
-                    alarmTimeLabel.Content = checker;
-
+                    String checker = alarm.getHour().ToString() + alarm.getMin().ToString() + alarm.getAMPM().ToString();
+                    ring.compareTime(alarm.getRingerPath(), checker);
                 }
-                
             }
 
         }
-
+        /*
         private void alarm_change(object sender, MouseButtonEventArgs e)
         {
            
