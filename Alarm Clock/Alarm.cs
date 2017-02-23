@@ -93,17 +93,21 @@ namespace Alarm_Clock
         public String getString()
         {
 
-            String temp = this.getHour() + ":" + this.getMin();
-               
-
+            String tempMin = minute.ToString();
+            if (minute < 10)
+            {
+                tempMin = "0" + tempMin;
+            }
            
+            String temp = this.getHour() + ":" + tempMin;
+               
             if (this.getAMPM() == 0)
             {
-                temp += " " + "AM";
+                temp += " AM";
             }
             else
             {
-                temp += " " + "PM";
+                temp += " PM";
             }
             return temp;
         }

@@ -41,13 +41,14 @@ namespace Alarm_Clock
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        List<Alarm> alarms = new List<Alarm>();
+        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         //int index = 0;
 
         //private Boolean Manual = false;
-       // private int HHours;
+        // private int HHours;
         //private int HMins;
-       // private int HAM_PM;
+        // private int HAM_PM;
+
 
         public MainWindow()
         {
@@ -59,6 +60,8 @@ namespace Alarm_Clock
 
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
+
+            
 
             this.KeyUp += MainWindow_KeyUp;
         }
@@ -284,20 +287,28 @@ namespace Alarm_Clock
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
 
-            listBox.FontSize = 60;
+            //*listBox.FontSize = 60;
 
             //Getting the String and putting it in the lilnked list
             String temp = myAlarm.getString();
-            alarms.Add(myAlarm);
+            alarms.AddLast(myAlarm);
 
+            UserAlarm alarmMade = new UserAlarm();
+            alarmMade.alarm_button.Content = temp;
 
+            stacky.Children.Add(alarmMade);
+
+            if (alarmMade.alarm_button.IsPressed)
+            {
+                slideMenu.Visibility = Visibility.Visible;
+            }
             //listBox.Items.Add(temp);
 
             // Source of list box will be linked list
-            listBox.ItemsSource = alarms;
+            //*listBox.ItemsSource = alarms;
 
 
-            
+
 
 
 
