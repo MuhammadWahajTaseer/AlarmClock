@@ -41,7 +41,9 @@ namespace Alarm_Clock
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
+
         //int index = 0;
 
         //private Boolean Manual = false;
@@ -281,7 +283,7 @@ namespace Alarm_Clock
 
         }
 
-        private void setAlarm_save_Click(object sender, RoutedEventArgs e)
+        public void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
@@ -293,12 +295,16 @@ namespace Alarm_Clock
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
-            UserAlarm alarmMade = new UserAlarm();
-            alarmMade.alarm_button.Content = temp;
+            // Creating new User Alarm and adding it to linked list
+            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1);
+            userAlarm.alarm_button.Content = temp;
+      
+            uAlarms.AddLast(userAlarm);
 
-            stacky.Children.Add(alarmMade);
+            // Updating Stack Panel
+            stacky.Children.Add(userAlarm);
 
-            if (alarmMade.alarm_button.IsPressed)
+            if (userAlarm.alarm_button.IsPressed)
             {
                 slideMenu.Visibility = Visibility.Visible;
             }

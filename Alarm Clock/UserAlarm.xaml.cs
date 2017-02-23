@@ -20,14 +20,19 @@ namespace Alarm_Clock
     /// </summary>
     public partial class UserAlarm : UserControl
     {
-        public UserAlarm()
+        private int id;
+        public UserAlarm(int id)
         {
             InitializeComponent();
+            this.id = id;
         }
 
         private void alarm_button_Click(object sender, RoutedEventArgs e)
         {
-            alarm_button.Content = "4";
+            
+
+           
         }
+
     }
 }
