@@ -33,7 +33,8 @@ namespace Alarm_Clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
-        
+
+        private Alarm previousAlarm;
 
 
         private int createAlarmHour = 12; 
@@ -284,6 +285,8 @@ namespace Alarm_Clock
             alarms.AddLast(myAlarm);
 
 
+
+
             /**
             String alarmMin = createAlarmMin.ToString();
             if(alarmMin.Length == 1)
@@ -308,8 +311,8 @@ namespace Alarm_Clock
             }
             slideMenu.Visibility = System.Windows.Visibility.Hidden; */
 
-            if (label_alarm.Content.ToString() == "")
-            {
+            // if (label_alarm.Content.ToString() == "")
+            //{
                 Alarm latest = alarms.Last();
                 String tempMin = latest.getMin().ToString();
 
@@ -326,8 +329,11 @@ namespace Alarm_Clock
                 {
                     label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
                 }
+               
                 slideMenu.Visibility = System.Windows.Visibility.Hidden;
-            }
+            //}
+
+            
         }
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
@@ -387,10 +393,20 @@ namespace Alarm_Clock
                 return;
             }
             Alarm edited = alarms.Last();
+            
             slideMenu.Visibility = Visibility.Visible;
             setAlarm_hours.Content = edited.getHour();
-            setAlarm_minutes.Content = edited.getMin();
-            if(edited.getAMPM() == 0)
+
+            int getmin = edited.getMin();
+            if(getmin < 10)
+            {
+                setAlarm_minutes.Content = "0" + edited.getMin();
+            }else {
+                setAlarm_minutes.Content = edited.getMin();
+            }
+
+
+            if (edited.getAMPM() == 0)
             {
                 setAlarm_amORpm.Content = " AM";
             }else {
@@ -403,8 +419,7 @@ namespace Alarm_Clock
             if (edited.getAMPM() == 0)
             {
                 setAlarm_amORpm.Content = " AM";
-            }
-            else
+            } else
             {
                 setAlarm_amORpm.Content = " PM";
             }
