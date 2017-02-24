@@ -458,6 +458,12 @@ namespace Alarm_Clock
             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
             slideMenu.Visibility = System.Windows.Visibility.Hidden;
         }
+
+        // Deleting the alarm
+        private void alarm_delete_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
 
