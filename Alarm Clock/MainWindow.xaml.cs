@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 
 namespace Alarm_Clock
@@ -98,6 +99,24 @@ namespace Alarm_Clock
         }
 
 
+        public static void moveSlideMenu(Canvas slideMenu)
+        {
+            if (slideMenu.IsVisible)
+            {
+                TranslateTransform trans = new TranslateTransform();
+                slideMenu.RenderTransform = trans;
+                DoubleAnimation anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
+                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+            }
+            else
+            {
+                TranslateTransform trans = new TranslateTransform();
+                slideMenu.RenderTransform = trans;
+                DoubleAnimation anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
+                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+            }
+        }
+
 
         protected virtual void OnAlarm(AlarmEventArgs e)
         {
@@ -127,6 +146,7 @@ namespace Alarm_Clock
             else
             {
                 slideMenu.Visibility = System.Windows.Visibility.Visible;
+                moveSlideMenu(slideMenu);
                 //update the button to open/close the window
                 plusButton.Content = " - ";
             }
