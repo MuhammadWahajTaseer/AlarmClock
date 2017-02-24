@@ -118,6 +118,8 @@ namespace Alarm_Clock
 
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
+            editAlarm_save.Visibility = Visibility.Hidden;
+            setAlarm_save.Visibility = Visibility.Visible;
             if (slideMenu.IsVisible)
             {
                 //hide the slideMenu
