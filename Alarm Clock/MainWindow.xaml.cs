@@ -34,7 +34,7 @@ namespace Alarm_Clock
         private RotateTransform SecHandTr = new RotateTransform();
 
         private Alarm previousAlarm;
-       
+        private UserAlarm currAlarm;
 
 
         private int createAlarmHour = 12; 
@@ -307,12 +307,12 @@ namespace Alarm_Clock
 
             //*listBox.FontSize = 60;
 
-            //Getting the String and putting it in the lilnked list
+            //Getting the String and putting it in the linked list
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
             // Creating new User Alarm and adding it to linked list
-            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1);
+            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -442,9 +442,19 @@ namespace Alarm_Clock
 
         }
 
+        public void setCurrentAlarm(UserAlarm al)
+        {
+            currAlarm = al;
+        }
+
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
         {
+            currAlarm.getAlarm().setHour(createAlarmHour);
+            currAlarm.getAlarm().setMin(createAlarmMin);
+            currAlarm.getAlarm().setAMPM(createAlarmAMPM);
 
+            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
         }
     }
 }
