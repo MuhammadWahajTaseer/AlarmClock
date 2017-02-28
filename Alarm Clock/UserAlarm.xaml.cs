@@ -52,12 +52,10 @@ namespace Alarm_Clock
 
             win.setCurrentAlarm(this);
             // Finding the position of the alarm in the alarms linked list
-            //foreach (Alarm al in win.alarms)
-            //{
                
            win.setAlarm_hours.Content = al.getHour();
                     
-                    // Loads previous alarm values
+           // Loads previous alarm values
            int getmin = al.getMin();
            if (getmin < 10)
            {

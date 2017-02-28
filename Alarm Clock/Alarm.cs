@@ -140,7 +140,10 @@ namespace Alarm_Clock
             this.ampm = amopm;
         }
         //....................
-
+        public void setRingerPath(String path)
+        {
+            ringerPath = path;
+        }
 
     }
 }
