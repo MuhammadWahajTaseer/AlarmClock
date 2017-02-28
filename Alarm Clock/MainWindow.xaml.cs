@@ -98,23 +98,23 @@ namespace Alarm_Clock
            // alarmCheck();
         }
 
-
+        // Animates the slide menu. Will be buddy for sliding in because i didn't test dat.
         public static void moveSlideMenu(Canvas slideMenu)
         {
+            TranslateTransform trans = new TranslateTransform();
+            slideMenu.RenderTransform = trans;
+            DoubleAnimation anim = null;
+
             if (slideMenu.IsVisible)
             {
-                TranslateTransform trans = new TranslateTransform();
-                slideMenu.RenderTransform = trans;
-                DoubleAnimation anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
-                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+                anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
             }
             else
             {
-                TranslateTransform trans = new TranslateTransform();
-                slideMenu.RenderTransform = trans;
-                DoubleAnimation anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
-                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+               anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
             }
+
+            trans.BeginAnimation(TranslateTransform.XProperty, anim);
         }
 
 
