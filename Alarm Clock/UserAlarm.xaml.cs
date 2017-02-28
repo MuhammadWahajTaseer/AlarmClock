@@ -49,6 +49,7 @@ namespace Alarm_Clock
 
             win.setAlarm_save.Visibility = Visibility.Hidden;
             win.editAlarm_save.Visibility = Visibility.Visible;
+            win.setAlarm_delete.Visibility = Visibility.Visible;
 
             win.setCurrentAlarm(this);
             // Finding the position of the alarm in the alarms linked list

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
 
 
 namespace Alarm_Clock
@@ -115,8 +116,32 @@ namespace Alarm_Clock
            alarmCheck(ring);
         }
 
+        // Animates the slide menu. Will be buddy for sliding in because i didn't test dat.
+        public static void moveSlideMenu(Canvas slideMenu)
+        {
+            TranslateTransform trans = new TranslateTransform();
+            slideMenu.RenderTransform = trans;
+            DoubleAnimation anim = null;
+
+            if (slideMenu.IsVisible)
+            {
+                anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
+            }
+            else
+            {
+               anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
+            }
+
+            trans.BeginAnimation(TranslateTransform.XProperty, anim);
+        }
+
+
+ 
+
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
+            editAlarm_save.Visibility = Visibility.Hidden;
+            setAlarm_save.Visibility = Visibility.Visible;
             if (slideMenu.IsVisible)
             {
                 //hide the slideMenu
@@ -137,6 +162,7 @@ namespace Alarm_Clock
             else
             {
                 slideMenu.Visibility = System.Windows.Visibility.Visible;
+                moveSlideMenu(slideMenu);
                 //update the button to open/close the window
                 plusButton.Content = " - ";
             }
@@ -397,6 +423,12 @@ namespace Alarm_Clock
 
             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
             slideMenu.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        // Deleting the alarm
+        private void alarm_delete_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
