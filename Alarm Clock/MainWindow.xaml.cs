@@ -35,14 +35,16 @@ namespace Alarm_Clock
         private RotateTransform SecHandTr = new RotateTransform();
 
         private Alarm previousAlarm;
-       
+        private UserAlarm currAlarm;
 
 
         private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
+
         //int index = 0;
 
         //private Boolean Manual = false;
@@ -56,16 +58,25 @@ namespace Alarm_Clock
             //initalizes the clock  
             InitializeComponent();
 
+            AlarmRing ring = new AlarmRing();
+
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             dispatcherTimer.Start();
 
-            
+            ring.AlarmRings += Ring_AlarmRings;
 
             this.KeyUp += MainWindow_KeyUp;
         }
+
+        private void Ring_AlarmRings(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        
 
         /* this method is an event driven system for analog and digital clock
          * event is called every "tick" which is one second
@@ -126,6 +137,8 @@ namespace Alarm_Clock
 
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
+            editAlarm_save.Visibility = Visibility.Hidden;
+            setAlarm_save.Visibility = Visibility.Visible;
             if (slideMenu.IsVisible)
             {
                 //hide the slideMenu
@@ -150,6 +163,13 @@ namespace Alarm_Clock
                 //update the button to open/close the window
                 plusButton.Content = " - ";
             }
+        }
+        private void dismissButton_Click(object sender, RoutedEventArgs e)
+        {
+            AlarmEventArgs ev = new AlarmEventArgs();
+            OnAlarm(ev);
+
+            alarmEventCanvas.Visibility = System.Windows.Visibility.Hidden;
         }
         /* This method closes the program down if the escape key is hit
          */
@@ -301,7 +321,7 @@ namespace Alarm_Clock
 
         }
 
-        private void setAlarm_save_Click(object sender, RoutedEventArgs e)
+        public void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
@@ -309,19 +329,23 @@ namespace Alarm_Clock
 
             //*listBox.FontSize = 60;
 
-            //Getting the String and putting it in the lilnked list
+            //Getting the String and putting it in the linked list
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
-            UserAlarm alarmMade = new UserAlarm();
-            alarmMade.alarm_button.Content = temp;
+            // Creating new User Alarm and adding it to linked list
+            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
+            userAlarm.alarm_button.Content = temp;
+      
+            uAlarms.AddLast(userAlarm);
 
-            stacky.Children.Add(alarmMade);
+            // Updating Stack Panel
+            stacky.Children.Add(userAlarm);
 
-            if (alarmMade.alarm_button.IsPressed)
-            {
-                slideMenu.Visibility = Visibility.Visible;
-            }
+            // Linking the user alarm to the alarm object
+            myAlarm.setUserAlarm(userAlarm);
+            userAlarm.setAlarm(myAlarm);
+            
             //listBox.Items.Add(temp);
 
             // Source of list box will be linked list
@@ -364,27 +388,20 @@ namespace Alarm_Clock
             }
         }
 
-        /**
-        private void alarmCheck()
+        
+        private void alarmCheck(AlarmRing ring)
         {
             // Getting the alarm itme in "hh:mm" format
             if (alarms.Last != null) {
-                String checker = "";
-                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0] + " " + alarms.Last().Split(':')[1].Split(' ')[1];
-                if (checker == DateTime.Now.ToString("h:mm tt"))
+              foreach(Alarm alarm in alarms)
                 {
-                    AlarmEventArgs ev = new AlarmEventArgs();
-                    OnAlarm(ev);
-
-                    alarmEventCanvas.Visibility = System.Windows.Visibility.Visible;
-                    alarmTimeLabel.Content = checker;
-
+                    String checker = alarm.getHour().ToString() + alarm.getMin().ToString() + alarm.getAMPM().ToString();
+                    ring.compareTime(alarm.getRingerPath(), checker);
                 }
-                
             }
 
         }
-
+        /*
         private void alarm_change(object sender, MouseButtonEventArgs e)
         {
            
@@ -445,6 +462,27 @@ namespace Alarm_Clock
             }
 
 
+        }
+
+        public void setCurrentAlarm(UserAlarm al)
+        {
+            currAlarm = al;
+        }
+
+        private void editAlarm_save_Click(object sender, RoutedEventArgs e)
+        {
+            currAlarm.getAlarm().setHour(createAlarmHour);
+            currAlarm.getAlarm().setMin(createAlarmMin);
+            currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+
+            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        // Deleting the alarm
+        private void alarm_delete_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

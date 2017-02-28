@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alarm_Clock
 {
-    class Alarm
+    public class Alarm
     {
         private int id;
         private int hour;
@@ -20,6 +20,9 @@ namespace Alarm_Clock
 
         // path for the ringer sound file
         private String ringerPath = null;
+
+        // Linnking to user conrol (user alarm)
+        private UserAlarm  userAlarm =  null;
 
 
         // Constructor initializes the time
@@ -113,6 +116,11 @@ namespace Alarm_Clock
         }
 
         // Setters
+        public void setUserAlarm(UserAlarm userAlarm)
+        {
+            this.userAlarm = userAlarm;
+        }
+
         public void setID(int id)
         {
             this.id = id;
