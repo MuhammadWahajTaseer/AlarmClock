@@ -93,6 +93,11 @@ namespace Alarm_Clock
             return ringerPath;
         }
 
+        public UserAlarm getUAlarm()
+        {
+            return userAlarm;
+        }
+
         public String getString()
         {
 

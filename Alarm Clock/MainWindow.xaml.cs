@@ -316,7 +316,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -414,11 +414,25 @@ namespace Alarm_Clock
 
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
         {
-            currAlarm.getAlarm().setHour(createAlarmHour);
-            currAlarm.getAlarm().setMin(createAlarmMin);
-            currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+            foreach (Alarm ala in alarms)
+            {
+                if(ala.getID() == currAlarm.getAlarm().getID())
+                {
+                    currAlarm.getAlarm().setHour(createAlarmHour);
+                    currAlarm.getAlarm().setMin(createAlarmMin);
+                    currAlarm.getAlarm().setAMPM(createAlarmAMPM);
 
-            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+                    ala.setHour(createAlarmHour);
+                    ala.setMin(createAlarmMin);
+                    ala.setAMPM(createAlarmAMPM);
+                    
+                    currAlarm.alarm_button.Content = ala.getString();
+
+                    //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+                    //currAlarm.alarm_button.Content = "meow";
+                }
+            }
+            
             slideMenu.Visibility = System.Windows.Visibility.Hidden;
         }
 
@@ -426,6 +440,18 @@ namespace Alarm_Clock
         private void dismiss_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        public void setCurrentHour(int hour)
+        {
+            createAlarmHour = hour;
+        }
+        public void setCurrentMin(int min)
+        {
+            createAlarmMin = min;
+        }
+        public void setCurrentAMPM(int ampm)
+        {
+            createAlarmAMPM = ampm;
         }
     }
 }
