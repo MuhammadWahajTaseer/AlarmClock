@@ -52,14 +52,13 @@ namespace Alarm_Clock
         // private int HHours;
         //private int HMins;
         // private int HAM_PM;
-
+     
 
         public MainWindow()
         {
             //initalizes the clock  
             InitializeComponent();
 
-            
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -71,8 +70,6 @@ namespace Alarm_Clock
 
             this.KeyUp += MainWindow_KeyUp;
 
-            
-            
         }
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
@@ -80,7 +77,7 @@ namespace Alarm_Clock
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(e.path);
             player.Load();
             player.Play();
-
+          
         }
 
        
@@ -306,7 +303,7 @@ namespace Alarm_Clock
         }
 
         public void setAlarm_save_Click(object sender, RoutedEventArgs e)
-        {
+        {    
             // ** Need to also check if it's repeating and send the last bool acordingly
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
@@ -426,9 +423,9 @@ namespace Alarm_Clock
         }
 
         // Deleting the alarm
-        private void alarm_delete_Click(object sender, RoutedEventArgs e)
+        private void dismiss_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
