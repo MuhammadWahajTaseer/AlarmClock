@@ -77,6 +77,7 @@ namespace Alarm_Clock
             System.Media.SoundPlayer player = new System.Media.SoundPlayer(e.path);
             player.Load();
             player.Play();
+            
           
         }
 
@@ -303,20 +304,22 @@ namespace Alarm_Clock
         }
 
         public void setAlarm_save_Click(object sender, RoutedEventArgs e)
-        {    
+        {
             // ** Need to also check if it's repeating and send the last bool acordingly
+            this.alarmEventCanvas.Visibility = Visibility.Visible;
+            
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
 
             //*listBox.FontSize = 60;
 
-            //Getting the String and putting it in the linked list
+            //Getting the String and putting it in the linked lisst
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -439,7 +442,7 @@ namespace Alarm_Clock
         // Deleting the alarm
         private void dismiss_Click(object sender, RoutedEventArgs e)
         {
-
+            this.alarmEventCanvas.Visibility = Visibility.Hidden;
         }
         public void setCurrentHour(int hour)
         {
