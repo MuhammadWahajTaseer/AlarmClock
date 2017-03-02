@@ -34,36 +34,31 @@ namespace Alarm_Clock
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
 
-        private Alarm previousAlarm;
         private UserAlarm currAlarm;
-
 
         private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
+        private System.Media.SoundPlayer player;
+        private bool alarmState;
+
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
 
         AlarmRing ring = new AlarmRing();
-        //int index = 0;
-
-        //private Boolean Manual = false;
-        // private int HHours;
-        //private int HMins;
-        // private int HAM_PM;
-     
 
         public MainWindow()
         {
             //initalizes the clock  
             InitializeComponent();
-
+            alarmState = false;
+           
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0,1);
             dispatcherTimer.Start();
 
             ring.AlarmRings += Ring_AlarmRings;
@@ -74,11 +69,14 @@ namespace Alarm_Clock
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(e.path);
-            player.Load();
-            player.Play();
-            
-          
+            if (e.currAl.dismissed == false) {
+                e.currAl.dismissed = true;
+                player = new System.Media.SoundPlayer(e.currAl.getRingerPath());
+                player.Load();
+                player.PlayLooping();
+                this.alertCanvas1.Visibility = Visibility.Visible;
+                this.alertCanvas2.Visibility = Visibility.Visible;
+            }
         }
 
        
@@ -243,13 +241,7 @@ namespace Alarm_Clock
                 setAlarm_hours.Content = createAlarmHour.ToString();
             }
             /*
-            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it 
-            else if (createAlarmHour >= 0 && createAlarmHour < 11)
-            {
-                createAlarmHour -= 1;
-                setAlarm_hours.Content = "0" + createAlarmHour.ToString();
-
-            }
+            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it
             */
             //otherwise just update the current hours and update the label 
             else
@@ -306,10 +298,10 @@ namespace Alarm_Clock
         public void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
-            this.alarmEventCanvas.Visibility = Visibility.Visible;
-            
+
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
+            myAlarm.dismissed = false;
 
             //*listBox.FontSize = 60;
 
@@ -361,7 +353,7 @@ namespace Alarm_Clock
                         min = uAlarm.getAlarm().getMin().ToString();
                     }
                     String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
-                    ring.compareTime(uAlarm.getAlarm().getRingerPath(), checker);
+                    ring.compareTime(uAlarm.getAlarm(), checker);
                  
                         
 
@@ -455,6 +447,13 @@ namespace Alarm_Clock
         public void setCurrentAMPM(int ampm)
         {
             createAlarmAMPM = ampm;
+        }
+
+        private void dismiss1_Click(object sender, RoutedEventArgs e)
+        {
+            player.Stop();
+            this.alertCanvas1.Visibility = Visibility.Hidden;
+            this.alertCanvas2.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Alarm_Clock
         private int hour;
         private int minute;
         private int ampm;
-
+        public bool dismissed;
         private bool repeating;
 
         // Arrray for which days to ring, STARTS ON SUNDAY
@@ -149,6 +149,6 @@ namespace Alarm_Clock
         {
             ringerPath = path;
         }
-
+        
     }
 }
