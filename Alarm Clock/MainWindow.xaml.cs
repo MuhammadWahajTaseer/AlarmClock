@@ -462,8 +462,14 @@ namespace Alarm_Clock
         // Deleting the alarm
         private void alarm_delete_Click(object sender, RoutedEventArgs e)
         {
+            //get the label of the alarm
+            currAlarm.getID();
+
             
         }
+
+
+
     }
 }
 

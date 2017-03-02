@@ -30,6 +30,10 @@ namespace Alarm_Clock
             al = alarm;
 
         }
+        public int getID()
+        {
+            return id;
+        }
 
         public void setAlarm(Alarm alarm)
         {
