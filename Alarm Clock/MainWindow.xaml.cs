@@ -98,7 +98,7 @@ namespace Alarm_Clock
            // alarmCheck();
         }
 
-
+        // Animates the slide menu. Will be buddy for sliding in because i didn't test dat.
         public static void moveSlideMenu(Canvas slideMenu)
         {
             if (slideMenu.IsVisible)
