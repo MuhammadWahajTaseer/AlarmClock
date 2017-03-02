@@ -27,45 +27,59 @@ namespace Alarm_Clock
 
     public partial class MainWindow : Window
     {
-        public delegate void AlarmEventHandler(object sender, AlarmEventArgs e);
-        public event AlarmEventHandler Alarm;
+        
+        
         //these are the objects of the min, hour, and second hand for the analog clock
         private RotateTransform MinHandTr = new RotateTransform();
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
 
-        private Alarm previousAlarm;
-       
-
+        private UserAlarm currAlarm;
 
         private int createAlarmHour = 12; 
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        LinkedList<Alarm> alarms = new LinkedList<Alarm>();
-        //int index = 0;
+        private System.Media.SoundPlayer player;
+        private bool alarmState;
 
-        //private Boolean Manual = false;
-        // private int HHours;
-        //private int HMins;
-        // private int HAM_PM;
+        public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
 
+        AlarmRing ring = new AlarmRing();
 
         public MainWindow()
         {
             //initalizes the clock  
             InitializeComponent();
+            alarmState = false;
+           
 
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0,1);
             dispatcherTimer.Start();
 
-            
+            ring.AlarmRings += Ring_AlarmRings;
 
             this.KeyUp += MainWindow_KeyUp;
+
         }
+
+        private void Ring_AlarmRings(object sender, AlarmEventArgs e)
+        {
+            if (e.currAl.dismissed == false) {
+                e.currAl.dismissed = true;
+                player = new System.Media.SoundPlayer(e.currAl.getRingerPath());
+                player.Load();
+                player.PlayLooping();
+                this.alertCanvas1.Visibility = Visibility.Visible;
+                this.alertCanvas2.Visibility = Visibility.Visible;
+            }
+        }
+
+       
 
         /* this method is an event driven system for analog and digital clock
          * event is called every "tick" which is one second
@@ -95,37 +109,35 @@ namespace Alarm_Clock
             SecondHand.RenderTransform = SecHandTr;
 
 
-           // alarmCheck();
+           alarmCheck(ring);
         }
 
         // Animates the slide menu. Will be buddy for sliding in because i didn't test dat.
         public static void moveSlideMenu(Canvas slideMenu)
         {
+            TranslateTransform trans = new TranslateTransform();
+            slideMenu.RenderTransform = trans;
+            DoubleAnimation anim = null;
+
             if (slideMenu.IsVisible)
             {
-                TranslateTransform trans = new TranslateTransform();
-                slideMenu.RenderTransform = trans;
-                DoubleAnimation anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
-                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+                anim = new DoubleAnimation(600, 0, TimeSpan.FromSeconds(0.5));
             }
             else
             {
-                TranslateTransform trans = new TranslateTransform();
-                slideMenu.RenderTransform = trans;
-                DoubleAnimation anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
-                trans.BeginAnimation(TranslateTransform.XProperty, anim);
+               anim = new DoubleAnimation(0, 600, TimeSpan.FromSeconds(0.5));
             }
+
+            trans.BeginAnimation(TranslateTransform.XProperty, anim);
         }
 
 
-        protected virtual void OnAlarm(AlarmEventArgs e)
-        {
-            if (Alarm != null)
-                Alarm(this, e);
-        }
+ 
 
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
+            editAlarm_save.Visibility = Visibility.Hidden;
+            setAlarm_save.Visibility = Visibility.Visible;
             if (slideMenu.IsVisible)
             {
                 //hide the slideMenu
@@ -151,6 +163,7 @@ namespace Alarm_Clock
                 plusButton.Content = " - ";
             }
         }
+       
         /* This method closes the program down if the escape key is hit
          */
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
@@ -158,11 +171,6 @@ namespace Alarm_Clock
             if (e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
-            }
-            else if (e.Key == Key.B)
-            {
-                AlarmEventArgs ev = new AlarmEventArgs();
-                OnAlarm(ev);
             }
 
         }
@@ -233,13 +241,7 @@ namespace Alarm_Clock
                 setAlarm_hours.Content = createAlarmHour.ToString();
             }
             /*
-            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it 
-            else if (createAlarmHour >= 0 && createAlarmHour < 11)
-            {
-                createAlarmHour -= 1;
-                setAlarm_hours.Content = "0" + createAlarmHour.ToString();
-
-            }
+            //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it
             */
             //otherwise just update the current hours and update the label 
             else
@@ -262,17 +264,9 @@ namespace Alarm_Clock
                 //setAlarm_hours.Content = "0" + createAlarmHour.ToString();
                 setAlarm_hours.Content = createAlarmHour.ToString();
             }
-            /*
+          
             //if the hours are inbetween or equal to 0 and 9 then add an extra "0" to format it 
-            else if (createAlarmHour >= 0 && createAlarmHour < 9)
-            {
-                createAlarmHour += 1;
-                setAlarm_hours.Content = "0" + createAlarmHour.ToString();
-
-            }
-            */
-
-            //otherwise just update the current hours and update the label 
+       
             else
             {
                 createAlarmHour += 1;
@@ -301,58 +295,35 @@ namespace Alarm_Clock
 
         }
 
-        private void setAlarm_save_Click(object sender, RoutedEventArgs e)
+        public void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
+
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
             myAlarm.setID(alarms.Count+1);
+            myAlarm.dismissed = false;
 
             //*listBox.FontSize = 60;
 
-            //Getting the String and putting it in the lilnked list
+            //Getting the String and putting it in the linked lisst
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
-            UserAlarm alarmMade = new UserAlarm();
-            alarmMade.alarm_button.Content = temp;
+            // Creating new User Alarm and adding it to linked list
+            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.alarm_button.Content = temp;
+      
+            uAlarms.AddLast(userAlarm);
 
-            stacky.Children.Add(alarmMade);
+            // Updating Stack Panel
+            stacky.Children.Add(userAlarm);
 
-            if (alarmMade.alarm_button.IsPressed)
-            {
-                slideMenu.Visibility = Visibility.Visible;
-            }
-            //listBox.Items.Add(temp);
-
-            // Source of list box will be linked list
-            //*listBox.ItemsSource = alarms;
-
-
-
-
-
-
-            /**Alarm latest = alarms.Last();
-            String tempMin = latest.getMin().ToString();
-
-            if (tempMin.Length == 1)
-            {
-                tempMin = "0" + tempMin;
-            }
-
-
-            if (latest.getAMPM() == 0) {
-                label_alarm.Content = (latest.getHour() + ":" + tempMin + " AM");
-            }
-            else
-            {
-                label_alarm.Content = (latest.getHour() + ":" + tempMin + " PM");
-            }**/
-
-
-            slideMenu.Visibility = System.Windows.Visibility.Hidden; 
+            // Linking the user alarm to the alarm object
+            myAlarm.setUserAlarm(userAlarm);
+            userAlarm.setAlarm(myAlarm);
             
-
+            slideMenu.Visibility = System.Windows.Visibility.Hidden; 
             
         }
 
@@ -364,48 +335,32 @@ namespace Alarm_Clock
             }
         }
 
-        /**
-        private void alarmCheck()
+        
+        private void alarmCheck(AlarmRing ring)
         {
             // Getting the alarm itme in "hh:mm" format
-            if (alarms.Last != null) {
-                String checker = "";
-                checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0] + " " + alarms.Last().Split(':')[1].Split(' ')[1];
-                if (checker == DateTime.Now.ToString("h:mm tt"))
+           if (uAlarms.Last != null) {
+              foreach(UserAlarm uAlarm in uAlarms)
                 {
-                    AlarmEventArgs ev = new AlarmEventArgs();
-                    OnAlarm(ev);
-
-                    alarmEventCanvas.Visibility = System.Windows.Visibility.Visible;
-                    alarmTimeLabel.Content = checker;
+                    String ampm = null;
+                    String min = null;
+                    ampm = (uAlarm.getAlarm().getAMPM() == 1 ?  "PM" : "PM");
+                    if (uAlarm.getAlarm().getMin().ToString().Length == 1) {
+                        min = "0" + uAlarm.getAlarm().getMin().ToString();
+                    }
+                    else
+                    {
+                        min = uAlarm.getAlarm().getMin().ToString();
+                    }
+                    String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
+                    ring.compareTime(uAlarm.getAlarm(), checker);
+                 
+                        
 
                 }
-                
             }
 
         }
-
-        private void alarm_change(object sender, MouseButtonEventArgs e)
-        {
-           
-            String checker = "";
-            checker = alarms.Last().Split(':')[0] + ":" + alarms.Last().Split(':')[1].Split(' ')[0];
-            slideMenu.Visibility = System.Windows.Visibility.Visible;
-            setAlarm_hours.Content = alarms.Last().Split(':')[0];
-            setAlarm_minutes.Content = alarms.Last().Split(':')[1].Split(' ')[0];
-            setAlarm_amORpm.Content = alarms.Last().Split(':')[1].Split(' ')[1];
-
-            createAlarmHour = Int32.Parse(alarms.Last().Split(':')[0]);
-            createAlarmMin = Int32.Parse(alarms.Last().Split(':')[1].Split(' ')[0]);
-            if(alarms.Last().Split(':')[1].Split(' ')[1] == "PM")
-            {
-                createAlarmAMPM = 1;
-            }else
-            {
-                createAlarmAMPM = 0;
-
-            }
-        }*/
 
         private void alarm_change(object sender, MouseButtonEventArgs e) {
             if (alarms.Count == 0)
@@ -445,6 +400,60 @@ namespace Alarm_Clock
             }
 
 
+        }
+
+        public void setCurrentAlarm(UserAlarm al)
+        {
+            currAlarm = al;
+        }
+
+        private void editAlarm_save_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (Alarm ala in alarms)
+            {
+                if(ala.getID() == currAlarm.getAlarm().getID())
+                {
+                    currAlarm.getAlarm().setHour(createAlarmHour);
+                    currAlarm.getAlarm().setMin(createAlarmMin);
+                    currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+
+                    ala.setHour(createAlarmHour);
+                    ala.setMin(createAlarmMin);
+                    ala.setAMPM(createAlarmAMPM);
+                    
+                    currAlarm.alarm_button.Content = ala.getString();
+
+                    //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+                    //currAlarm.alarm_button.Content = "meow";
+                }
+            }
+            
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        // Deleting the alarm
+        private void dismiss_Click(object sender, RoutedEventArgs e)
+        {
+            this.alarmEventCanvas.Visibility = Visibility.Hidden;
+        }
+        public void setCurrentHour(int hour)
+        {
+            createAlarmHour = hour;
+        }
+        public void setCurrentMin(int min)
+        {
+            createAlarmMin = min;
+        }
+        public void setCurrentAMPM(int ampm)
+        {
+            createAlarmAMPM = ampm;
+        }
+
+        private void dismiss1_Click(object sender, RoutedEventArgs e)
+        {
+            player.Stop();
+            this.alertCanvas1.Visibility = Visibility.Hidden;
+            this.alertCanvas2.Visibility = Visibility.Hidden;
         }
     }
 }

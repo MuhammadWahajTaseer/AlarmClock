@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Alarm_Clock
 {
-    class Alarm
+    public class Alarm
     {
         private int id;
         private int hour;
         private int minute;
         private int ampm;
-
+        public bool dismissed;
         private bool repeating;
 
         // Arrray for which days to ring, STARTS ON SUNDAY
@@ -20,6 +20,9 @@ namespace Alarm_Clock
 
         // path for the ringer sound file
         private String ringerPath = null;
+
+        // Linnking to user conrol (user alarm)
+        private UserAlarm  userAlarm =  null;
 
 
         // Constructor initializes the time
@@ -90,6 +93,11 @@ namespace Alarm_Clock
             return ringerPath;
         }
 
+        public UserAlarm getUAlarm()
+        {
+            return userAlarm;
+        }
+
         public String getString()
         {
 
@@ -113,6 +121,11 @@ namespace Alarm_Clock
         }
 
         // Setters
+        public void setUserAlarm(UserAlarm userAlarm)
+        {
+            this.userAlarm = userAlarm;
+        }
+
         public void setID(int id)
         {
             this.id = id;
@@ -132,7 +145,10 @@ namespace Alarm_Clock
             this.ampm = amopm;
         }
         //....................
-
-
+        public void setRingerPath(String path)
+        {
+            ringerPath = path;
+        }
+        
     }
 }
