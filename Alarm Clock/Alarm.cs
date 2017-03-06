@@ -12,7 +12,7 @@ namespace Alarm_Clock
         private int hour;
         private int minute;
         private int ampm;
-
+        public bool dismissed;
         private bool repeating;
 
         // Arrray for which days to ring, STARTS ON SUNDAY
@@ -93,6 +93,11 @@ namespace Alarm_Clock
             return ringerPath;
         }
 
+        public UserAlarm getUAlarm()
+        {
+            return userAlarm;
+        }
+
         public String getString()
         {
 
@@ -140,7 +145,10 @@ namespace Alarm_Clock
             this.ampm = amopm;
         }
         //....................
-
-
+        public void setRingerPath(String path)
+        {
+            ringerPath = path;
+        }
+        
     }
 }
