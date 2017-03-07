@@ -40,10 +40,10 @@ namespace Alarm_Clock
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
 
-        private static int idCount = 0;
-
         private System.Media.SoundPlayer player;
         private bool alarmState;
+
+        private static int idSet = 0;
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
@@ -302,7 +302,7 @@ namespace Alarm_Clock
             // ** Need to also check if it's repeating and send the last bool acordingly
 
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
-            myAlarm.setID(idCount+1);
+            myAlarm.setID(idSet+1);
             myAlarm.dismissed = false;
 
             //*listBox.FontSize = 60;
@@ -312,7 +312,7 @@ namespace Alarm_Clock
             alarms.AddLast(myAlarm);
 
             // Creating new User Alarm and adding it to linked list
-            UserAlarm userAlarm = new UserAlarm(idCount, myAlarm);
+            UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
             userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
@@ -331,18 +331,28 @@ namespace Alarm_Clock
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
-
-            
-            if (alarms.Count != 0)
-            {
-                for(int i =0; i < alarms.Count; i++)
+                //itterate through the list 
+                foreach (UserAlarm uAlarm in uAlarms)
                 {
-                                           
-                    
+
+
+                    if (uAlarm.getAlarm().getID() == currAlarm.getAlarm().getID())
+                    {
+                   
+                    uAlarms.Remove(currAlarm);
+                    stacky.Children.Remove(currAlarm);
+                    break;
+
                 }
-   
+                
 
             }
+
+    
+ 
+
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+
         }
 
         
@@ -369,6 +379,7 @@ namespace Alarm_Clock
 
                 }
             }
+
 
         }
 
