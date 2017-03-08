@@ -313,7 +313,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -323,7 +323,7 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
-            userAlarm.setAlarm(myAlarm);
+            //userAlarm.setAlarm(myAlarm);
             
             slideMenu.Visibility = System.Windows.Visibility.Hidden; 
             
@@ -382,7 +382,7 @@ namespace Alarm_Clock
 
 
         }
-
+        /*
         private void alarm_change(object sender, MouseButtonEventArgs e) {
             if (alarms.Count == 0)
             {
@@ -422,7 +422,7 @@ namespace Alarm_Clock
 
 
         }
-
+        */
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
@@ -438,11 +438,11 @@ namespace Alarm_Clock
                     currAlarm.getAlarm().setMin(createAlarmMin);
                     currAlarm.getAlarm().setAMPM(createAlarmAMPM);
 
-                    ala.setHour(createAlarmHour);
-                    ala.setMin(createAlarmMin);
-                    ala.setAMPM(createAlarmAMPM);
+                    //ala.setHour(createAlarmHour);
+                    //ala.setMin(createAlarmMin);
+                    //ala.setAMPM(createAlarmAMPM);
                     
-                    currAlarm.alarm_button.Content = ala.getString();
+                    currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
 
                     //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
                     //currAlarm.alarm_button.Content = "meow";

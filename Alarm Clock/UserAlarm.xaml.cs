@@ -60,7 +60,6 @@ namespace Alarm_Clock
                
            win.setAlarm_hours.Content = al.getHour();
            win.setCurrentHour(al.getHour());
-                    
            // Loads previous alarm values
            int getmin = al.getMin();
            win.setCurrentMin(al.getMin());
