@@ -263,7 +263,6 @@ namespace Alarm_Clock
             {
                 createAlarmHour = 1;
 
-                //setAlarm_hours.Content = "0" + createAlarmHour.ToString();
                 setAlarm_hours.Content = createAlarmHour.ToString();
             }
           
@@ -305,7 +304,6 @@ namespace Alarm_Clock
             myAlarm.setID(idSet+1);
             myAlarm.dismissed = false;
 
-            //*listBox.FontSize = 60;
 
             //Getting the String and putting it in the linked lisst
             String temp = myAlarm.getString();
@@ -323,7 +321,6 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
-            //userAlarm.setAlarm(myAlarm);
             
             slideMenu.Visibility = System.Windows.Visibility.Hidden; 
             
@@ -347,9 +344,6 @@ namespace Alarm_Clock
                 
 
             }
-
-    
- 
 
             slideMenu.Visibility = System.Windows.Visibility.Hidden;
 
@@ -382,47 +376,7 @@ namespace Alarm_Clock
 
 
         }
-        /*
-        private void alarm_change(object sender, MouseButtonEventArgs e) {
-            if (alarms.Count == 0)
-            {
-                return;
-            }
-            Alarm edited = alarms.Last();
-            
-            slideMenu.Visibility = Visibility.Visible;
-            setAlarm_hours.Content = edited.getHour();
-
-            int getmin = edited.getMin();
-            if(getmin < 10)
-            {
-                setAlarm_minutes.Content = "0" + edited.getMin();
-            }else {
-                setAlarm_minutes.Content = edited.getMin();
-            }
-
-
-            if (edited.getAMPM() == 0)
-            {
-                setAlarm_amORpm.Content = " AM";
-            }else {
-                setAlarm_amORpm.Content = " PM";
-            }
-
-            createAlarmHour = edited.getHour();
-
-            createAlarmMin = edited.getMin();
-            if (edited.getAMPM() == 0)
-            {
-                setAlarm_amORpm.Content = " AM";
-            } else
-            {
-                setAlarm_amORpm.Content = " PM";
-            }
-
-
-        }
-        */
+        
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
@@ -430,26 +384,13 @@ namespace Alarm_Clock
 
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Alarm ala in alarms)
-            {
-                if(ala.getID() == currAlarm.getAlarm().getID())
-                {
+           
                     currAlarm.getAlarm().setHour(createAlarmHour);
                     currAlarm.getAlarm().setMin(createAlarmMin);
                     currAlarm.getAlarm().setAMPM(createAlarmAMPM);
-
-                    //ala.setHour(createAlarmHour);
-                    //ala.setMin(createAlarmMin);
-                    //ala.setAMPM(createAlarmAMPM);
-                    
+                                                  
                     currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-
-                    //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-                    //currAlarm.alarm_button.Content = "meow";
-                }
-            }
-            
-            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+                    slideMenu.Visibility = System.Windows.Visibility.Hidden;
         }
 
         // Deleting the alarm
