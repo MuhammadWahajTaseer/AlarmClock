@@ -15,6 +15,8 @@ namespace Alarm_Clock
         public bool dismissed;
         private bool repeating;
 
+        private bool snooze = false;
+
         // Arrray for which days to ring, STARTS ON SUNDAY
         private bool[] days = { false, false, false, false, false, false, false };
 
@@ -31,6 +33,8 @@ namespace Alarm_Clock
             this.hour = hour;
             this.minute = minute;
             this.ampm = ampm;
+
+
         }
 
         // Constructor that initializes the time as well as days 
@@ -58,6 +62,10 @@ namespace Alarm_Clock
         }
 
         // Getters
+        public bool getSnooze()
+        {
+            return this.snooze;
+        }
         public int getID()
         {
             return id;
@@ -121,6 +129,10 @@ namespace Alarm_Clock
         }
 
         // Setters
+        public void setSnooze(bool snooze)
+        {
+            this.snooze = snooze;
+        }
         public void setUserAlarm(UserAlarm userAlarm)
         {
             this.userAlarm = userAlarm;

@@ -311,7 +311,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -358,7 +358,7 @@ namespace Alarm_Clock
                 {
                     String ampm = null;
                     String min = null;
-                    ampm = (uAlarm.getAlarm().getAMPM() == 1 ?  "PM" : "PM");
+                    ampm = (uAlarm.getAlarm().getAMPM() == 1 ?  "PM" : "AM");
                     if (uAlarm.getAlarm().getMin().ToString().Length == 1) {
                         min = "0" + uAlarm.getAlarm().getMin().ToString();
                     }
@@ -414,9 +414,13 @@ namespace Alarm_Clock
         //for dissmissing the alarm
         private void dismiss1_Click(object sender, RoutedEventArgs e)
         {
+
+
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+            
+
             /*
             //check if alarm repeats itself, if it does repeate then leave alarm as is, if it doesn't repeate delete it 
             bool repeating =currAlarm.getAlarm().getRepeating();
@@ -432,15 +436,75 @@ namespace Alarm_Clock
         //dissmisses an alarm, but creates a new alarm object that rings 5 mins later  
         private void snooze_Click(object sender, RoutedEventArgs e)
         {
+            
+            //now makes the new alarm that rings 5 mins later (this alarm is hidden from user)
+            //get values of current alarm
+            int newHour = DateTime.Now.Hour - 12;
+            int newMin = DateTime.Now.Minute + 1;
+            //int newSec = DateTime.Now.Second + 10;
+            int newAMPM;
+            if(DateTime.Now.ToString("tt") == "AM")
+            {
+                //its am
+                newAMPM = 0;
+            }
+            else
+            {
+                //its pm
+                newAMPM = 1;
+            }
+            
+            
+            //alarm object 
+            Alarm myAlarm = new Alarm(newHour, newMin, newAMPM, false);
+            myAlarm.setID(0);
+            myAlarm.dismissed = false;
+            myAlarm.setSnooze(true);
+            //add it 
+            alarms.AddLast(myAlarm);
+            String temp = myAlarm.getString();
 
+            //the other alarm object
+            UserAlarm userAlarm = new UserAlarm(0, myAlarm);
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.alarm_button.Content = temp;
 
+            uAlarms.AddLast(userAlarm);
+
+            // Don't Update Stack Panel, this is for testing
+            //stacky.Children.Add(userAlarm);
+
+            // Linking the user alarm to the alarm object
+            myAlarm.setUserAlarm(userAlarm);
 
             //dissmisses the inital alarm 
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
 
-            //now makes the new alarm that rings 5 mins later
+
+            /*
+            //itterate through the list 
+             foreach (UserAlarm uAlarm in uAlarms)
+             {
+
+
+                if (uAlarm.getAlarm().getID() == 0)
+               {
+
+                         uAlarms.Remove(currAlarm);
+                         stacky.Children.Remove(currAlarm);
+            
+
+               }
+
+
+              }*/
+
+
+
+
+
 
 
 
