@@ -73,7 +73,7 @@ namespace Alarm_Clock
                 e.currAl.dismissed = true;
                 player = new System.Media.SoundPlayer(e.currAl.getRingerPath());
                 player.Load();
-                player.PlayLooping();
+                player.Play();
                 this.alertCanvas1.Visibility = Visibility.Visible;
                 this.alertCanvas2.Visibility = Visibility.Visible;
             }
