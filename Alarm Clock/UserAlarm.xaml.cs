@@ -30,6 +30,10 @@ namespace Alarm_Clock
             al = alarm;
 
         }
+        public int getID()
+        {
+            return id;
+        }
 
         public void setAlarm(Alarm alarm)
         {
@@ -56,7 +60,6 @@ namespace Alarm_Clock
                
            win.setAlarm_hours.Content = al.getHour();
            win.setCurrentHour(al.getHour());
-                    
            // Loads previous alarm values
            int getmin = al.getMin();
            win.setCurrentMin(al.getMin());
