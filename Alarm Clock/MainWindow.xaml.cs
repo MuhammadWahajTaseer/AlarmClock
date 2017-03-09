@@ -43,6 +43,8 @@ namespace Alarm_Clock
         private System.Media.SoundPlayer player;
         private bool alarmState;
 
+        private static int idSet = 0;
+
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
 
@@ -261,7 +263,6 @@ namespace Alarm_Clock
             {
                 createAlarmHour = 1;
 
-                //setAlarm_hours.Content = "0" + createAlarmHour.ToString();
                 setAlarm_hours.Content = createAlarmHour.ToString();
             }
           
@@ -300,18 +301,17 @@ namespace Alarm_Clock
             // ** Need to also check if it's repeating and send the last bool acordingly
 
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
-            myAlarm.setID(alarms.Count+1);
+            myAlarm.setID(idSet+1);
             myAlarm.dismissed = false;
 
-            //*listBox.FontSize = 60;
 
             //Getting the String and putting it in the linked lisst
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
             // Creating new User Alarm and adding it to linked list
-            UserAlarm userAlarm = new UserAlarm(alarms.Count + 1, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
       
             uAlarms.AddLast(userAlarm);
@@ -321,7 +321,6 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
-            userAlarm.setAlarm(myAlarm);
             
             slideMenu.Visibility = System.Windows.Visibility.Hidden; 
             
@@ -329,10 +328,25 @@ namespace Alarm_Clock
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
-            if (alarms.Count != 0)
-            {
+                //itterate through the list /*
+               // foreach (UserAlarm uAlarm in uAlarms)
+              //  {
 
-            }
+
+                //    if (uAlarm.getAlarm().getID() == currAlarm.getAlarm().getID())
+                 //   {
+                   
+                    uAlarms.Remove(currAlarm);
+                    stacky.Children.Remove(currAlarm);
+                 //   break;
+
+               // }
+                
+
+          //  }
+
+            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+
         }
 
         
@@ -344,7 +358,7 @@ namespace Alarm_Clock
                 {
                     String ampm = null;
                     String min = null;
-                    ampm = (uAlarm.getAlarm().getAMPM() == 1 ?  "PM" : "PM");
+                    ampm = (uAlarm.getAlarm().getAMPM() == 1 ?  "PM" : "AM");
                     if (uAlarm.getAlarm().getMin().ToString().Length == 1) {
                         min = "0" + uAlarm.getAlarm().getMin().ToString();
                     }
@@ -360,48 +374,9 @@ namespace Alarm_Clock
                 }
             }
 
-        }
-
-        private void alarm_change(object sender, MouseButtonEventArgs e) {
-            if (alarms.Count == 0)
-            {
-                return;
-            }
-            Alarm edited = alarms.Last();
-            
-            slideMenu.Visibility = Visibility.Visible;
-            setAlarm_hours.Content = edited.getHour();
-
-            int getmin = edited.getMin();
-            if(getmin < 10)
-            {
-                setAlarm_minutes.Content = "0" + edited.getMin();
-            }else {
-                setAlarm_minutes.Content = edited.getMin();
-            }
-
-
-            if (edited.getAMPM() == 0)
-            {
-                setAlarm_amORpm.Content = " AM";
-            }else {
-                setAlarm_amORpm.Content = " PM";
-            }
-
-            createAlarmHour = edited.getHour();
-
-            createAlarmMin = edited.getMin();
-            if (edited.getAMPM() == 0)
-            {
-                setAlarm_amORpm.Content = " AM";
-            } else
-            {
-                setAlarm_amORpm.Content = " PM";
-            }
-
 
         }
-
+        
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
@@ -409,26 +384,13 @@ namespace Alarm_Clock
 
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Alarm ala in alarms)
-            {
-                if(ala.getID() == currAlarm.getAlarm().getID())
-                {
+           
                     currAlarm.getAlarm().setHour(createAlarmHour);
                     currAlarm.getAlarm().setMin(createAlarmMin);
                     currAlarm.getAlarm().setAMPM(createAlarmAMPM);
-
-                    ala.setHour(createAlarmHour);
-                    ala.setMin(createAlarmMin);
-                    ala.setAMPM(createAlarmAMPM);
-                    
-                    currAlarm.alarm_button.Content = ala.getString();
-
-                    //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-                    //currAlarm.alarm_button.Content = "meow";
-                }
-            }
-            
-            slideMenu.Visibility = System.Windows.Visibility.Hidden;
+                                                  
+                    currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+                    slideMenu.Visibility = System.Windows.Visibility.Hidden;
         }
 
         // Deleting the alarm
@@ -449,12 +411,107 @@ namespace Alarm_Clock
             createAlarmAMPM = ampm;
         }
 
+        //for dissmissing the alarm
         private void dismiss1_Click(object sender, RoutedEventArgs e)
         {
+
+
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+            
+
+            /*
+            //check if alarm repeats itself, if it does repeate then leave alarm as is, if it doesn't repeate delete it 
+            bool repeating =currAlarm.getAlarm().getRepeating();
+            if(repeating == false)
+            {
+                 uAlarms.Remove(currAlarm);
+                 stacky.Children.Remove(currAlarm);
+                       
+            }*/
+
         }
+
+        //dissmisses an alarm, but creates a new alarm object that rings 5 mins later  
+        private void snooze_Click(object sender, RoutedEventArgs e)
+        {
+            
+            //now makes the new alarm that rings 5 mins later (this alarm is hidden from user)
+            //get values of current alarm
+            int newHour = DateTime.Now.Hour - 12;
+            int newMin = DateTime.Now.Minute + 1;
+            //int newSec = DateTime.Now.Second + 10;
+            int newAMPM;
+            if(DateTime.Now.ToString("tt") == "AM")
+            {
+                //its am
+                newAMPM = 0;
+            }
+            else
+            {
+                //its pm
+                newAMPM = 1;
+            }
+            
+            
+            //alarm object 
+            Alarm myAlarm = new Alarm(newHour, newMin, newAMPM, false);
+            myAlarm.setID(0);
+            myAlarm.dismissed = false;
+            myAlarm.setSnooze(true);
+            //add it 
+            alarms.AddLast(myAlarm);
+            String temp = myAlarm.getString();
+
+            //the other alarm object
+            UserAlarm userAlarm = new UserAlarm(0, myAlarm);
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.alarm_button.Content = temp;
+
+            uAlarms.AddLast(userAlarm);
+
+            // Don't Update Stack Panel, this is for testing
+            //stacky.Children.Add(userAlarm);
+
+            // Linking the user alarm to the alarm object
+            myAlarm.setUserAlarm(userAlarm);
+
+            //dissmisses the inital alarm 
+            player.Stop();
+            this.alertCanvas1.Visibility = Visibility.Hidden;
+            this.alertCanvas2.Visibility = Visibility.Hidden;
+
+
+            /*
+            //itterate through the list 
+             foreach (UserAlarm uAlarm in uAlarms)
+             {
+
+
+                if (uAlarm.getAlarm().getID() == 0)
+               {
+
+                         uAlarms.Remove(currAlarm);
+                         stacky.Children.Remove(currAlarm);
+            
+
+               }
+
+
+              }*/
+
+
+
+
+
+
+
+
+        }
+
+
+
     }
 }
 
