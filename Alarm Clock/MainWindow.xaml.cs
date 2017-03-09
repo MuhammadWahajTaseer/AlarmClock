@@ -328,22 +328,22 @@ namespace Alarm_Clock
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
-                //itterate through the list 
-                foreach (UserAlarm uAlarm in uAlarms)
-                {
+                //itterate through the list /*
+               // foreach (UserAlarm uAlarm in uAlarms)
+              //  {
 
 
-                    if (uAlarm.getAlarm().getID() == currAlarm.getAlarm().getID())
-                    {
+                //    if (uAlarm.getAlarm().getID() == currAlarm.getAlarm().getID())
+                 //   {
                    
                     uAlarms.Remove(currAlarm);
                     stacky.Children.Remove(currAlarm);
-                    break;
+                 //   break;
 
-                }
+               // }
                 
 
-            }
+          //  }
 
             slideMenu.Visibility = System.Windows.Visibility.Hidden;
 
@@ -411,11 +411,39 @@ namespace Alarm_Clock
             createAlarmAMPM = ampm;
         }
 
+        //for dissmissing the alarm
         private void dismiss1_Click(object sender, RoutedEventArgs e)
         {
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+            /*
+            //check if alarm repeats itself, if it does repeate then leave alarm as is, if it doesn't repeate delete it 
+            bool repeating =currAlarm.getAlarm().getRepeating();
+            if(repeating == false)
+            {
+                 uAlarms.Remove(currAlarm);
+                 stacky.Children.Remove(currAlarm);
+                       
+            }*/
+
+        }
+
+        //dissmisses an alarm, but creates a new alarm object that rings 5 mins later  
+        private void snooze_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+            //dissmisses the inital alarm 
+            player.Stop();
+            this.alertCanvas1.Visibility = Visibility.Hidden;
+            this.alertCanvas2.Visibility = Visibility.Hidden;
+
+            //now makes the new alarm that rings 5 mins later
+
+
+
         }
 
 
