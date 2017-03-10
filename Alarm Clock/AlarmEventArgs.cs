@@ -10,7 +10,7 @@ namespace Alarm_Clock
 {
     public class AlarmEventArgs : EventArgs
     {
-        public Alarm currAl { get; set; }
+        public UserAlarm currAl { get; set; }
     }
 
     
