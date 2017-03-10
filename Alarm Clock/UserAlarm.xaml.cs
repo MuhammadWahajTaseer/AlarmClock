@@ -88,8 +88,15 @@ namespace Alarm_Clock
                // }
        }
 
-                
-          
+        private void snooze_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Window.GetWindow(this);
+            win.setCurrentAlarm(this);
+            
+        }
+
+
+
 
         }
 
