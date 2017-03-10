@@ -20,12 +20,12 @@ namespace Alarm_Clock
 
         }
 
-        public void compareTime(Alarm al, String timeStr)
+        public void compareTime(UserAlarm userAl, String timeStr)
         {
             if (DateTime.Now.ToString("h:m tt") == timeStr)
             {
                 AlarmEventArgs args = new AlarmEventArgs();
-                args.currAl = al;
+                args.currAl = userAl;
                 OnAlarmRings(args);
             }
         }
