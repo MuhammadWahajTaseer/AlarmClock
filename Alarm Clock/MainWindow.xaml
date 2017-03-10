@@ -38,9 +38,16 @@
             <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decHours_Click"/>
             <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decMinutes_Click"/>
             <Button x:Name="setAlarm_amORpm" Content="AM" Height="89" Canvas.Left="462" Canvas.Top="186" Width="100" FontSize="55" Background="{x:Null}" Click="setAlarm_amORpm_Click" BorderBrush="{x:Null}"/>
-            <Button x:Name="setAlarm_save" Content="SAVE" Height="89" Canvas.Left="305" Canvas.Top="426" Width="257" FontSize="55" Background="Black" Click="setAlarm_save_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Century Gothic"/>
-            <Button x:Name="setAlarm_delete" Content="DELETE" Height="89" Canvas.Left="305" Canvas.Top="546" Width="257" FontSize="55" Background="Black" Click="setAlarm_delete_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Century Gothic" Visibility="Hidden"/>
-            <Button x:Name="editAlarm_save" Content="CHANGE" Height="89" Canvas.Left="305" Canvas.Top="426" Width="257" FontSize="55" Background="Black" Click="editAlarm_save_Click" BorderBrush="{x:Null}" Foreground="White" FontFamily="Century Gothic" Visibility="Hidden"/>
+            <Button x:Name="setAlarm_save" Content="SAVE" Height="77" Canvas.Left="311" Canvas.Top="649" Width="251" FontSize="55" Background="Black" Click="setAlarm_save_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" BorderThickness="2"/>
+            <Button x:Name="setAlarm_delete" Content="DELETE" Height="77" Canvas.Left="48" Canvas.Top="649" Width="236" FontSize="55" Background="Black" Click="setAlarm_delete_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" Visibility="Hidden" BorderThickness="2"/>
+            <Button x:Name="editAlarm_save" Content="CHANGE" Height="77" Canvas.Left="311" Canvas.Top="649" Width="257" FontSize="55" Background="Black" Click="editAlarm_save_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" Visibility="Hidden" BorderThickness="2"/>
+            <Button x:Name="button_Copy" Content="SUN" Canvas.Left="31" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy1" Content="SAT" Canvas.Left="502" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy2" Content="FRI" Canvas.Left="423" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy3" Content="THURS" Canvas.Left="345" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy4" Content="WED" Canvas.Left="266" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy5" Content="TUES" Canvas.Left="189" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
+            <Button x:Name="button_Copy6" Content="MON" Canvas.Left="111" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
         </Canvas>
         <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
             <Ellipse.Stroke>
@@ -96,7 +103,7 @@
 
             <Button x:Name="dismiss1" Content="DISMISS" Height="151" Canvas.Left="760" Canvas.Top="253" Width="453" FontSize="72" Click="dismiss1_Click"/>
             <Button x:Name="snooze" Content="SNOOZE" Height="151" Canvas.Left="760" Canvas.Top="429" Width="453" FontSize="72" Click="snooze_Click"/>
-            
+
         </Canvas>
 
     </Grid>
