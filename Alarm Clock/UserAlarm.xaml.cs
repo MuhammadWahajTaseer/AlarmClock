@@ -81,6 +81,7 @@ namespace Alarm_Clock
            {
                win.setAlarm_amORpm.Content = " PM";
            }
+           
 
                     //  set changed alarm values for the alrm in alarms linked list
 

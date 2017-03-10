@@ -34,7 +34,7 @@ namespace Alarm_Clock
         private RotateTransform HourHandTr = new RotateTransform();
         private RotateTransform SecHandTr = new RotateTransform();
 
-        private UserAlarm currAlarm;
+        public UserAlarm currAlarm;
 
         private int createAlarmHour = 12;
         private int createAlarmMin = 0;
@@ -313,8 +313,9 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
+            userAlarm.alarm_title.Content = alarm_name.Text;
 
             uAlarms.AddLast(userAlarm);
 
@@ -476,7 +477,7 @@ namespace Alarm_Clock
 
                     //the other alarm object
                     UserAlarm userAlarm = new UserAlarm(0, myAlarm);
-                    userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+                    userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
                     userAlarm.alarm_button.Content = temp;
 
                     uAlarms.AddLast(userAlarm);
