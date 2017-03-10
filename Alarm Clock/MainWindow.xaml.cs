@@ -483,7 +483,7 @@ namespace Alarm_Clock
             this.alertCanvas2.Visibility = Visibility.Hidden;
 
 
-            /*
+            
             //itterate through the list 
              foreach (UserAlarm uAlarm in uAlarms)
              {
@@ -491,22 +491,15 @@ namespace Alarm_Clock
 
                 if (uAlarm.getAlarm().getID() == 0)
                {
-
+                    if(uAlarm.getRang() == 1)
                          uAlarms.Remove(currAlarm);
-                         stacky.Children.Remove(currAlarm);
+                         
             
 
                }
 
 
-              }*/
-
-
-
-
-
-
-
+              }
 
         }
 

@@ -15,7 +15,9 @@ namespace Alarm_Clock
         public bool dismissed;
         private bool repeating;
 
+        //variables for snooze
         private bool snooze = false;
+        private int rang = 0;
 
         // Arrray for which days to ring, STARTS ON SUNDAY
         private bool[] days = { false, false, false, false, false, false, false };
@@ -62,6 +64,10 @@ namespace Alarm_Clock
         }
 
         // Getters
+        public int getRang()
+        {
+            return this.rang;
+        }
         public bool getSnooze()
         {
             return this.snooze;
