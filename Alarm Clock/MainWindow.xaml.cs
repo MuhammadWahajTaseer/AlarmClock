@@ -463,6 +463,26 @@ namespace Alarm_Clock
                     newHour = 1;
                 }
             }
+
+            //now we need to adjust the am and pm of the clock if the snooze alarm is at 12:00 am/pm
+            if(newHour == 12)
+            {
+                if(newMin == 0)
+                {
+                    //if the alarm is at 11:59 and snooze time is 12:00 change the am to pm and pm to am  
+                    if (newAMPM == 0)
+                    {
+                        //if previously am change to pm 
+                        newAMPM = 1;
+
+                    }
+                    else
+                    {
+                        //if previously pm change to am
+                        newAMPM = 0;
+                    }
+                }
+            }
             
 
             if (currAlarm != null)
