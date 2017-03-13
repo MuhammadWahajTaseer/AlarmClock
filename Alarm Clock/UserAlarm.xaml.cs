@@ -49,7 +49,8 @@ namespace Alarm_Clock
         {
 
             MainWindow win = (MainWindow)Window.GetWindow(this);
-            win.slideMenu.Visibility = Visibility.Visible;
+            //win.slideMenu.Visibility = Visibility.Visible;
+            win.slideMenuToggle(win.slideMenu, win.menuTogg);
 
             win.setAlarm_save.Visibility = Visibility.Hidden;
             win.editAlarm_save.Visibility = Visibility.Visible;
@@ -81,6 +82,7 @@ namespace Alarm_Clock
            {
                win.setAlarm_amORpm.Content = " PM";
            }
+           
 
                     //  set changed alarm values for the alrm in alarms linked list
 

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Alarm_Clock"
              mc:Ignorable="d" Height="53.18" Width="380.925">
     <Grid Margin="0,0,0,263">
-        <Button x:Name="alarm_button" Content="TI : ME AM" HorizontalAlignment="Left" Height="51" Margin="0,0,0,-51" VerticalAlignment="Top" Width="380" FontSize="36" Click="alarm_button_Click" />
+        <Button x:Name="alarm_button" Content="TI : ME AM" HorizontalAlignment="Left" Height="66" Margin="0,0,0,-66" VerticalAlignment="Top" Width="380" FontSize="36" Click="alarm_button_Click" />
+        <Label x:Name="alarm_title" Content="alarm title" HorizontalAlignment="Left" Margin="5,-7,0,-23" VerticalAlignment="Top" Height="30" Width="297" FontSize="18"/>
     </Grid>
 </UserControl>
