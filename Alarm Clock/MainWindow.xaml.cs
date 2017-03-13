@@ -498,7 +498,7 @@ namespace Alarm_Clock
 
 
 
-
+                if 
                 /*
                 //itterate through the list 
                  foreach (UserAlarm uAlarm in uAlarms)
