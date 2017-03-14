@@ -33,10 +33,11 @@ namespace Alarm_Clock
 
         private System.Media.SoundPlayer player;
         private bool alarmState;
-
+        
         private static int idSet = 0;
 
         public int menuTogg = 0;
+        public bool light = true;
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
@@ -95,6 +96,7 @@ namespace Alarm_Clock
             }
 
             trans.BeginAnimation(TranslateTransform.XProperty, anim);
+
         }
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
@@ -284,7 +286,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -559,6 +561,29 @@ namespace Alarm_Clock
 
             }
         }
-     }
+
+
+        //light/dark mode of the program 
+        private void light_dark_Click(object sender, RoutedEventArgs e)
+        {
+            //change background 
+            //hide button and call second  
+
+            light_dark.Visibility = Visibility.Hidden;
+            light_dark2.Visibility = Visibility.Visible;
+
+
+        }
+        //dark #FFAF8FC1
+
+        private void light_dark2_Click(object sender, RoutedEventArgs e)
+        {
+
+            light_dark2.Visibility = Visibility.Hidden;
+            light_dark.Visibility = Visibility.Visible;
+            
+
+        }
+    }
 }
 
