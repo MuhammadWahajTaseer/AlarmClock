@@ -35,12 +35,13 @@ namespace Alarm_Clock
         private bool alarmState;
         private String alarmTitle;
         private static int idSet = 0;
+        private double timeMult = 0;
 
         public int menuTogg = 0;
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
-        
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer;
 
         AlarmRing ring = new AlarmRing();
         public MainWindow()
@@ -49,7 +50,7 @@ namespace Alarm_Clock
             InitializeComponent();
             alarmState = false;
 
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
@@ -120,11 +121,12 @@ namespace Alarm_Clock
          */
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            var myDate = DateTime.Now;
+            DateTime myDate = DateTime.Now;
 
             /* digital clock
              * displays the time, date and am
              */
+            myDate = timeMultiplier(myDate);
             digitalTime.Content = myDate.ToString("hh:mm:ss"); //hours:minutes: seconds   
             amORpm.Content = myDate.ToString("tt"); //AM or PM 
             date.Content = myDate.ToString("MMM dd, yyyy"); //month day, year 
@@ -142,7 +144,11 @@ namespace Alarm_Clock
 
             alarmCheck(ring);
         }
-
+        private DateTime timeMultiplier(DateTime myDate)
+        {
+            myDate = myDate.AddSeconds(timeMult);
+            return myDate;
+        }
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
             editAlarm_save.Visibility = Visibility.Hidden;
@@ -169,6 +175,10 @@ namespace Alarm_Clock
             if (e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
+            }
+            else if (e.Key == Key.B)
+            {
+                timeMult = timeMult + 60;
             }
         }
 
