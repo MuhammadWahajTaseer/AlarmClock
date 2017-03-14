@@ -573,22 +573,26 @@ namespace Alarm_Clock
         //light/dark mode of the program 
         private void light_dark_Click(object sender, RoutedEventArgs e)
         {
-            //change background 
             //hide button and call second  
-
             light_dark.Visibility = Visibility.Hidden;
             light_dark2.Visibility = Visibility.Visible;
 
+            //change background to dark #FFAF8FC1
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
 
         }
         //dark #FFAF8FC1
 
         private void light_dark2_Click(object sender, RoutedEventArgs e)
         {
-
+            //hide button and call second button 
             light_dark2.Visibility = Visibility.Hidden;
             light_dark.Visibility = Visibility.Visible;
-            
+
+            //change background to white 
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFFFFFFF");
 
         }
     }
