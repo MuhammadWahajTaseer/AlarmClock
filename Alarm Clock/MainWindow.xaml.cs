@@ -581,6 +581,8 @@ namespace Alarm_Clock
             var bc = new BrushConverter();
             this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
 
+            //☀ ☾
+
         }
         //dark #FFAF8FC1
 
