@@ -12,6 +12,9 @@ namespace Alarm_Clock
         private int hour;
         private int minute;
         private int ampm;
+        private int origHour;
+        private int origMinute;
+        private int origAmpm;
         public bool dismissed;
         private bool repeating;
 
@@ -35,9 +38,10 @@ namespace Alarm_Clock
             this.hour = hour;
             this.minute = minute;
             this.ampm = ampm;
-
-
-        }
+            this.origHour = hour;
+            this.origMinute = minute;
+            this.origAmpm = ampm;
+    }
 
         // Constructor that initializes the time as well as days 
         public Alarm(int hour, int minute, int ampm, bool repeating, bool[] days)
@@ -45,6 +49,9 @@ namespace Alarm_Clock
             this.hour = hour;
             this.minute = minute;
             this.ampm = ampm;
+            this.origHour = hour;
+            this.origMinute = minute;
+            this.origAmpm = ampm;
 
             this.repeating = repeating;
             this.days = days;
@@ -64,6 +71,18 @@ namespace Alarm_Clock
         }
 
         // Getters
+        public int getOrigHour()
+        {
+            return this.origHour;
+        }
+        public int getOrigMinute()
+        {
+            return this.origMinute;
+        }
+        public int getorigAmpm()
+        {
+            return this.origAmpm;
+        }
         public int getRang()
         {
             return this.rang;

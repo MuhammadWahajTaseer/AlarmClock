@@ -40,9 +40,9 @@ namespace Alarm_Clock
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
+        
 
         AlarmRing ring = new AlarmRing();
-
         public MainWindow()
         {
             //initalizes the clock  
@@ -101,7 +101,6 @@ namespace Alarm_Clock
         {
             if (e.currAl.getAlarm().dismissed == false)
             {
-                e.currAl.getAlarm().dismissed = true;
                 player = new System.Media.SoundPlayer(e.currAl.getAlarm().getRingerPath());
                 player.Load();
                 player.Play();
@@ -122,7 +121,6 @@ namespace Alarm_Clock
             /* digital clock
              * displays the time, date and am
              */
-
             digitalTime.Content = myDate.ToString("hh:mm:ss"); //hours:minutes: seconds   
             amORpm.Content = myDate.ToString("tt"); //AM or PM 
             date.Content = myDate.ToString("MMM dd, yyyy"); //month day, year 
@@ -286,7 +284,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -388,44 +386,13 @@ namespace Alarm_Clock
 
             if (currAlarm != null)
             {
-                if (currAlarm.getAlarm().getSnooze() == true)
-                {
-                    uAlarms.Remove(currAlarm);
-                }
+                currAlarm.getAlarm().dismissed = true;
             }
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+            
 
-
-
-
-          
-            var node = uAlarms.First;
-            while (node != null)
-            {
-                var next = node.Next;
-
-                if (node.Value.getAlarm().getSnooze() == true)
-                    uAlarms.Remove(node);
-                    //testing code
-                    //stacky.Children.Remove(currAlarm);
-
-                node = next;
-            }
-
-
-
-
-
-            /*
-            //check if alarm repeats itself, if it does repeate then leave alarm as is, if it doesn't repeate delete it 
-            bool repeating =currAlarm.getAlarm().getRepeating();
-            if(repeating == false)
-            {
-                 uAlarms.Remove(currAlarm);
-                 stacky.Children.Remove(currAlarm);        
-            }*/
         }
         public void snooze_Click(object sender, RoutedEventArgs e)
         {
@@ -437,23 +404,27 @@ namespace Alarm_Clock
             int newMin = DateTime.Now.Minute + 1;
             //int newSec = DateTime.Now.Second + 10;
             int newAMPM;
-            if (DateTime.Now.ToString("tt") == "AM")
+            if (DateTime.Now.ToString("tt") == "AM" || DateTime.Now.Hour == 12)
             {
                 //its am
-                newAMPM = 0;
                 newHour = DateTime.Now.Hour;
             }
 
             else
             {
                 //its pm
-                newAMPM = 1;
                 newHour = DateTime.Now.Hour - 12;
             }
-
-
+            if (DateTime.Now.ToString("tt") == "AM")
+            {
+                newAMPM = 0;
+            }
+            else
+            {
+                newAMPM = 1;
+            }
             //IF THE CURRENT ALARM IS 59MINS THE NEW MIN SHOULD BE 00 WITH HOURS BEING +1
-            if(newMin >= 60)
+            if (newMin >= 60)
             {
                 newMin = 0;
                 newHour = newHour + 1;
@@ -463,82 +434,18 @@ namespace Alarm_Clock
                     newHour = 1;
                 }
             }
-            
+
 
             if (currAlarm != null)
             {
-                if (currAlarm.getAlarm().getSnooze() == false)
-                {
-                    //alarm object 
-                    Alarm myAlarm = new Alarm(newHour, newMin, newAMPM, false);
-                    myAlarm.setID(0);
-                    myAlarm.dismissed = false;
-                    myAlarm.setSnooze(true);
-                    //add it 
-                    alarms.AddLast(myAlarm);
-                    String temp = myAlarm.getString();
-
-                    //the other alarm object
-                    UserAlarm userAlarm = new UserAlarm(0, myAlarm);
-                    userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
-                    userAlarm.alarm_button.Content = temp;
-
-                    uAlarms.AddLast(userAlarm);
-
-                    // Don't Update Stack Panel, this is for testing
-                    //stacky.Children.Add(userAlarm);
-
-                    // Linking the user alarm to the alarm object
-                    myAlarm.setUserAlarm(userAlarm);
-                }
-                else
-                {
-                    uAlarms.Remove(currAlarm);
-                    //alarm object 
-                    Alarm myAlarm = new Alarm(newHour, newMin, newAMPM, false);
-                    myAlarm.setID(0);
-                    myAlarm.dismissed = false;
-                    myAlarm.setSnooze(true);
-                    //add it 
-                    alarms.AddLast(myAlarm);
-                    String temp = myAlarm.getString();
-
-            //the other alarm object
-            UserAlarm userAlarm = new UserAlarm(0, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
-            userAlarm.alarm_button.Content = temp;
-
-                    uAlarms.AddLast(userAlarm);
-
-                    // Don't Update Stack Panel, this is for testing
-                    stacky.Children.Add(userAlarm);
-
-                    // Linking the user alarm to the alarm object
-                    myAlarm.setUserAlarm(userAlarm);
-
-                    //currAlarm.getAlarm().setMin(newMin);
-                    //currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-                    /*
-                    foreach(UserAlarm uAlarm in uAlarms)
-                    {
-                        if (uAlarm == currAlarm)
-                        {
-                            uAlarm.getAlarm().setMin(newMin);
-                            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-                        }
-                    }*/
-                }
-                //dissmisses the inital alarm 
-                player.Stop();
-                this.alertCanvas1.Visibility = Visibility.Hidden;
-                this.alertCanvas2.Visibility = Visibility.Hidden;
-
-
-
-
-            }
-
-
+                currAlarm.getAlarm().setHour(newHour);
+                currAlarm.getAlarm().setMin(newMin);
+                currAlarm.getAlarm().setAMPM(newAMPM);  
+            }    
+            //dissmisses the inital alarm 
+            player.Stop();
+            this.alertCanvas1.Visibility = Visibility.Hidden;
+            this.alertCanvas2.Visibility = Visibility.Hidden;
 
         }
     }
