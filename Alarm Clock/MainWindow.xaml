@@ -140,28 +140,16 @@
             <TextBox x:Name="alarm_name" Height="40" Canvas.Left="271" TextWrapping="Wrap" Canvas.Top="626" Width="229" FontSize="20" Background="#FF8723FF" Foreground="White"/>
         </Canvas>
         <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
-            <Ellipse.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Stroke>
             <Ellipse.Fill>
                 <RadialGradientBrush GradientOrigin="0.203,0.78">
-                    <GradientStop Color="#FF0016EE" Offset="1"/>
-                    <GradientStop Color="White" Offset="1"/>
-                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF7527C3" Offset="0.936"/>
+                    <GradientStop Color="#FFBEA8EC" Offset="0.396"/>
+                    <GradientStop Color="#FF3B0D7E" Offset="0.986"/>
+                    <GradientStop Color="#FF560ED4" Offset="0.17"/>
                 </RadialGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,168" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FF140E95">
-            <Ellipse.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Stroke>
-        </Ellipse>
+        <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,164" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FF2C0D51"/>
         <Ellipse x:Name="Circle3" HorizontalAlignment="Left" Margin="127,413,0,187" Grid.RowSpan="2" Width="600" OpacityMask="Black" Fill="White">
             <Ellipse.Stroke>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
