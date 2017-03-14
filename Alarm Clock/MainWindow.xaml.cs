@@ -33,11 +33,10 @@ namespace Alarm_Clock
 
         private System.Media.SoundPlayer player;
         private bool alarmState;
-        
+        private String alarmTitle;
         private static int idSet = 0;
 
         public int menuTogg = 0;
-        public bool light = true;
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
@@ -69,11 +68,14 @@ namespace Alarm_Clock
             if (plusButton.Content.ToString() == "-")
             {
                 plusButton.Content = "+";
+                setAlarm_delete.Visibility = Visibility.Hidden;
+                alarm_name.Text = "";
             }
             else
             {
                 plusButton.Content = "-";
             }        
+           
         }
 
         // Animates the slide menu.
@@ -276,7 +278,8 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            alarmTitle = alarm_name.Text;
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -358,8 +361,12 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setHour(createAlarmHour);
              currAlarm.getAlarm().setMin(createAlarmMin);
              currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+             currAlarm.getAlarm().setName(alarm_name.Text);
+
+             currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+             
            
              slideMenuToggle(slideMenu, menuTogg);
         }
