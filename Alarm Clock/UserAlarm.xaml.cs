@@ -58,23 +58,23 @@ namespace Alarm_Clock
 
             win.setCurrentAlarm(this);
             // Finding the position of the alarm in the alarms linked list
-               
-           win.setAlarm_hours.Content = al.getHour();
-           win.setCurrentHour(al.getHour());
+
+           win.setAlarm_hours.Content = al.getOrigHour();
+           win.setCurrentHour(al.getOrigHour());
            // Loads previous alarm values
-           int getmin = al.getMin();
-           win.setCurrentMin(al.getMin());
+           int getmin = al.getOrigMinute();
+           win.setCurrentMin(al.getOrigMinute());
            if (getmin < 10)
            {
-                win.setAlarm_minutes.Content = "0" + al.getMin();
+                win.setAlarm_minutes.Content = "0" + al.getOrigMinute();
            }
            else
            {
-                win.setAlarm_minutes.Content = al.getMin();
-           }
+                win.setAlarm_minutes.Content = al.getOrigMinute();
+            }
 
-           win.setCurrentAMPM(al.getAMPM());
-           if (al.getAMPM() == 0)
+           win.setCurrentAMPM(al.getorigAmpm());
+           if (al.getorigAmpm() == 0)
            {
                 win.setAlarm_amORpm.Content = " AM";
            }
