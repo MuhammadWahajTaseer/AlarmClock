@@ -434,7 +434,17 @@ namespace Alarm_Clock
                     newHour = 1;
                 }
             }
+            
 
+                    }
+                    else
+                    {
+                        //if previously pm change to am
+                        newAMPM = 0;
+                    }
+                }
+            }
+            
 
             if (currAlarm != null)
             {
@@ -447,7 +457,114 @@ namespace Alarm_Clock
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
 
+            }
+
         }
+
+        //digital clock checkbox if it is checked
+        private void checkBoxDigital_Checked(object sender, RoutedEventArgs e)
+        {
+            HandleDig(sender as CheckBox);
+        }
+
+        //digital clock checkbox if it is unchecked
+        private void checkBoxDigital_Unchecked(object sender, RoutedEventArgs e)
+        {
+            HandleDig(sender as CheckBox);
+        }
+
+        //the handler for the digital clock checkbox
+        void HandleDig(CheckBox checkBox)
+        {
+            // Use IsChecked.
+            bool flag = checkBox.IsChecked.Value;
+
+            //if the checkbox is checked then hide the digital clock
+            if(flag == true)
+            {
+                this.date.Visibility = Visibility.Hidden;
+                this.digitalTime.Visibility = Visibility.Hidden;
+                this.amORpm.Visibility = Visibility.Hidden;
+
+
+            }
+
+            //otherwise if the flag is false then display thedigital clock
+            if(flag == false)
+            {
+
+                this.date.Visibility = Visibility.Visible;
+                this.digitalTime.Visibility = Visibility.Visible;
+                this.amORpm.Visibility = Visibility.Visible;
+
+            }
+
+
+        }
+
+        //analog clock checkbox if it is checked
+        private void checkBoxAnalog_Checked(object sender, RoutedEventArgs e)
+        {
+            HandleAn(sender as CheckBox);
+        }
+
+        //analog clock checkbox if it is not checked
+        private void checkBoxAnalog_UnChecked(object sender, RoutedEventArgs e)
+        {
+            HandleAn(sender as CheckBox);
+        }
+
+        //the handler for the digital clock checkbox
+        void HandleAn(CheckBox checkBox)
+        {
+            // Use IsChecked.
+            bool flag = checkBox.IsChecked.Value;
+
+            //if the checkbox is checked then hide the digital clock
+            if (flag == true)
+            {
+                //make circles invisible
+                this.Circle1.Visibility = Visibility.Hidden;
+                this.Circle2.Visibility = Visibility.Hidden;
+                this.Circle3.Visibility = Visibility.Hidden;
+                this.Circle4.Visibility = Visibility.Hidden;
+
+                //make labels invisible
+                this.Label12.Visibility = Visibility.Hidden;
+                this.Label3.Visibility = Visibility.Hidden;
+                this.Label6.Visibility = Visibility.Hidden;
+                this.Label9.Visibility = Visibility.Hidden;
+
+                //make hands invisible
+                this.SecondHand.Visibility = Visibility.Hidden;
+                this.MinuteHand.Visibility = Visibility.Hidden;
+                this.HourHand.Visibility = Visibility.Hidden;
+            }
+
+            //otherwise if the flag is false then display thedigital clock
+            if (flag == false)
+            {
+                //make circles visible 
+                this.Circle1.Visibility = Visibility.Visible;
+                this.Circle2.Visibility = Visibility.Visible;
+                this.Circle3.Visibility = Visibility.Visible;
+                this.Circle4.Visibility = Visibility.Visible;
+
+                //make labels visible
+                this.Label12.Visibility = Visibility.Visible;
+                this.Label3.Visibility = Visibility.Visible;
+                this.Label6.Visibility = Visibility.Visible;
+                this.Label9.Visibility = Visibility.Visible;
+
+                //make hands visible
+                this.SecondHand.Visibility = Visibility.Visible;
+                this.MinuteHand.Visibility = Visibility.Visible;
+                this.HourHand.Visibility = Visibility.Visible;
+
+            }
+
+        }
+
     }
 }
 
