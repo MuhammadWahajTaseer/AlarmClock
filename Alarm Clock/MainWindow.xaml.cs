@@ -433,15 +433,11 @@ namespace Alarm_Clock
                 {
                     newHour = 1;
                 }
-            }
             
-
-                    }
-                    else
-                    {
-                        //if previously pm change to am
-                        newAMPM = 0;
-                    }
+                else
+                {
+                  //if previously pm change to am
+                  newAMPM = 0;
                 }
             }
             
@@ -459,7 +455,7 @@ namespace Alarm_Clock
 
             }
 
-        }
+        
 
         //digital clock checkbox if it is checked
         private void checkBoxDigital_Checked(object sender, RoutedEventArgs e)
@@ -562,9 +558,7 @@ namespace Alarm_Clock
                 this.HourHand.Visibility = Visibility.Visible;
 
             }
-
         }
-
-    }
+     }
 }
 
