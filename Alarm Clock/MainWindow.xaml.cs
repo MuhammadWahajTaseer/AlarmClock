@@ -33,7 +33,7 @@ namespace Alarm_Clock
 
         private System.Media.SoundPlayer player;
         private bool alarmState;
-
+        private String alarmTitle;
         private static int idSet = 0;
 
         public int menuTogg = 0;
@@ -68,11 +68,14 @@ namespace Alarm_Clock
             if (plusButton.Content.ToString() == "-")
             {
                 plusButton.Content = "+";
+                setAlarm_delete.Visibility = Visibility.Hidden;
+                alarm_name.Text = "";
             }
             else
             {
                 plusButton.Content = "-";
             }        
+           
         }
 
         // Animates the slide menu.
@@ -95,6 +98,7 @@ namespace Alarm_Clock
             }
 
             trans.BeginAnimation(TranslateTransform.XProperty, anim);
+
         }
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
@@ -274,7 +278,8 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            alarmTitle = alarm_name.Text;
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -356,8 +361,12 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setHour(createAlarmHour);
              currAlarm.getAlarm().setMin(createAlarmMin);
              currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+             currAlarm.getAlarm().setName(alarm_name.Text);
+
+             currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+             
            
              slideMenuToggle(slideMenu, menuTogg);
         }
@@ -433,8 +442,14 @@ namespace Alarm_Clock
                 {
                     newHour = 1;
                 }
+            
+                else
+                {
+                  //if previously pm change to am
+                  newAMPM = 0;
+                }
             }
-
+            
 
             if (currAlarm != null)
             {
@@ -446,6 +461,140 @@ namespace Alarm_Clock
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+
+            }
+
+        
+
+        //digital clock checkbox if it is checked
+        private void checkBoxDigital_Checked(object sender, RoutedEventArgs e)
+        {
+            HandleDig(sender as CheckBox);
+        }
+
+        //digital clock checkbox if it is unchecked
+        private void checkBoxDigital_Unchecked(object sender, RoutedEventArgs e)
+        {
+            HandleDig(sender as CheckBox);
+        }
+
+        //the handler for the digital clock checkbox
+        void HandleDig(CheckBox checkBox)
+        {
+            // Use IsChecked.
+            bool flag = checkBox.IsChecked.Value;
+
+            //if the checkbox is checked then hide the digital clock
+            if(flag == true)
+            {
+                this.date.Visibility = Visibility.Hidden;
+                this.digitalTime.Visibility = Visibility.Hidden;
+                this.amORpm.Visibility = Visibility.Hidden;
+
+
+            }
+
+            //otherwise if the flag is false then display thedigital clock
+            if(flag == false)
+            {
+
+                this.date.Visibility = Visibility.Visible;
+                this.digitalTime.Visibility = Visibility.Visible;
+                this.amORpm.Visibility = Visibility.Visible;
+
+            }
+
+
+        }
+
+        //analog clock checkbox if it is checked
+        private void checkBoxAnalog_Checked(object sender, RoutedEventArgs e)
+        {
+            HandleAn(sender as CheckBox);
+        }
+
+        //analog clock checkbox if it is not checked
+        private void checkBoxAnalog_UnChecked(object sender, RoutedEventArgs e)
+        {
+            HandleAn(sender as CheckBox);
+        }
+
+        //the handler for the digital clock checkbox
+        void HandleAn(CheckBox checkBox)
+        {
+            // Use IsChecked.
+            bool flag = checkBox.IsChecked.Value;
+
+            //if the checkbox is checked then hide the digital clock
+            if (flag == true)
+            {
+                //make circles invisible
+                this.Circle1.Visibility = Visibility.Hidden;
+                this.Circle2.Visibility = Visibility.Hidden;
+                this.Circle3.Visibility = Visibility.Hidden;
+                this.Circle4.Visibility = Visibility.Hidden;
+
+                //make labels invisible
+                this.Label12.Visibility = Visibility.Hidden;
+                this.Label3.Visibility = Visibility.Hidden;
+                this.Label6.Visibility = Visibility.Hidden;
+                this.Label9.Visibility = Visibility.Hidden;
+
+                //make hands invisible
+                this.SecondHand.Visibility = Visibility.Hidden;
+                this.MinuteHand.Visibility = Visibility.Hidden;
+                this.HourHand.Visibility = Visibility.Hidden;
+            }
+
+            //otherwise if the flag is false then display thedigital clock
+            if (flag == false)
+            {
+                //make circles visible 
+                this.Circle1.Visibility = Visibility.Visible;
+                this.Circle2.Visibility = Visibility.Visible;
+                this.Circle3.Visibility = Visibility.Visible;
+                this.Circle4.Visibility = Visibility.Visible;
+
+                //make labels visible
+                this.Label12.Visibility = Visibility.Visible;
+                this.Label3.Visibility = Visibility.Visible;
+                this.Label6.Visibility = Visibility.Visible;
+                this.Label9.Visibility = Visibility.Visible;
+
+                //make hands visible
+                this.SecondHand.Visibility = Visibility.Visible;
+                this.MinuteHand.Visibility = Visibility.Visible;
+                this.HourHand.Visibility = Visibility.Visible;
+
+            }
+        }
+
+
+        //light/dark mode of the program 
+        private void light_dark_Click(object sender, RoutedEventArgs e)
+        {
+            //hide button and call second  
+            light_dark.Visibility = Visibility.Hidden;
+            light_dark2.Visibility = Visibility.Visible;
+
+            //change background to dark #FFAF8FC1
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
+
+            //☀ ☾
+
+        }
+        //dark #FFAF8FC1
+
+        private void light_dark2_Click(object sender, RoutedEventArgs e)
+        {
+            //hide button and call second button 
+            light_dark2.Visibility = Visibility.Hidden;
+            light_dark.Visibility = Visibility.Visible;
+
+            //change background to white 
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFFFFFFF");
 
         }
     }
