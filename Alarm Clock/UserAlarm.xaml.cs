@@ -82,13 +82,17 @@ namespace Alarm_Clock
            {
                win.setAlarm_amORpm.Content = " PM";
            }
-           
 
-                    //  set changed alarm values for the alrm in alarms linked list
+            alarm_title.Content = al.getName();
+            win.alarm_name.Text = al.getName();
 
 
-               // }
-       }
+
+            //  set changed alarm values for the alrm in alarms linked list
+
+
+            // }
+        }
 
         private void snooze_Click(object sender, RoutedEventArgs e)
         {

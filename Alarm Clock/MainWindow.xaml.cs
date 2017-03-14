@@ -33,7 +33,7 @@ namespace Alarm_Clock
 
         private System.Media.SoundPlayer player;
         private bool alarmState;
-
+        private String alarmTitle;
         private static int idSet = 0;
 
         public int menuTogg = 0;
@@ -68,11 +68,14 @@ namespace Alarm_Clock
             if (plusButton.Content.ToString() == "-")
             {
                 plusButton.Content = "+";
+                setAlarm_delete.Visibility = Visibility.Hidden;
+                alarm_name.Text = "";
             }
             else
             {
                 plusButton.Content = "-";
             }        
+           
         }
 
         // Animates the slide menu.
@@ -274,7 +277,8 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            alarmTitle = alarm_name.Text;
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -284,7 +288,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\huynjm\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -356,8 +360,12 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setHour(createAlarmHour);
              currAlarm.getAlarm().setMin(createAlarmMin);
              currAlarm.getAlarm().setAMPM(createAlarmAMPM);
+             currAlarm.getAlarm().setName(alarm_name.Text);
+
+             currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+             
            
              slideMenuToggle(slideMenu, menuTogg);
         }
