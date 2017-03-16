@@ -33,15 +33,17 @@ namespace Alarm_Clock
 
         private System.Media.SoundPlayer player;
         private bool alarmState;
+        private String alarmTitle;
         private double timeMult = 0;
         private static int idSet = 0;
+        private DateTime myDate = DateTime.Now;
 
         public int menuTogg = 0;
 
         public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
         public LinkedList<UserAlarm> uAlarms = new LinkedList<UserAlarm>();
         System.Windows.Threading.DispatcherTimer dispatcherTimer;
-
+        
         AlarmRing ring = new AlarmRing();
         public MainWindow()
         {
@@ -68,11 +70,14 @@ namespace Alarm_Clock
             if (plusButton.Content.ToString() == "-")
             {
                 plusButton.Content = "+";
+                setAlarm_delete.Visibility = Visibility.Hidden;
+                alarm_name.Text = "";
             }
             else
             {
                 plusButton.Content = "-";
             }        
+           
         }
 
         // Animates the slide menu.
@@ -95,6 +100,7 @@ namespace Alarm_Clock
             }
 
             trans.BeginAnimation(TranslateTransform.XProperty, anim);
+
         }
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
@@ -116,8 +122,6 @@ namespace Alarm_Clock
          */
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            DateTime myDate = DateTime.Now;
-
             /* digital clock
              * displays the time, date and am
              */
@@ -136,8 +140,9 @@ namespace Alarm_Clock
             MinuteHand.RenderTransform = MinHandTr;
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
-
             alarmCheck(ring);
+            myDate.AddSeconds(1);
+            timeMult = 0;
         }
         private DateTime timeMultiplier(DateTime myDate)
         {
@@ -284,7 +289,8 @@ namespace Alarm_Clock
         {
             // ** Need to also check if it's repeating and send the last bool acordingly
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false);
+            alarmTitle = alarm_name.Text;
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -358,7 +364,9 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setOrigMinute(createAlarmMin);
              currAlarm.getAlarm().setorigAmpm(createAlarmAMPM);
 
+             currAlarm.getAlarm().setSnooze(false);
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+             
            
              slideMenuToggle(slideMenu, menuTogg);
         }
@@ -560,6 +568,35 @@ namespace Alarm_Clock
 
             }
         }
-     }
+
+
+        //light/dark mode of the program 
+        private void light_dark_Click(object sender, RoutedEventArgs e)
+        {
+            //hide button and call second  
+            light_dark.Visibility = Visibility.Hidden;
+            light_dark2.Visibility = Visibility.Visible;
+
+            //change background to dark #FFAF8FC1
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
+
+            //☀ ☾
+
+        }
+        //dark #FFAF8FC1
+
+        private void light_dark2_Click(object sender, RoutedEventArgs e)
+        {
+            //hide button and call second button 
+            light_dark2.Visibility = Visibility.Hidden;
+            light_dark.Visibility = Visibility.Visible;
+
+            //change background to white 
+            var bc = new BrushConverter();
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFFFFFFF");
+
+        }
+    }
 }
 
