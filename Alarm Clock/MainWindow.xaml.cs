@@ -594,7 +594,7 @@ namespace Alarm_Clock
 
             //change background to white 
             var bc = new BrushConverter();
-            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFD7C8EA");
 
         }
     }
