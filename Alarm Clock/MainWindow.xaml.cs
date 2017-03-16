@@ -367,6 +367,7 @@ namespace Alarm_Clock
              currAlarm.getAlarm().dismissed = false;
              currAlarm.getAlarm().setSnooze(false);
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+             currAlarm.alarm_title.Content = alarm_name.Text;
              
            
              slideMenuToggle(slideMenu, menuTogg);
@@ -580,9 +581,9 @@ namespace Alarm_Clock
 
             //change background to dark (FFAF8FC1)
             var bc = new BrushConverter();
-            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FF594735");
 
-            //☀ ☾
+            //☀ ☾    FF594735   FFF1E4D8
 
         }
         //dark #FFAF8FC1
@@ -595,7 +596,8 @@ namespace Alarm_Clock
 
             //change background to light (FFD7C8EA) 
             var bc = new BrushConverter();
-            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFD7C8EA");
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFF1E4D8");
+            //#FFF1E4D8
 
         }
     }
