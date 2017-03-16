@@ -141,7 +141,7 @@ namespace Alarm_Clock
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
             alarmCheck(ring);
-            myDate.AddSeconds(1);
+            myDate = myDate.AddSeconds(1);
             timeMult = 0;
         }
         private DateTime timeMultiplier(DateTime myDate)
@@ -342,7 +342,7 @@ namespace Alarm_Clock
                         min = uAlarm.getAlarm().getMin().ToString();
                     }
                     String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
-                    ring.compareTime(uAlarm, checker);
+                    ring.compareTime(uAlarm, checker, myDate);
 
 
 
@@ -364,6 +364,7 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setOrigMinute(createAlarmMin);
              currAlarm.getAlarm().setorigAmpm(createAlarmAMPM);
 
+             currAlarm.getAlarm().dismissed = false;
              currAlarm.getAlarm().setSnooze(false);
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
              
@@ -410,21 +411,21 @@ namespace Alarm_Clock
             //now makes the new alarm that rings 5 mins later (this alarm is hidden from user)
             //get values of current alarm
             int newHour;
-            int newMin = DateTime.Now.Minute + 1;
+            int newMin = myDate.Minute + 1;
             //int newSec = DateTime.Now.Second + 10;
             int newAMPM;
-            if (DateTime.Now.ToString("tt") == "AM" || DateTime.Now.Hour == 12)
+            if (myDate.ToString("tt") == "AM" || myDate.Hour == 12)
             {
                 //its am
-                newHour = DateTime.Now.Hour;
+                newHour = myDate.Hour;
             }
 
             else
             {
                 //its pm
-                newHour = DateTime.Now.Hour - 12;
+                newHour = myDate.Hour - 12;
             }
-            if (DateTime.Now.ToString("tt") == "AM")
+            if (myDate.ToString("tt") == "AM")
             {
                 newAMPM = 0;
             }
