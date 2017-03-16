@@ -300,7 +300,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"C:\Users\stefan.jovanovic\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -577,7 +577,7 @@ namespace Alarm_Clock
             light_dark.Visibility = Visibility.Hidden;
             light_dark2.Visibility = Visibility.Visible;
 
-            //change background to dark #FFAF8FC1
+            //change background to dark (FFAF8FC1)
             var bc = new BrushConverter();
             this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
 
@@ -592,7 +592,7 @@ namespace Alarm_Clock
             light_dark2.Visibility = Visibility.Hidden;
             light_dark.Visibility = Visibility.Visible;
 
-            //change background to white 
+            //change background to light (FFD7C8EA) 
             var bc = new BrushConverter();
             this.MainWin.Background = (Brush)bc.ConvertFrom("#FFD7C8EA");
 
