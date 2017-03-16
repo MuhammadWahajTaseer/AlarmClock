@@ -17,6 +17,7 @@ namespace Alarm_Clock
         private int origAmpm;
         public bool dismissed;
         private bool repeating;
+        private String descript;
 
         //variables for snooze
         private bool snooze = false;
@@ -33,7 +34,7 @@ namespace Alarm_Clock
 
 
         // Constructor initializes the time
-        public Alarm(int hour, int minute, int ampm, bool repeating)
+        public Alarm(int hour, int minute, int ampm, bool repeating, string words)
         {
             this.hour = hour;
             this.minute = minute;
@@ -41,6 +42,7 @@ namespace Alarm_Clock
             this.origHour = hour;
             this.origMinute = minute;
             this.origAmpm = ampm;
+            this.descript = words;
     }
 
         // Constructor that initializes the time as well as days 
@@ -101,6 +103,11 @@ namespace Alarm_Clock
             return hour;
         }
 
+        public String getName()
+        {
+            return descript;
+        }
+
         public int getMin()
         {
             return minute;
@@ -129,6 +136,11 @@ namespace Alarm_Clock
         public UserAlarm getUAlarm()
         {
             return userAlarm;
+        }
+
+        public void setName(String words)
+        {
+            this.descript = words;
         }
 
         public String getString()
