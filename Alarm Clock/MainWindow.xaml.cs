@@ -368,6 +368,7 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setSnooze(false);
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
              currAlarm.alarm_title.Content = alarm_name.Text;
+             currAlarm.getAlarm().setName(alarm_name.Text);
              
            
              slideMenuToggle(slideMenu, menuTogg);
