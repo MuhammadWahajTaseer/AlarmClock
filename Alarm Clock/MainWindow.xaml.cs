@@ -105,14 +105,17 @@ namespace Alarm_Clock
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
         {
+
             if (e.currAl.getAlarm().dismissed == false)
             {
                 player = new System.Media.SoundPlayer(e.currAl.getAlarm().getRingerPath());
                 player.Load();
                 player.Play();
                 currAlarm = e.currAl;
+
                 this.alertCanvas1.Visibility = Visibility.Visible;
                 this.alertCanvas2.Visibility = Visibility.Visible;
+
             }
         }
 
@@ -344,8 +347,6 @@ namespace Alarm_Clock
                     String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
                     ring.compareTime(uAlarm, checker, myDate);
 
-
-
                 }
             }
         }
@@ -368,6 +369,8 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setSnooze(false);
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
              currAlarm.alarm_title.Content = alarm_name.Text;
+            currAlarm.getAlarm().setName(alarm_name.Text);
+            
              
            
              slideMenuToggle(slideMenu, menuTogg);
@@ -407,7 +410,6 @@ namespace Alarm_Clock
         }
         public void snooze_Click(object sender, RoutedEventArgs e)
         {
-
 
             //now makes the new alarm that rings 5 mins later (this alarm is hidden from user)
             //get values of current alarm
@@ -493,6 +495,8 @@ namespace Alarm_Clock
                 this.digitalTime.Visibility = Visibility.Hidden;
                 this.amORpm.Visibility = Visibility.Hidden;
 
+                this.checkBoxAnalog.IsEnabled = false;
+                //this.checkBoxAnalog.Visibility = Visibility.Hidden;
 
             }
 
@@ -503,6 +507,9 @@ namespace Alarm_Clock
                 this.date.Visibility = Visibility.Visible;
                 this.digitalTime.Visibility = Visibility.Visible;
                 this.amORpm.Visibility = Visibility.Visible;
+
+                this.checkBoxAnalog.IsEnabled = true;
+                //this.checkBoxAnalog.Visibility = Visibility.Visible;
 
             }
 
@@ -546,6 +553,9 @@ namespace Alarm_Clock
                 this.SecondHand.Visibility = Visibility.Hidden;
                 this.MinuteHand.Visibility = Visibility.Hidden;
                 this.HourHand.Visibility = Visibility.Hidden;
+
+                this.checkBoxDigital.IsEnabled = false;
+               // this.checkBoxDigital.Visibility = Visibility.Hidden;
             }
 
             //otherwise if the flag is false then display thedigital clock
@@ -567,6 +577,9 @@ namespace Alarm_Clock
                 this.SecondHand.Visibility = Visibility.Visible;
                 this.MinuteHand.Visibility = Visibility.Visible;
                 this.HourHand.Visibility = Visibility.Visible;
+
+                this.checkBoxDigital.IsEnabled = true;
+             //   this.checkBoxDigital.Visibility = Visibility.Visible;
 
             }
         }
@@ -600,6 +613,13 @@ namespace Alarm_Clock
             //#FFF1E4D8
 
         }
-    }
-}
 
+        private void butSnoozeErr_Click(object sender, RoutedEventArgs e)
+        {
+            this.SnoozeError.Visibility = Visibility.Hidden;
+            this.butSnoozeErr.Visibility = Visibility.Hidden;
+        }
+
+    }
+
+}
