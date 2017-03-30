@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Alarm_Clock
 {
-    public class Alarm
+    [Serializable]
+    public class Alarm : ISerializable
     {
         private int id;
         private int hour;
@@ -198,6 +200,10 @@ namespace Alarm_Clock
         {
             ringerPath = path;
         }
-        
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("AlarmID", this.id);
+        }
     }
 }

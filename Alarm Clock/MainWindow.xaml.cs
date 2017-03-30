@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Runtime.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Alarm_Clock
 {
@@ -44,12 +47,16 @@ namespace Alarm_Clock
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
 
         AlarmRing ring = new AlarmRing();
+        IFormatter formatter;
+        Stream stream;
         public MainWindow()
         {
             //initalizes the clock  
             InitializeComponent();
             alarmState = false;
 
+            formatter = new BinaryFormatter();
+            stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
@@ -174,6 +181,7 @@ namespace Alarm_Clock
         {
             if (e.Key == Key.Escape)
             {
+                stream.Close();
                 Application.Current.Shutdown();
             }
             else if (e.Key == Key.B)
@@ -310,7 +318,10 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
- 
+
+            //
+            formatter.Serialize(stream, myAlarm);
+
             slideMenuToggle(slideMenu, menuTogg);
         }
 
