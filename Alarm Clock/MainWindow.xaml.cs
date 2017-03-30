@@ -355,19 +355,22 @@ namespace Alarm_Clock
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
-           
+            this.deleteAlarm();
+            slideMenuToggle(slideMenu, menuTogg);
+        }
+        public void deleteAlarm()
+        {
             uAlarms.Remove(currAlarm);
             stacky.Children.Remove(currAlarm);
 
             stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
-            foreach(UserAlarm uAlarm in uAlarms)
+            foreach (UserAlarm uAlarm in uAlarms)
             {
                 formatter.Serialize(stream, uAlarm.getAlarm());
             }
             stream.Close();
-            slideMenuToggle(slideMenu, menuTogg);
+            
         }
-
 
         private void alarmCheck(AlarmRing ring)
         {
