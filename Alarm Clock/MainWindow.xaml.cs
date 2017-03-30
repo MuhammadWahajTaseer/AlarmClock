@@ -61,7 +61,6 @@ namespace Alarm_Clock
             }
 
             formatter = new BinaryFormatter();
-            stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
@@ -337,7 +336,7 @@ namespace Alarm_Clock
 
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"C:\Users\jgelay\Source\Repos\AlarmClock\Alarm Clock\Ringtones\Default.wav");
+            userAlarm.getAlarm().setRingerPath(@"Default.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -348,7 +347,6 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
-
             stream = new FileStream("MyFile.bin", FileMode.Append, FileAccess.Write, FileShare.None);
             formatter.Serialize(stream, myAlarm);
             stream.Close();
