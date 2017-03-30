@@ -101,10 +101,13 @@ namespace Alarm_Clock
             
         }
 
-
-
-
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow win = (MainWindow)Window.GetWindow(this);
+            win.setCurrentAlarm(this);
+            win.deleteAlarm();
         }
+    }
 
     }
 
