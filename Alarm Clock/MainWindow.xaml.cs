@@ -37,8 +37,8 @@ namespace Alarm_Clock
         private System.Media.SoundPlayer player;
         private bool alarmState;
         private String alarmTitle;
-        private static int idSet = 0;
         private double timeMult = 0;
+        private static int idSet = 0;
 
         public int menuTogg = 0;
 
@@ -49,6 +49,7 @@ namespace Alarm_Clock
         AlarmRing ring = new AlarmRing();
         private IFormatter formatter;
         private Stream stream;
+        DateTime myDate;
         public MainWindow()
         {
             //initializes the clock  
@@ -140,14 +141,17 @@ namespace Alarm_Clock
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
         {
+
             if (e.currAl.getAlarm().dismissed == false)
             {
                 player = new System.Media.SoundPlayer(e.currAl.getAlarm().getRingerPath());
                 player.Load();
                 player.Play();
                 currAlarm = e.currAl;
+
                 this.alertCanvas1.Visibility = Visibility.Visible;
                 this.alertCanvas2.Visibility = Visibility.Visible;
+
             }
         }
 
@@ -157,7 +161,7 @@ namespace Alarm_Clock
          */
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            DateTime myDate = DateTime.Now;
+            myDate = DateTime.Now;
 
             /* digital clock
              * displays the time, date and am
@@ -177,8 +181,9 @@ namespace Alarm_Clock
             MinuteHand.RenderTransform = MinHandTr;
             HourHand.RenderTransform = HourHandTr;
             SecondHand.RenderTransform = SecHandTr;
-
             alarmCheck(ring);
+            myDate = myDate.AddSeconds(1);
+            timeMult = 0;
         }
         private DateTime timeMultiplier(DateTime myDate)
         {
@@ -218,6 +223,7 @@ namespace Alarm_Clock
                 timeMult = timeMult + 60;
             }
         }
+
 
         //**When creating a new alarm** - decriment of the mins button  
         private void setAlarm_decMinutes_Click(object sender, RoutedEventArgs e)
@@ -391,7 +397,7 @@ namespace Alarm_Clock
                         min = uAlarm.getAlarm().getMin().ToString();
                     }
                     String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
-                    ring.compareTime(uAlarm, checker);
+                    ring.compareTime(uAlarm, checker, myDate);
 
                 }
             }
@@ -407,8 +413,13 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setHour(createAlarmHour);
              currAlarm.getAlarm().setMin(createAlarmMin);
              currAlarm.getAlarm().setAMPM(createAlarmAMPM);
-             currAlarm.getAlarm().setName(alarm_name.Text);
+             currAlarm.getAlarm().setOrigHour(createAlarmHour);
+             currAlarm.getAlarm().setOrigMinute(createAlarmMin);
+             currAlarm.getAlarm().setorigAmpm(createAlarmAMPM);
 
+             currAlarm.getAlarm().dismissed = false;
+             currAlarm.getAlarm().setSnooze(false);
+             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
              currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
@@ -457,25 +468,24 @@ namespace Alarm_Clock
         public void snooze_Click(object sender, RoutedEventArgs e)
         {
 
-
             //now makes the new alarm that rings 5 mins later (this alarm is hidden from user)
             //get values of current alarm
             int newHour;
-            int newMin = DateTime.Now.Minute + 1;
+            int newMin = myDate.Minute + 1;
             //int newSec = DateTime.Now.Second + 10;
             int newAMPM;
-            if (DateTime.Now.ToString("tt") == "AM" || DateTime.Now.Hour == 12)
+            if (myDate.ToString("tt") == "AM" || myDate.Hour == 12)
             {
                 //its am
-                newHour = DateTime.Now.Hour;
+                newHour = myDate.Hour;
             }
 
             else
             {
                 //its pm
-                newHour = DateTime.Now.Hour - 12;
+                newHour = myDate.Hour - 12;
             }
-            if (DateTime.Now.ToString("tt") == "AM")
+            if (myDate.ToString("tt") == "AM")
             {
                 newAMPM = 0;
             }
@@ -542,6 +552,8 @@ namespace Alarm_Clock
                 this.digitalTime.Visibility = Visibility.Hidden;
                 this.amORpm.Visibility = Visibility.Hidden;
 
+                this.checkBoxAnalog.IsEnabled = false;
+                //this.checkBoxAnalog.Visibility = Visibility.Hidden;
 
             }
 
@@ -552,6 +564,9 @@ namespace Alarm_Clock
                 this.date.Visibility = Visibility.Visible;
                 this.digitalTime.Visibility = Visibility.Visible;
                 this.amORpm.Visibility = Visibility.Visible;
+
+                this.checkBoxAnalog.IsEnabled = true;
+                //this.checkBoxAnalog.Visibility = Visibility.Visible;
 
             }
 
@@ -595,6 +610,9 @@ namespace Alarm_Clock
                 this.SecondHand.Visibility = Visibility.Hidden;
                 this.MinuteHand.Visibility = Visibility.Hidden;
                 this.HourHand.Visibility = Visibility.Hidden;
+
+                this.checkBoxDigital.IsEnabled = false;
+               // this.checkBoxDigital.Visibility = Visibility.Hidden;
             }
 
             //otherwise if the flag is false then display thedigital clock
@@ -617,6 +635,9 @@ namespace Alarm_Clock
                 this.MinuteHand.Visibility = Visibility.Visible;
                 this.HourHand.Visibility = Visibility.Visible;
 
+                this.checkBoxDigital.IsEnabled = true;
+             //   this.checkBoxDigital.Visibility = Visibility.Visible;
+
             }
         }
 
@@ -628,11 +649,11 @@ namespace Alarm_Clock
             light_dark.Visibility = Visibility.Hidden;
             light_dark2.Visibility = Visibility.Visible;
 
-            //change background to dark #FFAF8FC1
+            //change background to dark (FFAF8FC1)
             var bc = new BrushConverter();
-            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFAF8FC1");
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FF594735");
 
-            //☀ ☾
+            //☀ ☾    FF594735   FFF1E4D8
 
         }
         //dark #FFAF8FC1
@@ -643,11 +664,19 @@ namespace Alarm_Clock
             light_dark2.Visibility = Visibility.Hidden;
             light_dark.Visibility = Visibility.Visible;
 
-            //change background to white 
+            //change background to light (FFD7C8EA) 
             var bc = new BrushConverter();
-            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFFFFFFF");
+            this.MainWin.Background = (Brush)bc.ConvertFrom("#FFF1E4D8");
+            //#FFF1E4D8
 
         }
-    }
-}
 
+        private void butSnoozeErr_Click(object sender, RoutedEventArgs e)
+        {
+            this.SnoozeError.Visibility = Visibility.Hidden;
+            this.butSnoozeErr.Visibility = Visibility.Hidden;
+        }
+
+    }
+
+}

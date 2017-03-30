@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Alarm_Clock"
              mc:Ignorable="d" Height="53.18" Width="420.925">
     <Grid Margin="0,0,0,263">
-        <Button x:Name="alarm_button" Content="TI : ME AM" HorizontalAlignment="Left" Height="61" Margin="0,0,0,-61" VerticalAlignment="Top" Width="380" FontSize="36" Click="alarm_button_Click" />
+        <Button x:Name="alarm_button" Content="TI : ME AM" HorizontalAlignment="Left" Height="61" Margin="0,0,0,-61" VerticalAlignment="Top" Width="380" FontSize="36" Click="alarm_button_Click" BorderBrush="#FF9B9B9B" Background="#FFBEBEBE" BorderThickness="2" />
         <Label x:Name="alarm_title" Content="alarm title" HorizontalAlignment="Left" Margin="5,-7,0,-27" VerticalAlignment="Top" Height="34" Width="297" FontSize="18"/>
         <Button x:Name="deleteButton" FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" HorizontalAlignment="Left" Height="61" Margin="370,0,0,-61" VerticalAlignment="Top" Width="50" BorderThickness="0,1,1,1" FontSize="36" Click="deleteButton_Click"/>
     </Grid>

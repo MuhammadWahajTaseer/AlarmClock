@@ -102,7 +102,7 @@
             <BeginStoryboard Storyboard="{StaticResource OnLoaded1}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid x:Name="MainWin" Background="White">
+    <Grid x:Name="MainWin" Background="#FFF1E4D8">
         <Grid.RowDefinitions>
             <RowDefinition Height="0*"/>
             <RowDefinition/>
@@ -112,52 +112,45 @@
 
         </Canvas>
 
-        <Label x:Name="digitalTime" Content="00:00:00" Margin="173,147,1311,911" FontSize="108" FontFamily="Century Gothic" Grid.RowSpan="2" Visibility="Visible"/>
-        <Label x:Name="date" Content="MMM DD, YYYY" HorizontalAlignment="Left" Margin="173,103,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="56" Width="276" FontSize="36" Visibility="Visible"/>
-        <Label x:Name="amORpm" Content="AM" HorizontalAlignment="Left" Margin="609,215,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="54" Width="118" FontSize="36" Visibility="Visible"/>
+        <Label x:Name="digitalTime" Content="00:00:00" Margin="173,147,1311,911" FontSize="108" FontFamily="Century Gothic" Grid.RowSpan="2" Visibility="Visible" BorderThickness="2" Foreground="#FF978A8A"/>
+        <Label x:Name="date" Content="MMM DD, YYYY" HorizontalAlignment="Left" Margin="173,103,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="56" Width="276" FontSize="36" Visibility="Visible" Foreground="#FF978A8A"/>
+        <Label x:Name="amORpm" Content="AM" HorizontalAlignment="Left" Margin="609,215,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Height="54" Width="118" FontSize="36" Visibility="Visible" Foreground="#FF978A8A"/>
         <StackPanel x:Name="stacky" HorizontalAlignment="Left" Height="1180" Margin="1320,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="590"/>
 
-        <Canvas x:Name="slideMenu" HorizontalAlignment="Left" Height="1200" Grid.RowSpan="2" VerticalAlignment="Top" Width="600" Margin="1920,0,-600,0" Background="#FF8723FF">
-            <Label x:Name="setAlarm_hours" Content="12" Canvas.Left="116" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
-            <Label x:Name="setAlarm_minutes" Content="00" Canvas.Left="305" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
-            <Label x:Name="setAlarm_colon" Content=":" Canvas.Left="209" Canvas.Top="140" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="Black"/>
-            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_incHours_Click_1"/>
-            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_incMinutes_Click"/>
-            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decHours_Click"/>
-            <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="setAlarm_decMinutes_Click"/>
-            <Button x:Name="setAlarm_amORpm" Content="AM" Height="89" Canvas.Left="462" Canvas.Top="186" Width="100" FontSize="55" Background="{x:Null}" Click="setAlarm_amORpm_Click" BorderBrush="{x:Null}"/>
-            <Button x:Name="setAlarm_save" Content="SAVE" Height="77" Canvas.Left="311" Canvas.Top="901" Width="251" FontSize="55" Background="Black" Click="setAlarm_save_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" BorderThickness="2"/>
-            <Button x:Name="setAlarm_delete" Content="DELETE" Height="77" Canvas.Left="48" Canvas.Top="901" Width="236" FontSize="55" Background="Black" Click="setAlarm_delete_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" BorderThickness="2" Visibility="Hidden"/>
-            <Button x:Name="editAlarm_save" Content="CHANGE" Height="77" Canvas.Left="311" Canvas.Top="899" Width="257" FontSize="55" Background="Black" Click="editAlarm_save_Click" BorderBrush="White" Foreground="White" FontFamily="Century Gothic" BorderThickness="2" Visibility="Hidden"/>
-            <Button x:Name="sun_button" Content="SUN" Canvas.Left="31" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="sat_button" Content="SAT" Canvas.Left="502" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="fri_button" Content="FRI" Canvas.Left="423" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="thurs_button" Content="THURS" Canvas.Left="345" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="wed_button" Content="WED" Canvas.Left="266" Canvas.Top="459" Width="71" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="tues_button" Content="TUES" Canvas.Left="189" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Button x:Name="mon_button" Content="MON" Canvas.Left="111" Canvas.Top="459" Width="70" Height="88" Background="#FF3254C5" FontSize="20" Foreground="White" BorderThickness="2" BorderBrush="White"/>
-            <Label x:Name="alarm_label" Content="Alarm name" Canvas.Left="118" Canvas.Top="626" Height="42" Width="140" Foreground="White" FontSize="20"/>
-            <TextBox x:Name="alarm_name" Height="40" Canvas.Left="271" TextWrapping="Wrap" Canvas.Top="626" Width="229" FontSize="20" Background="#FF8723FF" Foreground="White"/>
+        <Canvas x:Name="slideMenu" HorizontalAlignment="Left" Height="1200" Grid.RowSpan="2" VerticalAlignment="Top" Width="600" Margin="1920,0,-600,0" Background="#FF94C7BA">
+            <Label x:Name="setAlarm_hours" Content="12" Canvas.Left="116" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="#FF254F3C"/>
+            <Label x:Name="setAlarm_minutes" Content="00" Canvas.Left="305" Canvas.Top="146" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="#FF254F3C"/>
+            <Label x:Name="setAlarm_colon" Content=":" Canvas.Left="209" Canvas.Top="140" FontSize="108" Height="180" Width="126" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Century Gothic" Foreground="#FF254F3C"/>
+            <Button x:Name="setAlarm_incHours" Content="p" Canvas.Left="138" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF254F3C" Click="setAlarm_incHours_Click_1"/>
+            <Button x:Name="setAlarm_incMinutes" Content="p" Canvas.Left="329" Canvas.Top="90" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF254F3C" Click="setAlarm_incMinutes_Click"/>
+            <Button x:Name="setAlarm_decHours" Content="q" Canvas.Left="138" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF254F3C" Click="setAlarm_decHours_Click"/>
+            <Button x:Name="setAlarm_decMinutes" Content="q" Canvas.Left="329" Canvas.Top="301" Width="75" Height="75" FontSize="72" FontFamily="Wingdings 3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF254F3C" Click="setAlarm_decMinutes_Click"/>
+            <Button x:Name="setAlarm_amORpm" Content="AM" Height="89" Canvas.Left="452" Canvas.Top="186" Width="100" FontSize="55" Background="{x:Null}" Click="setAlarm_amORpm_Click" BorderBrush="{x:Null}" HorizontalAlignment="Center" Foreground="#FF254F3C"/>
+            <Button x:Name="setAlarm_save" Content="SAVE" Height="77" Canvas.Left="311" Canvas.Top="901" Width="251" FontSize="55" Background="#FF1D5552" Click="setAlarm_save_Click" BorderBrush="#FFB6FBF5" Foreground="#FFF3FFFE" FontFamily="Century Gothic" BorderThickness="2"/>
+            <Button x:Name="setAlarm_delete" Content="DELETE" Height="77" Canvas.Left="48" Canvas.Top="901" Width="236" FontSize="55" Background="#FF1D5552" Click="setAlarm_delete_Click" BorderBrush="#FFB6FBF5" Foreground="White" FontFamily="Century Gothic" BorderThickness="2" Visibility="Hidden"/>
+            <Button x:Name="editAlarm_save" Content="CHANGE" Height="79" Canvas.Left="311" Canvas.Top="899" Width="257" FontSize="55" Background="#FF1D5552" Click="editAlarm_save_Click" BorderBrush="#FFB6FBF5" Foreground="White" FontFamily="Century Gothic" BorderThickness="2" Visibility="Hidden"/>
+            <Button x:Name="sun_button" Content="SUN" Canvas.Left="31" Canvas.Top="459" Width="71" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="sat_button" Content="SAT" Canvas.Left="502" Canvas.Top="459" Width="71" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="fri_button" Content="FRI" Canvas.Left="423" Canvas.Top="459" Width="70" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="thurs_button" Content="THURS" Canvas.Left="345" Canvas.Top="459" Width="70" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="wed_button" Content="WED" Canvas.Left="266" Canvas.Top="459" Width="71" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="tues_button" Content="TUES" Canvas.Left="189" Canvas.Top="459" Width="70" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Button x:Name="mon_button" Content="MON" Canvas.Left="111" Canvas.Top="459" Width="70" Height="88" Background="#FFD8F1E4" FontSize="20" Foreground="#FF1D6454" BorderThickness="2" BorderBrush="#FF407457"/>
+            <Label x:Name="alarm_label" Content="Alarm name" Canvas.Left="118" Canvas.Top="626" Height="42" Width="140" Foreground="#FF1D5552" FontSize="20"/>
+            <TextBox x:Name="alarm_name" Height="40" Canvas.Left="271" TextWrapping="Wrap" Canvas.Top="626" Width="229" FontSize="20" Background="#FFD8F1E4" Foreground="#FF1D5552" BorderBrush="#FF407457"/>
         </Canvas>
         <Ellipse x:Name="Circle1" HorizontalAlignment="Left" Margin="66,352,0,126" Grid.RowSpan="2" Width="722" OpacityMask="Black">
             <Ellipse.Fill>
                 <RadialGradientBrush GradientOrigin="0.203,0.78">
-                    <GradientStop Color="#FF976AD6" Offset="0.936"/>
-                    <GradientStop Color="#FF3A2E53" Offset="0.39"/>
-                    <GradientStop Color="#FF7949BD" Offset="0.986"/>
-                    <GradientStop Color="#FF5E1BD3" Offset="0.056"/>
+                    <GradientStop Color="#FF8B6A48" Offset="0.936"/>
+                    <GradientStop Color="#FFB49E8B" Offset="0.386"/>
+                    <GradientStop Color="#FF7A5D43" Offset="0.988"/>
+                    <GradientStop Color="#FF594735" Offset="0.085"/>
                 </RadialGradientBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,164" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FF2C0D51"/>
-        <Ellipse x:Name="Circle3" HorizontalAlignment="Left" Margin="127,413,0,187" Grid.RowSpan="2" Width="600" OpacityMask="Black" Fill="White">
-            <Ellipse.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Ellipse.Stroke>
-        </Ellipse>
+        <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,164" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FFBEBEBE"/>
+        <Ellipse x:Name="Circle3" HorizontalAlignment="Left" Margin="127,413,0,187" Grid.RowSpan="2" Width="600" OpacityMask="Black" Fill="White"/>
         <Ellipse x:Name="Circle4" HorizontalAlignment="Left" Margin="395,0,0,455" Grid.RowSpan="2" Width="64" Fill="#FF000C59" Height="64" VerticalAlignment="Bottom" Stroke="#FF000C59" OpacityMask="#FF000C59"/>
         <Rectangle x:Name="SecondHand" HorizontalAlignment="Left" Margin="425,440,0,487" Grid.RowSpan="2" Width="4" Height="270" Fill="Black" RenderTransformOrigin="0.5,1">
             <Rectangle.Stroke>
@@ -174,7 +167,7 @@
         <Label x:Name="Label9" Content="9" HorizontalAlignment="Left" Margin="127,0,0,459" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>
         <Image x:Name="HourHand" Margin="135.06,464,0,235.34" Grid.RowSpan="2" Source="minuteHand.png" Stretch="Fill" RenderTransformOrigin="0.503,0.505" HorizontalAlignment="Left" Width="583.94" />
         <Image x:Name="MinuteHand" Margin="404,477,0,473" Grid.RowSpan="2" Source="minute-hand-mitchell-joh-.png" Stretch="Fill" HorizontalAlignment="Left" Width="47" RenderTransformOrigin="0.511,0.944" />
-        <Button x:Name="plusButton" Content="+" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="Black" Height="142" FontSize="108" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
+        <Button x:Name="plusButton" Content="+" HorizontalAlignment="Right" Margin="0,0,63,58" Grid.RowSpan="2" VerticalAlignment="Bottom" Width="142" Click="plusButton_Click" BorderBrush="#00000000" Foreground="#FF978A8A" Height="142" FontSize="110" Background="#00000000" RenderTransformOrigin="0.5,0.5" FontWeight="Bold"/>
         <Canvas x:Name="alertCanvas1" HorizontalAlignment="Left" Height="1200" Grid.RowSpan="2" VerticalAlignment="Top" Width="1920" Background="White" Opacity="0.75" Visibility="Hidden">
         </Canvas>
         <Canvas x:Name="alertCanvas2" HorizontalAlignment="Left" Height="1200" Margin="-5,0,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="1925" Opacity="0.99" Visibility="Hidden">
@@ -183,10 +176,12 @@
             <Button x:Name="snooze" Content="SNOOZE" Height="151" Canvas.Left="760" Canvas.Top="429" Width="453" FontSize="72" Click="snooze_Click"/>
 
         </Canvas>
-        <CheckBox x:Name="checkBoxDigital" Content="Hide digital clock" HorizontalAlignment="Left" Height="43" Margin="20,1098,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="274" FontSize="30" Style="{DynamicResource CheckBoxStyle1}" Checked="checkBoxDigital_Checked" Unchecked="checkBoxDigital_Unchecked"/>
-        <CheckBox x:Name="checkBoxAnalog" Content="Hide analog clock" HorizontalAlignment="Left" Height="43" Margin="20,1141,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="274" FontSize="30" Style="{DynamicResource CheckBoxStyle1}" Checked="checkBoxAnalog_Checked" Unchecked="checkBoxAnalog_UnChecked"/>
-        <Button x:Name="light_dark" Content="☾" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="40" FontSize="20" Visibility="Visible" BorderThickness="3" Background="#FFB37DC3" Foreground="White" Click="light_dark_Click"/>
-        <Button x:Name="light_dark2" Content="☀" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="40" FontSize="20" Visibility="Hidden" BorderThickness="3" Background="White" Foreground="Black" Click="light_dark2_Click"/>
+        <CheckBox x:Name="checkBoxDigital" Content="Hide digital clock" HorizontalAlignment="Left" Height="43" Margin="20,1098,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="274" FontSize="30" Style="{DynamicResource CheckBoxStyle1}" Checked="checkBoxDigital_Checked" Unchecked="checkBoxDigital_Unchecked" Foreground="#FF978A8A"/>
+        <CheckBox x:Name="checkBoxAnalog" Content="Hide analog clock" HorizontalAlignment="Left" Height="43" Margin="20,1141,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="274" FontSize="30" Style="{DynamicResource CheckBoxStyle1}" Checked="checkBoxAnalog_Checked" Unchecked="checkBoxAnalog_UnChecked" Foreground="#FF978A8A"/>
+        <Button x:Name="light_dark" Content="☾" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="40" FontSize="20" Visibility="Visible" BorderThickness="3" Background="#FF594735" Foreground="White" Click="light_dark_Click" BorderBrush="White"/>
+        <Button x:Name="light_dark2" Content="☀" HorizontalAlignment="Left" Height="36" Margin="10,10,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="40" FontSize="20" Visibility="Hidden" BorderThickness="3" Background="#FFF1E4D8" Foreground="#FFB08A82" Click="light_dark2_Click" BorderBrush="#FFB08A82"/>
+        <Label x:Name="SnoozeError" Content="An alarm was canceled due to&#xD;&#xA;another alarm ringing." HorizontalAlignment="Center" Height="261" Margin="1026,28,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="694" Background="White" BorderBrush="Red" OpacityMask="Black" BorderThickness="5" FontSize="48" Visibility="Hidden"/>
+        <Button x:Name="butSnoozeErr" Content="OK" HorizontalAlignment="Left" Height="92" Margin="1368,177,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="188" Background="White" FontSize="40" Visibility="Hidden" Click="butSnoozeErr_Click"/>
 
     </Grid>
 

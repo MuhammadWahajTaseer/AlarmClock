@@ -186,6 +186,18 @@ namespace Alarm_Clock
         }
 
         // Setters
+        public void setOrigHour(int hour)
+        {
+             this.origHour = hour;
+        }
+        public void setOrigMinute(int mint)
+        {
+            this.origMinute = mint;
+        }
+        public void setorigAmpm(int ampm)
+        {
+            this.origAmpm  = ampm;
+        }
         public void setSnooze(bool snooze)
         {
             this.snooze = snooze;
