@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Alarm_Clock
 {
-    public class Alarm
+    [Serializable]
+    public class Alarm : ISerializable
     {
         private int id;
         private int hour;
@@ -34,6 +36,19 @@ namespace Alarm_Clock
 
 
         // Constructor initializes the time
+        protected Alarm(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null) throw new System.ArgumentNullException("info");
+            this.id = (int)info.GetValue("AlarmID", typeof(int));
+            this.hour = (int)info.GetValue("AlarmHour", typeof(int));
+            this.minute = (int)info.GetValue("AlarmMin", typeof(int));
+            this.ampm = (int)info.GetValue("AlarmAMPM", typeof(int));
+            this.ringerPath = (string)info.GetValue("AlarmRingerPath", typeof(String));
+            this.origHour = (int)info.GetValue("AlarmOriginalHour", typeof(int));
+            this.origMinute = (int)info.GetValue("AlarmOriginalMin", typeof(int));
+            this.origAmpm = (int)info.GetValue("AlarmOriginalAMPM", typeof(int));
+            this.descript = (string)info.GetValue("AlarmDescription", typeof(string));
+        }
         public Alarm(int hour, int minute, int ampm, bool repeating, string words)
         {
             this.hour = hour;
@@ -71,6 +86,7 @@ namespace Alarm_Clock
             this.days = days;
             this.ringerPath = ringerPath;
         }
+
 
         // Getters
         public int getOrigHour()
@@ -128,6 +144,10 @@ namespace Alarm_Clock
             return days;
         }
 
+        public string getDescription()
+        {
+            return this.descript;
+        }
         public String getRingerPath()
         {
             return ringerPath;
@@ -198,6 +218,18 @@ namespace Alarm_Clock
         {
             ringerPath = path;
         }
-        
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("AlarmID", this.id);
+            info.AddValue("AlarmHour", this.hour);
+            info.AddValue("AlarmMin", this.minute);
+            info.AddValue("AlarmAMPM", this.ampm);
+            info.AddValue("AlarmRingerPath", this.ringerPath);
+            info.AddValue("AlarmOriginalHour", this.origHour);
+            info.AddValue("AlarmOriginalMin", this.origMinute);
+            info.AddValue("AlarmOriginalAMPM", this.origAmpm);
+            info.AddValue("AlarmDescription", this.descript);
+        }
     }
 }

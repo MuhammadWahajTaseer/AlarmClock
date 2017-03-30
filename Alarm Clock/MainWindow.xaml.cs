@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Runtime.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Alarm_Clock
 {
@@ -44,11 +47,18 @@ namespace Alarm_Clock
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
 
         AlarmRing ring = new AlarmRing();
+        private IFormatter formatter;
+        private Stream stream;
         public MainWindow()
         {
-            //initalizes the clock  
+            //initializes the clock  
             InitializeComponent();
             alarmState = false;
+            formatter = new BinaryFormatter();
+            if (File.Exists("MyFile.bin") == true)
+            {
+                loadAlarmObjects();
+            }
 
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -61,6 +71,31 @@ namespace Alarm_Clock
             this.KeyUp += MainWindow_KeyUp;
         }
 
+        // Loads the serialized objects from MyFile.bin
+        private void loadAlarmObjects()
+        {
+            stream = new FileStream("MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+            while (stream.Position != stream.Length)
+            {
+                Alarm deserializedAlarm = (Alarm)formatter.Deserialize(stream);
+                deserializedAlarm.dismissed = false;
+                alarms.AddLast(deserializedAlarm);
+
+                UserAlarm userAlarm = new UserAlarm(deserializedAlarm.getID(), deserializedAlarm);
+                userAlarm.alarm_button.Content = deserializedAlarm.getString();
+                userAlarm.alarm_title.Content = "";
+
+                uAlarms.AddLast(userAlarm);
+
+                // Updating Stack Panel
+                stacky.Children.Add(userAlarm);
+
+                // Linking the user alarm to the alarm object
+                deserializedAlarm.setUserAlarm(userAlarm);
+            }
+
+            stream.Close();
+        }
         public void slideMenuToggle(Canvas slideMenu, int menuTogg)
         {
             moveSlideMenu(slideMenu, menuTogg);
@@ -174,6 +209,7 @@ namespace Alarm_Clock
         {
             if (e.Key == Key.Escape)
             {
+                stream.Close();
                 Application.Current.Shutdown();
             }
             else if (e.Key == Key.B)
@@ -293,7 +329,7 @@ namespace Alarm_Clock
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
-            //Getting the String and putting it in the linked lisst
+            //Getting the String and putting it in the linked list
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
@@ -310,26 +346,25 @@ namespace Alarm_Clock
 
             // Linking the user alarm to the alarm object
             myAlarm.setUserAlarm(userAlarm);
- 
+
+            stream = new FileStream("MyFile.bin", FileMode.Append, FileAccess.Write, FileShare.None);
+            formatter.Serialize(stream, myAlarm);
+            stream.Close();
             slideMenuToggle(slideMenu, menuTogg);
         }
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            // itterate through the list
-            foreach (UserAlarm uAlarm in uAlarms)
-            {
-                if (uAlarm.getAlarm().getID() == currAlarm.getAlarm().getID())
-                {
-                   uAlarms.Remove(currAlarm);
-                   stacky.Children.Remove(currAlarm);
-                   break;
-                }
-            }
-            */
+           
             uAlarms.Remove(currAlarm);
             stacky.Children.Remove(currAlarm);
+
+            stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            foreach(UserAlarm uAlarm in uAlarms)
+            {
+                formatter.Serialize(stream, uAlarm.getAlarm());
+            }
+            stream.Close();
             slideMenuToggle(slideMenu, menuTogg);
         }
 
@@ -355,8 +390,6 @@ namespace Alarm_Clock
                     String checker = uAlarm.getAlarm().getHour().ToString() + ":" + min + " " + ampm;
                     ring.compareTime(uAlarm, checker);
 
-
-
                 }
             }
         }
@@ -376,9 +409,14 @@ namespace Alarm_Clock
              currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-             
-           
-             slideMenuToggle(slideMenu, menuTogg);
+
+            stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+            foreach (UserAlarm uAlarm in uAlarms)
+            {
+                formatter.Serialize(stream, uAlarm.getAlarm());
+            }
+            stream.Close();
+            slideMenuToggle(slideMenu, menuTogg);
         }
 
         // Deleting the alarm

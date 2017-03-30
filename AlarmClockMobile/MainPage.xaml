@@ -8,11 +8,12 @@
     mc:Ignorable="d">
 
     <Grid Background="LightGray">
-        <TextBlock x:Name="digitalTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Current Time" VerticalAlignment="Top" Margin="75,51,75,0" Width="284" Height="58" FontSize="36" TextAlignment="Center" LineHeight="6"/>
-        <TextBlock x:Name="dateTime" Margin="104,114,104,0" TextWrapping="Wrap" Text="Current Date" VerticalAlignment="Top" TextAlignment="Center" Height="30" FontSize="18"/>
+        <TextBlock x:Name="digitalTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="HH:MM:SS TT" VerticalAlignment="Top" Margin="75,51,75,0" Width="284" Height="58" FontSize="36" TextAlignment="Center" LineHeight="6"/>
+        <TextBlock x:Name="dateTime" Margin="104,114,104,0" TextWrapping="Wrap" Text="MMM DD, YYYY" VerticalAlignment="Top" TextAlignment="Center" Height="30" FontSize="18"/>
         <StackPanel HorizontalAlignment="Left" Height="95" VerticalAlignment="Top" Width="432" Margin="0,672,0,0" Background="#FF1B1A1A">
             <Button x:Name="homeButton" FontFamily="Segoe MDL2 Assets" Content="&#xE80F;" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Height="65" FontSize="48" Background="{x:Null}" Margin="21,15,0,0" BorderThickness="0,0,2,0" FocusVisualPrimaryBrush="Black" BorderBrush="#FFB0A388" Width="110"/>
-
+            <Button x:Name="alarmsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE916;" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Height="65" FontSize="48" Background="{x:Null}" Margin="0,-64,0,0" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="Black" BorderBrush="#FFB0A388" Width="110"/>
+            <Button x:Name="settingsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE713;" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" Height="65" FontSize="48" Background="{x:Null}" Margin="0,-64,21,15" BorderThickness="2,0,0,0" FocusVisualPrimaryBrush="Black" BorderBrush="#FFB0A388" Width="110"/>
         </StackPanel>
 
     </Grid>
