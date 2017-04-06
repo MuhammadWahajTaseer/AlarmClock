@@ -30,6 +30,8 @@ namespace Alarm_Clock
 
         public UserAlarm currAlarm;
 
+        public bool[] currDays;
+
         private int createAlarmHour = 12;
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
@@ -39,6 +41,7 @@ namespace Alarm_Clock
         private String alarmTitle;
         private double timeMult = 0;
         private static int idSet = 0;
+        private Button[] daysList;
 
         public int menuTogg = 0;
 
@@ -82,6 +85,8 @@ namespace Alarm_Clock
 
             ring.AlarmRings += Ring_AlarmRings;
 
+            daysList = new Button[7]{sun_button, mon_button, tues_button, wed_button, thurs_button,fri_button,sat_button};
+
             this.KeyUp += MainWindow_KeyUp;
         }
 
@@ -120,6 +125,11 @@ namespace Alarm_Clock
                 plusButton.Content = "+";
                 setAlarm_delete.Visibility = Visibility.Hidden;
                 alarm_name.Text = "";
+                foreach(Button p in daysList)
+                {
+                    p.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
+
+                }
             }
             else
             {
@@ -344,7 +354,11 @@ namespace Alarm_Clock
             // ** Need to also check if it's repeating and send the last bool acordingly
 
             alarmTitle = alarm_name.Text;
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle);
+
+            bool[] days = checkDays(daysList);
+
+
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle,days);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -403,6 +417,10 @@ namespace Alarm_Clock
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
+
+            updateControl(userAlarm, days);
+            
+
             uAlarms.AddLast(userAlarm);
 
             // Updating Stack Panel
@@ -415,6 +433,112 @@ namespace Alarm_Clock
             stream.Close();
             slideMenuToggle(slideMenu, menuTogg);
         }
+
+       private void updateControl(UserAlarm ala, bool[] date)
+        {
+            int counter = 0;
+            foreach (bool p in date)
+            {
+                if (p)
+                {
+                    if (counter == 0)
+                    {
+                        ala.sun_label.FontWeight = FontWeights.Bold;
+                    }
+                    else if (counter == 1)
+                    {
+                        ala.mon_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 2)
+                    {
+                        ala.tues_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 3)
+                    {
+                        ala.wed_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 4)
+                    {
+                        ala.thurs_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 5)
+                    {
+                        ala.fri_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 6)
+                    {
+                        ala.sat_label.FontWeight = FontWeights.Bold;
+
+                    }
+                }else
+                {
+                    if (counter == 0)
+                    {
+                        ala.sun_label.FontWeight = FontWeights.Regular;
+                    }
+                    else if (counter == 1)
+                    {
+                        ala.mon_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 2)
+                    {
+                        ala.tues_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 3)
+                    {
+                        ala.wed_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 4)
+                    {
+                        ala.thurs_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 5)
+                    {
+                        ala.fri_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 6)
+                    {
+                        ala.sat_label.FontWeight = FontWeights.Regular;
+
+                    }
+                }
+                counter++;
+            }
+
+        }
+       
+
+        private bool[] checkDays(Button[] list)
+        {
+            bool[] read = new bool[7];
+            int x = 0;
+            foreach(Button p in list){
+                if(p.Background == Brushes.LightSeaGreen)
+                {
+                    read[x] = true;
+                }else
+                {
+                    read[x] = false;
+                }
+                x++;
+            }
+
+            return read;
+        }
+
+
+     
+
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
@@ -526,6 +650,10 @@ namespace Alarm_Clock
             currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+
+            currAlarm.getAlarm().setDays(checkDays(daysList));
+
+            updateControl(currAlarm, currAlarm.getAlarm().getDays());
 
             stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             foreach (UserAlarm uAlarm in uAlarms)
@@ -780,9 +908,55 @@ namespace Alarm_Clock
             this.butSnoozeErr.Visibility = Visibility.Hidden;
         }
 
-
-        private void AlarmSelectSound_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Sun_Select(object sender, RoutedEventArgs e)
         {
+            changeColor(sun_button);
+        }
+
+        private void mon_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(mon_button);
+        }
+
+        private void changeColor(Button name)
+        {
+            if (name.Background != Brushes.LightSeaGreen)
+            {
+                name.Background = Brushes.LightSeaGreen;
+            }
+            else
+            {
+                name.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
+            }
+        }
+
+        private void tues_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(tues_button);
+
+        }
+
+        private void wed_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(wed_button);
+
+        }
+
+        private void thurs_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(thurs_button);
+
+        }
+
+        private void fri_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(fri_button);
+
+        }
+
+        private void sat_click(object sender, RoutedEventArgs e)
+        {
+            changeColor(sat_button);
 
         }
 

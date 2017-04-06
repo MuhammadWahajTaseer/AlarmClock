@@ -26,6 +26,7 @@ namespace Alarm_Clock
         private int rang = 0;
 
         // Arrray for which days to ring, STARTS ON SUNDAY
+        // SUN MON TUES WED THURS SAT
         private bool[] days = { false, false, false, false, false, false, false };
 
         // path for the ringer sound file
@@ -49,7 +50,7 @@ namespace Alarm_Clock
             this.origAmpm = (int)info.GetValue("AlarmOriginalAMPM", typeof(int));
             this.descript = (string)info.GetValue("AlarmDescription", typeof(string));
         }
-        public Alarm(int hour, int minute, int ampm, bool repeating, string words)
+        public Alarm(int hour, int minute, int ampm, bool repeating, string words,bool[]days)
         {
             this.hour = hour;
             this.minute = minute;
@@ -58,7 +59,9 @@ namespace Alarm_Clock
             this.origMinute = minute;
             this.origAmpm = ampm;
             this.descript = words;
-    }
+            this.days = days;
+
+        }
 
         // Constructor that initializes the time as well as days 
         public Alarm(int hour, int minute, int ampm, bool repeating, bool[] days)
@@ -189,6 +192,11 @@ namespace Alarm_Clock
         public void setOrigHour(int hour)
         {
              this.origHour = hour;
+        }
+
+        public void setDays(bool[] day)
+        {
+            this.days = day;
         }
         public void setOrigMinute(int mint)
         {

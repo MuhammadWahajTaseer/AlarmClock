@@ -86,11 +86,53 @@ namespace Alarm_Clock
             alarm_title.Content = al.getName();
             win.alarm_name.Text = al.getName();
 
-            win.AlarmSelectSound.Visibility = Visibility.Visible;
+            int counter = 0;
+            foreach(bool p in al.getDays())
+            {
+               
+                if(counter == 0)
+                {
+                    changeColor(win.sun_button, p);
+                }else if(counter == 1)
+                {
+                     changeColor(win.mon_button, p);
+                }else if(counter == 2)
+                {
+                    changeColor(win.tues_button, p);
+                }else if(counter == 3)
+                {
+                    changeColor(win.wed_button, p);
+
+                }else if(counter == 4)
+                {
+                    changeColor(win.thurs_button, p);
+
+                }else if(counter == 5)
+                {
+                    changeColor(win.fri_button, p);
+
+                }else if(counter == 6){
+                    changeColor(win.sat_button, p);
+
+                }
+                counter++;
+
+            }
+
             //  set changed alarm values for the alrm in alarms linked list
 
-
             // }
+        }
+        private void changeColor(Button name, bool value)
+        {
+            if (value)
+            {
+                name.Background = Brushes.LightSeaGreen;
+            }
+            else
+            {
+                name.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
+            }
         }
 
         private void snooze_Click(object sender, RoutedEventArgs e)
