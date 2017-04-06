@@ -359,49 +359,42 @@ namespace Alarm_Clock
 
             if (s.Equals("Default"))//if user selected default alarm sound 
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"Default.wav");
 
             }
 
             else if (s.Equals("Metal Crunch"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"metal_crunch.wav");
 
             }
 
             else if (s.Equals("Gun Shot"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"gun.wav");
 
             }
             
             else if (s.Equals("Buzz"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"neon_light.wav");
 
             }
 
             else if (s.Equals("Hammer"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"hammer_anvil2.wav");
 
             }
 
             else if (s.Equals("Kiss"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"kiss_x.wav");
 
             }
 
             else if (s.Equals("Laser"))
             {
-                label.Content = s;
                 userAlarm.getAlarm().setRingerPath(@"laser_x.wav");
 
             }
@@ -487,49 +480,42 @@ namespace Alarm_Clock
 
             if (s.Equals("Default"))//if user selected default alarm sound 
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"Default.wav");
 
             }
 
             else if (s.Equals("Metal Crunch"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"metal_crunch.wav");
 
             }
 
             else if (s.Equals("Gun Shot"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"gun.wav");
 
             }
 
             else if (s.Equals("Buzz"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"neon_light.wav");
 
             }
 
             else if (s.Equals("Hammer"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"hammer_anvil2.wav");
 
             }
 
             else if (s.Equals("Kiss"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"kiss_x.wav");
 
             }
 
             else if (s.Equals("Laser"))
             {
-                label.Content = s;
                 currAlarm.getAlarm().setRingerPath(@"laser_x.wav");
 
             }
