@@ -121,22 +121,4 @@
   <data name="Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Debug\Default.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gun1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\gun.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hammer_anvil2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\hammer_anvil2.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="kiss_x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\kiss_x.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="laser_x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\laser_x.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="metal_crunch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\metal_crunch.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="neon_light" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\neon_light.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>

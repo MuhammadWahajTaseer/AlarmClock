@@ -36,7 +36,7 @@ namespace AlarmLibrary
                 _days = value;
             }
         }
-        public Alarm(int hour, int minute, int ampm, string words)
+        public Alarm(int hour, int minute, int ampm, string words, bool repeating)
         {
             this.hour = hour;
             this.minute = minute;
@@ -45,6 +45,8 @@ namespace AlarmLibrary
             this.origMinute = minute;
             this.origAmpm = ampm;
             this.descript = words;
+            this.repeating = repeating;
+           
         }
         /*protected Alarm(SerializationInfo info, StreamingContext context)
         {
