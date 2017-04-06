@@ -193,6 +193,11 @@ namespace Alarm_Clock
         {
              this.origHour = hour;
         }
+
+        public void setDays(bool[] day)
+        {
+            this.days = day;
+        }
         public void setOrigMinute(int mint)
         {
             this.origMinute = mint;

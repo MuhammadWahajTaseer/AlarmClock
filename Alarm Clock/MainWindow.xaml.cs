@@ -30,6 +30,8 @@ namespace Alarm_Clock
 
         public UserAlarm currAlarm;
 
+        public bool[] currDays;
+
         private int createAlarmHour = 12;
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
@@ -358,48 +360,8 @@ namespace Alarm_Clock
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
-            int counter = 0;
-            foreach(bool p in days)
-            {
-                if (p)
-                {
-                    if(counter == 0)
-                    {
-                        userAlarm.sun_label.FontWeight = FontWeights.Bold;
-                    }else if (counter == 1)
-                    {
-                        userAlarm.mon_label.FontWeight = FontWeights.Bold;
 
-                    }
-                    else if (counter == 2)
-                    {
-                        userAlarm.tues_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 3)
-                    {
-                        userAlarm.wed_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 4)
-                    {
-                        userAlarm.thurs_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 5)
-                    {
-                        userAlarm.fri_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if(counter == 6)
-                    {
-                        userAlarm.sat_label.FontWeight = FontWeights.Bold;
-
-                    }
-                }
-                counter++;
-            }
-
+            updateControl(userAlarm, days);
             
 
             uAlarms.AddLast(userAlarm);
@@ -415,10 +377,89 @@ namespace Alarm_Clock
             slideMenuToggle(slideMenu, menuTogg);
         }
 
-        private void boldDate()
+       private void updateControl(UserAlarm ala, bool[] date)
         {
+            int counter = 0;
+            foreach (bool p in date)
+            {
+                if (p)
+                {
+                    if (counter == 0)
+                    {
+                        ala.sun_label.FontWeight = FontWeights.Bold;
+                    }
+                    else if (counter == 1)
+                    {
+                        ala.mon_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 2)
+                    {
+                        ala.tues_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 3)
+                    {
+                        ala.wed_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 4)
+                    {
+                        ala.thurs_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 5)
+                    {
+                        ala.fri_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 6)
+                    {
+                        ala.sat_label.FontWeight = FontWeights.Bold;
+
+                    }
+                }else
+                {
+                    if (counter == 0)
+                    {
+                        ala.sun_label.FontWeight = FontWeights.Regular;
+                    }
+                    else if (counter == 1)
+                    {
+                        ala.mon_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 2)
+                    {
+                        ala.tues_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 3)
+                    {
+                        ala.wed_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 4)
+                    {
+                        ala.thurs_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 5)
+                    {
+                        ala.fri_label.FontWeight = FontWeights.Regular;
+
+                    }
+                    else if (counter == 6)
+                    {
+                        ala.sat_label.FontWeight = FontWeights.Regular;
+
+                    }
+                }
+                counter++;
+            }
 
         }
+       
 
         private bool[] checkDays(Button[] list)
         {
@@ -439,7 +480,7 @@ namespace Alarm_Clock
         }
 
 
-
+     
 
 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
@@ -506,6 +547,10 @@ namespace Alarm_Clock
              currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
              currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+
+            currAlarm.getAlarm().setDays(checkDays(daysList));
+
+            updateControl(currAlarm, currAlarm.getAlarm().getDays());
 
             stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             foreach (UserAlarm uAlarm in uAlarms)
