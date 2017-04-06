@@ -54,6 +54,18 @@ namespace Alarm_Clock
         {
             //initializes the clock  
             InitializeComponent();
+
+            //initalizes the combo-box for selecting the alarm sound 
+            this.AlarmSelectSound.SelectedValuePath = "Key";
+            this.AlarmSelectSound.DisplayMemberPath = "Value";
+            //how works | value = string of the sound clip | text = what is displayed on the combo box | (Value, Text) 
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Default"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Metal Crunch"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Gun Shot"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Buzz"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Hammer"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Kiss"));
+            this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Laser"));
             alarmState = false;
             formatter = new BinaryFormatter();
             if (File.Exists("MyFile.bin") == true)
@@ -340,9 +352,61 @@ namespace Alarm_Clock
             String temp = myAlarm.getString();
             alarms.AddLast(myAlarm);
 
+            String s = AlarmSelectSound.Text;
+            
             // Creating new User Alarm and adding it to linked list
             UserAlarm userAlarm = new UserAlarm(idSet, myAlarm);
-            userAlarm.getAlarm().setRingerPath(@"Default.wav");
+
+            if (s.Equals("Default"))//if user selected default alarm sound 
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"Default.wav");
+
+            }
+
+            else if (s.Equals("Metal Crunch"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"metal_crunch.wav");
+
+            }
+
+            else if (s.Equals("Gun Shot"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"gun.wav");
+
+            }
+            
+            else if (s.Equals("Buzz"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"neon_light.wav");
+
+            }
+
+            else if (s.Equals("Hammer"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"hammer_anvil2.wav");
+
+            }
+
+            else if (s.Equals("Kiss"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"kiss_x.wav");
+
+            }
+
+            else if (s.Equals("Laser"))
+            {
+                label.Content = s;
+                userAlarm.getAlarm().setRingerPath(@"laser_x.wav");
+
+            }
+
+            // userAlarm.getAlarm().setRingerPath(@"one.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -416,13 +480,66 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setOrigHour(createAlarmHour);
              currAlarm.getAlarm().setOrigMinute(createAlarmMin);
              currAlarm.getAlarm().setorigAmpm(createAlarmAMPM);
+            // currAlarm.getAlarm().setRingerPath(AlarmSelectSound.Text);
 
-             currAlarm.getAlarm().dismissed = false;
-             currAlarm.getAlarm().setSnooze(false);
-             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
-             currAlarm.alarm_title.Content = alarm_name.Text;
+
+            String s = AlarmSelectSound.Text;
+
+            if (s.Equals("Default"))//if user selected default alarm sound 
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"Default.wav");
+
+            }
+
+            else if (s.Equals("Metal Crunch"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"metal_crunch.wav");
+
+            }
+
+            else if (s.Equals("Gun Shot"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"gun.wav");
+
+            }
+
+            else if (s.Equals("Buzz"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"neon_light.wav");
+
+            }
+
+            else if (s.Equals("Hammer"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"hammer_anvil2.wav");
+
+            }
+
+            else if (s.Equals("Kiss"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"kiss_x.wav");
+
+            }
+
+            else if (s.Equals("Laser"))
+            {
+                label.Content = s;
+                currAlarm.getAlarm().setRingerPath(@"laser_x.wav");
+
+            }
+
+            currAlarm.getAlarm().dismissed = false;
+            currAlarm.getAlarm().setSnooze(false);
+            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+            currAlarm.alarm_title.Content = alarm_name.Text;
                                                   
-             currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
+            currAlarm.alarm_button.Content = currAlarm.getAlarm().getString();
 
             stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
             foreach (UserAlarm uAlarm in uAlarms)
@@ -675,6 +792,12 @@ namespace Alarm_Clock
         {
             this.SnoozeError.Visibility = Visibility.Hidden;
             this.butSnoozeErr.Visibility = Visibility.Hidden;
+        }
+
+
+        private void AlarmSelectSound_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
     }

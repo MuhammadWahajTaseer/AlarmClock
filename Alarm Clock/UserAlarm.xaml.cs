@@ -86,8 +86,7 @@ namespace Alarm_Clock
             alarm_title.Content = al.getName();
             win.alarm_name.Text = al.getName();
 
-
-
+            win.AlarmSelectSound.Visibility = Visibility.Visible;
             //  set changed alarm values for the alrm in alarms linked list
 
 

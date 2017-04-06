@@ -150,7 +150,7 @@ namespace Alarm_Clock
         }
         public String getRingerPath()
         {
-            return ringerPath;
+            return this.ringerPath;
         }
 
         public UserAlarm getUAlarm()
@@ -228,7 +228,7 @@ namespace Alarm_Clock
         //....................
         public void setRingerPath(String path)
         {
-            ringerPath = path;
+            this.ringerPath = path;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
