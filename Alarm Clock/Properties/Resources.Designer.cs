@@ -72,9 +72,27 @@ namespace Alarm_Clock.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream gun1 {
+        internal static System.IO.UnmanagedMemoryStream drumRoll {
             get {
-                return ResourceManager.GetStream("gun1", resourceCulture);
+                return ResourceManager.GetStream("drumRoll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream gun {
+            get {
+                return ResourceManager.GetStream("gun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream hair_dryer {
+            get {
+                return ResourceManager.GetStream("hair_dryer", resourceCulture);
             }
         }
         
