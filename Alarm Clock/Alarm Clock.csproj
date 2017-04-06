@@ -136,6 +136,33 @@
   <ItemGroup>
     <None Include="bin\Debug\Default.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\Default.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\drumRoll.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\gun.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\hair_dryer.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\hammer_anvil2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\kiss_x.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\laser_x.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\metal_crunch.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ringtones\neon_light.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
