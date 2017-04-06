@@ -358,6 +358,50 @@ namespace Alarm_Clock
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
+            int counter = 0;
+            foreach(bool p in days)
+            {
+                if (p)
+                {
+                    if(counter == 0)
+                    {
+                        userAlarm.sun_label.FontWeight = FontWeights.Bold;
+                    }else if (counter == 1)
+                    {
+                        userAlarm.mon_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 2)
+                    {
+                        userAlarm.tues_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 3)
+                    {
+                        userAlarm.wed_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 4)
+                    {
+                        userAlarm.thurs_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if (counter == 5)
+                    {
+                        userAlarm.fri_label.FontWeight = FontWeights.Bold;
+
+                    }
+                    else if(counter == 6)
+                    {
+                        userAlarm.sat_label.FontWeight = FontWeights.Bold;
+
+                    }
+                }
+                counter++;
+            }
+
+            
+
             uAlarms.AddLast(userAlarm);
 
             // Updating Stack Panel
@@ -369,6 +413,11 @@ namespace Alarm_Clock
             formatter.Serialize(stream, myAlarm);
             stream.Close();
             slideMenuToggle(slideMenu, menuTogg);
+        }
+
+        private void boldDate()
+        {
+
         }
 
         private bool[] checkDays(Button[] list)

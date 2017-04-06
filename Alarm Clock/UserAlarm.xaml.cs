@@ -86,10 +86,7 @@ namespace Alarm_Clock
             alarm_title.Content = al.getName();
             win.alarm_name.Text = al.getName();
 
-
-
             //  set changed alarm values for the alrm in alarms linked list
-
 
             // }
         }
