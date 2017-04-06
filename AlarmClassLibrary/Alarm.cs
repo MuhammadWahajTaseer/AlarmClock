@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlarmObj
+namespace AlarmLibrary
 {
-    [Serializable]
-    public class Alarm : ISerializable
+    
+    public class Alarm
     {
         public int id { get; set; }
         public int hour { get; set; }
@@ -37,7 +36,17 @@ namespace AlarmObj
                 _days = value;
             }
         }
-        protected Alarm(SerializationInfo info, StreamingContext context)
+        public Alarm(int hour, int minute, int ampm, string words)
+        {
+            this.hour = hour;
+            this.minute = minute;
+            this.ampm = ampm;
+            this.origHour = hour;
+            this.origMinute = minute;
+            this.origAmpm = ampm;
+            this.descript = words;
+        }
+        /*protected Alarm(SerializationInfo info, StreamingContext context)
         {
             if (info == null) throw new System.ArgumentNullException("info");
             this.id = (int)info.GetValue("AlarmID", typeof(int));
@@ -49,7 +58,7 @@ namespace AlarmObj
             this.origMinute = (int)info.GetValue("AlarmOriginalMin", typeof(int));
             this.origAmpm = (int)info.GetValue("AlarmOriginalAMPM", typeof(int));
             this.descript = (string)info.GetValue("AlarmDescription", typeof(string));
-        }
+        }*/
 
         public String getString()
         {
@@ -72,7 +81,7 @@ namespace AlarmObj
             }
             return temp;
         }
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        /*public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("AlarmID", this.id);
             info.AddValue("AlarmHour", this.hour);
@@ -83,6 +92,6 @@ namespace AlarmObj
             info.AddValue("AlarmOriginalMin", this.origMinute);
             info.AddValue("AlarmOriginalAMPM", this.origAmpm);
             info.AddValue("AlarmDescription", this.descript);
-        }
+        }*/
     }
 }

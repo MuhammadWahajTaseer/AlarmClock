@@ -58,7 +58,7 @@ namespace Alarm_Clock
             this.origMinute = minute;
             this.origAmpm = ampm;
             this.descript = words;
-    }
+        }
 
         // Constructor that initializes the time as well as days 
         public Alarm(int hour, int minute, int ampm, bool repeating, bool[] days)
