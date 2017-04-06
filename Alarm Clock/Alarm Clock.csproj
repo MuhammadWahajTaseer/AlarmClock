@@ -115,6 +115,27 @@
   <ItemGroup>
     <Resource Include="minute-hand-mitchell-joh-.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\gun.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\hammer_anvil2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\kiss_x.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\laser_x.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\metal_crunch.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\neon_light.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Default.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
