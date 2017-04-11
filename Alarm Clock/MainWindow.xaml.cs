@@ -357,6 +357,7 @@ namespace Alarm_Clock
 
             bool[] days = checkDays(daysList);
 
+            
 
             Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle,days);
             myAlarm.setID(idSet + 1);
@@ -373,7 +374,7 @@ namespace Alarm_Clock
 
             if (s.Equals("Default"))//if user selected default alarm sound 
             {
-                userAlarm.getAlarm().setRingerPath(Alarm_Clock.Properties.Resources.Default);
+                userAlarm.getAlarm().setRingerPath(@"\Ringtones\Default.wav");
 
             }
 
