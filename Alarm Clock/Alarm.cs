@@ -35,7 +35,8 @@ namespace Alarm_Clock
 
         // Linnking to user conrol (user alarm)
         private UserAlarm  userAlarm =  null;
-
+        private UnmanagedMemoryStream actualRinger;
+        
 
         // Constructor initializes the time
         protected Alarm(SerializationInfo info, StreamingContext context)
@@ -63,6 +64,7 @@ namespace Alarm_Clock
             this.days = days;
 
         }
+
 
         // Constructor that initializes the time as well as days 
         public Alarm(int hour, int minute, int ampm, bool repeating, bool[] days)
@@ -96,6 +98,14 @@ namespace Alarm_Clock
         public int getOrigHour()
         {
             return this.origHour;
+        }
+        public UnmanagedMemoryStream getActualRinger(String ringer)
+        {
+            UnmanagedMemoryStream ringerPath = null;
+            if (ringer == @"Default.wav"){
+                ringerPath = Alarm_Clock.Properties.Resources.Default;
+            }
+            return ringerPath;
         }
         public int getOrigMinute()
         {
