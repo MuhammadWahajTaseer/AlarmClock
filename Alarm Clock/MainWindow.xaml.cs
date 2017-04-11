@@ -166,7 +166,7 @@ namespace Alarm_Clock
 
             if (e.currAl.getAlarm().dismissed == false)
             {
-                player = new System.Media.SoundPlayer(e.currAl.getAlarm().getRingerPath());
+                player = new System.Media.SoundPlayer(e.currAl.getAlarm().getActualRinger(e.currAl.getAlarm().getRingerPath()));
                 player.Load();
                 player.Play();
                 currAlarm = e.currAl;

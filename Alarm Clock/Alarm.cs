@@ -278,7 +278,7 @@ namespace Alarm_Clock
         //....................
         public void setRingerPath(String path)
         {
-            this.ringerPath = this.ringerPath + path;
+            this.ringerPath = path;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
