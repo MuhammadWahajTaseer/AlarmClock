@@ -31,7 +31,7 @@ namespace Alarm_Clock
         private bool[] days = { false, false, false, false, false, false, false };
 
         // path for the ringer sound file
-        private String ringerPath = null;
+        private String ringerPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
 
         // Linnking to user conrol (user alarm)
         private UserAlarm  userAlarm =  null;
@@ -237,7 +237,7 @@ namespace Alarm_Clock
         //....................
         public void setRingerPath(String path)
         {
-            this.ringerPath = path;
+            this.ringerPath = this.ringerPath + path;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
