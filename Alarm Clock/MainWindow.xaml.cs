@@ -373,7 +373,7 @@ namespace Alarm_Clock
 
             if (s.Equals("Default"))//if user selected default alarm sound 
             {
-                userAlarm.getAlarm().setRingerPath(@"Default.wav");
+                userAlarm.getAlarm().setRingerPath(Alarm_Clock.Properties.Resources.Default);
 
             }
 
