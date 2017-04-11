@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -250,6 +251,11 @@ namespace Alarm_Clock
             info.AddValue("AlarmOriginalMin", this.origMinute);
             info.AddValue("AlarmOriginalAMPM", this.origAmpm);
             info.AddValue("AlarmDescription", this.descript);
+        }
+
+        internal void setRingerPath(UnmanagedMemoryStream @default)
+        {
+            throw new NotImplementedException();
         }
     }
 }

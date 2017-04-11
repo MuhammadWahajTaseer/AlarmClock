@@ -12,7 +12,13 @@ namespace AlarmLibrary
         private int createAlarmHour = 12;
         private int createAlarmMin = 0;
         private int createAlarmAMPM = 0;
+        public LinkedList<Alarm> alarms = new LinkedList<Alarm>();
+        public LinkedList<UserAlarmViewModel> uAlarms = new LinkedList<UserAlarmViewModel>();
 
+        public AlarmViewModel()
+        {
+
+        }
         public void setAlarm_decMinutes(Label label)
         {
             //if there are 0 mins in the label clicking up will change it to 59 mins
@@ -107,10 +113,15 @@ namespace AlarmLibrary
                 label.Content = "AM";
             }
         }
-        public void createAlarm(LinkedList<UserAlarmViewModel> userAlarm)
+        public void createAlarm()
         {
             UserAlarmViewModel uAlarm = new AlarmLibrary.UserAlarmViewModel();
-            Alarm alarm = new Alarm();
+            Alarm alarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, "test", false);
+            alarm.dismissed = false;
+
+            uAlarms.AddLast(uAlarm);
+
+
 
         }
 
