@@ -102,9 +102,40 @@ namespace Alarm_Clock
         public UnmanagedMemoryStream getActualRinger(String ringer)
         {
             UnmanagedMemoryStream ringerPath = null;
-            if (ringer == @"Default.wav"){
+            if (ringer.Equals(@"Default.wav")){
                 ringerPath = Alarm_Clock.Properties.Resources.Default;
             }
+
+            else if (ringer.Equals(@"metal_crunch.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.metal_crunch;
+            }
+
+            else if (ringer.Equals(@"gun.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.gun;
+            }
+
+            else if (ringer.Equals(@"neon_light.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.neon_light;
+            }
+
+            else if (ringer.Equals(@"hammer_anvil2.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.hammer_anvil2;
+            }
+
+            else if (ringer.Equals(@"kiss_x.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.kiss_x;
+            }
+
+            else if (ringer.Equals(@"laser_x.wav"))
+            {
+                ringerPath = Alarm_Clock.Properties.Resources.laser_x;
+            }
+
             return ringerPath;
         }
         public int getOrigMinute()
