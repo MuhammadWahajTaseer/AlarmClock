@@ -151,15 +151,8 @@
         </Ellipse>
         <Ellipse x:Name="Circle2" HorizontalAlignment="Left" Margin="108,394,0,164" Grid.RowSpan="2" Width="638" OpacityMask="Black" Fill="#FFBEBEBE"/>
         <Ellipse x:Name="Circle3" HorizontalAlignment="Left" Margin="127,413,0,187" Grid.RowSpan="2" Width="600" OpacityMask="Black" Fill="White"/>
-        <Ellipse x:Name="Circle4" HorizontalAlignment="Left" Margin="395,0,0,455" Grid.RowSpan="2" Width="64" Fill="#FF000C59" Height="64" VerticalAlignment="Bottom" Stroke="#FF000C59" OpacityMask="#FF000C59"/>
-        <Rectangle x:Name="SecondHand" HorizontalAlignment="Left" Margin="425,440,0,487" Grid.RowSpan="2" Width="4" Height="270" Fill="Black" RenderTransformOrigin="0.5,1">
-            <Rectangle.Stroke>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="1"/>
-                    <GradientStop Color="White" Offset="1"/>
-                </LinearGradientBrush>
-            </Rectangle.Stroke>
-        </Rectangle>
+        <Ellipse x:Name="Circle4" HorizontalAlignment="Left" Margin="395,0,0,455" Grid.RowSpan="2" Width="64" Fill="#FF3A2B1D" Height="64" VerticalAlignment="Bottom" Stroke="#FF3A2B1D" OpacityMask="#FF3A2B1D"/>
+        <Rectangle x:Name="SecondHand" HorizontalAlignment="Left" Margin="425,440,0,487" Grid.RowSpan="2" Width="4" Height="270" Fill="Black" RenderTransformOrigin="0.5,1"/>
 
         <Label x:Name="Label12" Content="12" HorizontalAlignment="Left" Margin="397,403,0,0" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Top"/>
         <Label x:Name="Label3" Content="3" HorizontalAlignment="Left" Margin="682,0,0,461" Grid.RowSpan="2" Width="64" FontSize="48" FontWeight="Bold" FontFamily="Century Gothic" TextOptions.TextFormattingMode="Display" Height="61" VerticalAlignment="Bottom"/>

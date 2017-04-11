@@ -103,8 +103,13 @@ namespace Alarm_Clock
 
         }
 
+      
+
+        
+
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
         {
+  
 
             if (e.currAl.getAlarm().dismissed == false)
             {
