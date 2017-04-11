@@ -437,83 +437,51 @@ namespace Alarm_Clock
        private void updateControl(UserAlarm ala, bool[] date)
         {
             int counter = 0;
+            TextBlock name = ala.sun_label;
             foreach (bool p in date)
-            {
+            { 
+            
+                if (counter == 0)
+                {
+                    name = ala.sun_label;
+                }
+                else if (counter == 1)
+                {
+                    name = ala.mon_label;
+                }
+                else if (counter == 2)
+                {
+                    name = ala.tues_label;
+                }
+                else if (counter == 3)
+                {
+                    name = ala.wed_label;
+                }
+                else if (counter == 4)
+                {
+                    name = ala.thurs_label;
+                }
+                else if (counter == 5)
+                {
+                    name = ala.fri_label;
+                }
+                else if (counter == 6)
+                {
+                    name = ala.sat_label;
+                }
+
                 if (p)
                 {
-                    if (counter == 0)
-                    {
-                        ala.sun_label.FontWeight = FontWeights.Bold;
-                    }
-                    else if (counter == 1)
-                    {
-                        ala.mon_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 2)
-                    {
-                        ala.tues_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 3)
-                    {
-                        ala.wed_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 4)
-                    {
-                        ala.thurs_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 5)
-                    {
-                        ala.fri_label.FontWeight = FontWeights.Bold;
-
-                    }
-                    else if (counter == 6)
-                    {
-                        ala.sat_label.FontWeight = FontWeights.Bold;
-
-                    }
+                    name.FontWeight = FontWeights.Bold;
+                                 
                 }else
                 {
-                    if (counter == 0)
-                    {
-                        ala.sun_label.FontWeight = FontWeights.Regular;
-                    }
-                    else if (counter == 1)
-                    {
-                        ala.mon_label.FontWeight = FontWeights.Regular;
-
-                    }
-                    else if (counter == 2)
-                    {
-                        ala.tues_label.FontWeight = FontWeights.Regular;
-
-                    }
-                    else if (counter == 3)
-                    {
-                        ala.wed_label.FontWeight = FontWeights.Regular;
-
-                    }
-                    else if (counter == 4)
-                    {
-                        ala.thurs_label.FontWeight = FontWeights.Regular;
-
-                    }
-                    else if (counter == 5)
-                    {
-                        ala.fri_label.FontWeight = FontWeights.Regular;
-
-                    }
-                    else if (counter == 6)
-                    {
-                        ala.sat_label.FontWeight = FontWeights.Regular;
-
-                    }
+                    name.FontWeight = FontWeights.Regular;
+                                       
                 }
                 counter++;
             }
+
 
         }
        
