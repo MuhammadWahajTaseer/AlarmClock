@@ -125,6 +125,7 @@ namespace Alarm_Clock
                 plusButton.Content = "+";
                 setAlarm_delete.Visibility = Visibility.Hidden;
                 alarm_name.Text = "";
+                checkBox.IsChecked = false;
                 foreach(Button p in daysList)
                 {
                     p.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
@@ -357,9 +358,17 @@ namespace Alarm_Clock
 
             bool[] days = checkDays(daysList);
 
-            
+            bool repeating =false;
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, false, alarmTitle,days);
+            if(checkBox.IsChecked == true)
+            {
+                repeating = true;
+            }else
+            {
+                repeating = false;
+            }
+
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, repeating, alarmTitle,days);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
 
@@ -566,6 +575,20 @@ namespace Alarm_Clock
              currAlarm.getAlarm().setOrigHour(createAlarmHour);
              currAlarm.getAlarm().setOrigMinute(createAlarmMin);
              currAlarm.getAlarm().setorigAmpm(createAlarmAMPM);
+
+            bool repeating = false;
+
+            if (checkBox.IsChecked == true)
+            {
+                repeating = true;
+            }
+            else
+            {
+                repeating = false;
+            }
+
+            currAlarm.getAlarm().setRepeat(repeating);
+            
             // currAlarm.getAlarm().setRingerPath(AlarmSelectSound.Text);
 
 
@@ -662,6 +685,12 @@ namespace Alarm_Clock
             player.Stop();
             this.alertCanvas1.Visibility = Visibility.Hidden;
             this.alertCanvas2.Visibility = Visibility.Hidden;
+            bool s = currAlarm.getAlarm().getRepeating();
+
+            if (s == false)
+            {
+                deleteAlarm();
+            }
             
 
         }

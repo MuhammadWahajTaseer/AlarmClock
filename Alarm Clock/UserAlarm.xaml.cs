@@ -56,11 +56,12 @@ namespace Alarm_Clock
             win.editAlarm_save.Visibility = Visibility.Visible;
             win.setAlarm_delete.Visibility = Visibility.Visible;
 
-            win.setCurrentAlarm(this);
+             win.setCurrentAlarm(this);
             // Finding the position of the alarm in the alarms linked list
 
            win.setAlarm_hours.Content = al.getHour();
            win.setCurrentHour(al.getHour());
+           win.checkBox.IsChecked = al.getRepeating();
             // Loads previous alarm values
             int getmin = al.getMin();
            win.setCurrentMin(al.getMin());

@@ -60,6 +60,8 @@ namespace Alarm_Clock
             this.origHour = hour;
             this.origMinute = minute;
             this.origAmpm = ampm;
+            this.repeating = repeating;
+
             this.descript = words;
             this.days = days;
 
@@ -260,6 +262,11 @@ namespace Alarm_Clock
         public void setID(int id)
         {
             this.id = id;
+        }
+
+        public void setRepeat(bool repe)
+        {
+            this.repeating = repe;
         }
 
         public void setHour(int hour)
