@@ -105,6 +105,7 @@ namespace Alarm_Clock
                 UserAlarm userAlarm = new UserAlarm(deserializedAlarm.getID(), deserializedAlarm);
                 userAlarm.alarm_button.Content = deserializedAlarm.getString();
                 userAlarm.alarm_title.Content = "";
+                this.updateControl(userAlarm, userAlarm.getAlarm().getDays());
 
                 uAlarms.AddLast(userAlarm);
 
@@ -166,18 +167,13 @@ namespace Alarm_Clock
 
         private void Ring_AlarmRings(object sender, AlarmEventArgs e)
         {
+            player = new System.Media.SoundPlayer(e.currAl.getAlarm().getActualRinger(e.currAl.getAlarm().getRingerPath()));
+            player.Load();
+            player.Play();
+            currAlarm = e.currAl;
 
-            if (e.currAl.getAlarm().dismissed == false)
-            {
-                player = new System.Media.SoundPlayer(e.currAl.getAlarm().getActualRinger(e.currAl.getAlarm().getRingerPath()));
-                player.Load();
-                player.Play();
-                currAlarm = e.currAl;
-
-                this.alertCanvas1.Visibility = Visibility.Visible;
-                this.alertCanvas2.Visibility = Visibility.Visible;
-
-            }
+            this.alertCanvas1.Visibility = Visibility.Visible;
+            this.alertCanvas2.Visibility = Visibility.Visible;
         }
 
         /* this method is an event driven system for analog and digital clock
