@@ -22,12 +22,17 @@ namespace Alarm_Clock
 
         public void compareTime(UserAlarm userAl, String timeStr, DateTime currDate)
         {
-            if (currDate.ToString("h:mm tt") == timeStr)
+            if (currDate.ToString("h:mm tt") == timeStr && this.getDays(userAl, currDate))
             {
                 AlarmEventArgs args = new AlarmEventArgs();
                 args.currAl = userAl;
                 OnAlarmRings(args);
             }
+        }
+        public bool getDays(UserAlarm userAl, DateTime currDate)
+        {
+            bool[] currDays = userAl.getAlarm().getDays();
+            return currDays[(int)currDate.DayOfWeek];
         }
     }
 }

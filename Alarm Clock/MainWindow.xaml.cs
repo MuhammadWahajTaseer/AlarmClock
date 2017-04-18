@@ -21,7 +21,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Alarm_Clock
 {
-    public partial class MainWindow : Window
+    
+    public partial class MainWindow : Window 
     {
         //these are the objects of the min, hour, and second hand for the analog clock
         private RotateTransform MinHandTr = new RotateTransform();
@@ -37,7 +38,6 @@ namespace Alarm_Clock
         private int createAlarmAMPM = 0;
 
         private System.Media.SoundPlayer player;
-        private bool alarmState;
         private String alarmTitle;
         private double timeMult = 0;
         private static int idSet = 0;
@@ -53,6 +53,8 @@ namespace Alarm_Clock
         private IFormatter formatter;
         private Stream stream;
         DateTime myDate;
+        private string currDay;
+
         public MainWindow()
         {
             //initializes the clock  
@@ -69,13 +71,13 @@ namespace Alarm_Clock
             this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Hammer"));
             this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Kiss"));
             this.AlarmSelectSound.Items.Add(new KeyValuePair<String, string>(" ", "Laser"));
-            alarmState = false;
             formatter = new BinaryFormatter();
             if (File.Exists("MyFile.bin") == true)
             {
                 loadAlarmObjects();
             }
 
+            currDay = DateTime.Now.ToString("DDDD");
             formatter = new BinaryFormatter();
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
@@ -185,7 +187,10 @@ namespace Alarm_Clock
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             myDate = DateTime.Now;
-
+            if (!myDate.ToString("DDDD").Equals(currDay))
+            {
+                currDay = myDate.ToString("DDDD");
+            }
             /* digital clock
              * displays the time, date and am
              */
@@ -368,9 +373,10 @@ namespace Alarm_Clock
                 repeating = false;
             }
 
-            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, repeating, alarmTitle,days);
+            Alarm myAlarm = new Alarm(createAlarmHour, createAlarmMin, createAlarmAMPM, repeating, alarmTitle, days);
             myAlarm.setID(idSet + 1);
             myAlarm.dismissed = false;
+            
 
             //Getting the String and putting it in the linked list
             String temp = myAlarm.getString();
@@ -423,7 +429,6 @@ namespace Alarm_Clock
 
             }
 
-            // userAlarm.getAlarm().setRingerPath(@"one.wav");
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
 
@@ -565,6 +570,7 @@ namespace Alarm_Clock
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
+            
         }
 
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
@@ -899,6 +905,17 @@ namespace Alarm_Clock
             //#FFF1E4D8
 
         }
+        private void changeColor(Button name)
+        {
+            if (name.Background != Brushes.LightSeaGreen)
+            {
+                name.Background = Brushes.LightSeaGreen;
+            }
+            else
+            {
+                name.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
+            }
+        }
 
         private void butSnoozeErr_Click(object sender, RoutedEventArgs e)
         {
@@ -916,22 +933,9 @@ namespace Alarm_Clock
             changeColor(mon_button);
         }
 
-        private void changeColor(Button name)
-        {
-            if (name.Background != Brushes.LightSeaGreen)
-            {
-                name.Background = Brushes.LightSeaGreen;
-            }
-            else
-            {
-                name.Background = new SolidColorBrush(Color.FromRgb(216, 241, 228));
-            }
-        }
-
         private void tues_click(object sender, RoutedEventArgs e)
         {
             changeColor(tues_button);
-
         }
 
         private void wed_click(object sender, RoutedEventArgs e)
@@ -943,19 +947,37 @@ namespace Alarm_Clock
         private void thurs_click(object sender, RoutedEventArgs e)
         {
             changeColor(thurs_button);
-
         }
 
         private void fri_click(object sender, RoutedEventArgs e)
         {
             changeColor(fri_button);
-
         }
 
         private void sat_click(object sender, RoutedEventArgs e)
         {
             changeColor(sat_button);
+        }
 
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            sun_button.Visibility = Visibility.Visible;
+            mon_button.Visibility = Visibility.Visible;
+            tues_button.Visibility = Visibility.Visible;
+            wed_button.Visibility = Visibility.Visible;
+            thurs_button.Visibility = Visibility.Visible;
+            fri_button.Visibility = Visibility.Visible;
+            sat_button.Visibility = Visibility.Visible;
+        }
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            sun_button.Visibility = Visibility.Hidden;
+            mon_button.Visibility = Visibility.Hidden;
+            tues_button.Visibility = Visibility.Hidden;
+            wed_button.Visibility = Visibility.Hidden;
+            thurs_button.Visibility = Visibility.Hidden;
+            fri_button.Visibility = Visibility.Hidden;
+            sat_button.Visibility = Visibility.Hidden;
         }
 
     }

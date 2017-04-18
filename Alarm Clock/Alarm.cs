@@ -35,7 +35,7 @@ namespace Alarm_Clock
 
         // Linnking to user conrol (user alarm)
         private UserAlarm  userAlarm =  null;
-        private UnmanagedMemoryStream actualRinger;
+        
         
 
         // Constructor initializes the time
