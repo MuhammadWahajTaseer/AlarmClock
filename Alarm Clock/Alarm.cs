@@ -51,7 +51,9 @@ namespace Alarm_Clock
             this.origMinute = (int)info.GetValue("AlarmOriginalMin", typeof(int));
             this.origAmpm = (int)info.GetValue("AlarmOriginalAMPM", typeof(int));
             this.descript = (string)info.GetValue("AlarmDescription", typeof(string));
+            this.repeating = (bool)info.GetValue("AlarmRepeat", typeof(bool));
             this.days = (bool[])info.GetValue("AlarmDays", typeof(bool[]));
+            this.dismissed = (bool)info.GetValue("AlarmDismissed", typeof(bool));
         }
         public Alarm(int hour, int minute, int ampm, bool repeating, string words,bool[]days)
         {
@@ -300,7 +302,9 @@ namespace Alarm_Clock
             info.AddValue("AlarmOriginalMin", this.origMinute);
             info.AddValue("AlarmOriginalAMPM", this.origAmpm);
             info.AddValue("AlarmDescription", this.descript);
+            info.AddValue("AlarmRepeat", this.repeating);
             info.AddValue("AlarmDays", this.days);
+            info.AddValue("AlarmDismissed", this.dismissed);
         }
 
         internal void setRingerPath(UnmanagedMemoryStream @default)

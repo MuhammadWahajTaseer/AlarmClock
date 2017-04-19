@@ -77,12 +77,14 @@ namespace Alarm_Clock
                 loadAlarmObjects();
             }
 
-            currDay = DateTime.Now.ToString("DDDD");
+            
             formatter = new BinaryFormatter();
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer(DispatcherPriority.Render);
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
 
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            myDate = DateTime.Now;
+            currDay = myDate.ToString("dddd");
             dispatcherTimer.Start();
 
             ring.AlarmRings += Ring_AlarmRings;
@@ -99,7 +101,6 @@ namespace Alarm_Clock
             while (stream.Position != stream.Length)
             {
                 Alarm deserializedAlarm = (Alarm)formatter.Deserialize(stream);
-                deserializedAlarm.dismissed = false;
                 alarms.AddLast(deserializedAlarm);
 
                 UserAlarm userAlarm = new UserAlarm(deserializedAlarm.getID(), deserializedAlarm);
@@ -182,10 +183,11 @@ namespace Alarm_Clock
          */
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            myDate = DateTime.Now;
-            if (!myDate.ToString("DDDD").Equals(currDay))
+            
+            if (!myDate.ToString("dddd").Equals(currDay))
             {
-                currDay = myDate.ToString("DDDD");
+                currDay = myDate.ToString("dddd");
+                resetDismissed();
             }
             /* digital clock
              * displays the time, date and am
@@ -208,6 +210,16 @@ namespace Alarm_Clock
             alarmCheck(ring);
             myDate = myDate.AddSeconds(1);
             timeMult = 0;
+        }
+        private void resetDismissed()
+        {
+            if (uAlarms.Last() != null)
+            {
+                foreach(UserAlarm u in uAlarms)
+                {
+                    u.getAlarm().dismissed = false;
+                }
+            }
         }
         private DateTime timeMultiplier(DateTime myDate)
         {
@@ -245,6 +257,10 @@ namespace Alarm_Clock
             else if (e.Key == Key.B)
             {
                 timeMult = timeMult + 60;
+            }
+            else if (e.Key == Key.C)
+            {
+                timeMult = timeMult + 86400;
             }
         }
 
@@ -566,7 +582,6 @@ namespace Alarm_Clock
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
-            
         }
 
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
@@ -676,7 +691,7 @@ namespace Alarm_Clock
             createAlarmAMPM = ampm;
         }
 
-        //for dissmissing the alarm
+        //for dismissing the alarm
         private void dismiss1_Click(object sender, RoutedEventArgs e)
         {
 
