@@ -30,6 +30,7 @@ namespace Alarm_Clock
             al = alarm;
 
         }
+        // ID Method
         public int getID()
         {
             return id;
@@ -45,6 +46,8 @@ namespace Alarm_Clock
             return al;
         }
 
+        // The method deals with the selected alarm and loads the information
+        // on to the slide menu.
         private void alarm_button_Click(object sender, RoutedEventArgs e)
         {
 
@@ -124,6 +127,8 @@ namespace Alarm_Clock
 
             // }
         }
+        
+        // This method changes the days button color
         private void changeColor(Button name, bool value)
         {
             if (value)
@@ -136,6 +141,7 @@ namespace Alarm_Clock
             }
         }
 
+        // Method that snoozes the alarm
         private void snooze_Click(object sender, RoutedEventArgs e)
         {
             MainWindow win = (MainWindow)Window.GetWindow(this);
@@ -143,6 +149,7 @@ namespace Alarm_Clock
             
         }
 
+        // Method that deletes the alarm
         private void deleteButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow win = (MainWindow)Window.GetWindow(this);

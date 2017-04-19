@@ -119,6 +119,9 @@ namespace Alarm_Clock
 
             stream.Close();
         }
+        //Checks to see if the slide menu is visible,
+        //if so then hide the menu, also reset values to default
+        //If the slide menu is not visible, it will make the menu visible
         public void slideMenuToggle(Canvas slideMenu, int menuTogg)
         {
             moveSlideMenu(slideMenu, menuTogg);
@@ -212,7 +215,7 @@ namespace Alarm_Clock
             timeMult = 0;
         }
 
-        // This method gets called whenever a new day rolls in
+        // This method gets called whenever a new day begins
         private void resetDismissed()
         {
             if (uAlarms.Last() != null)
@@ -224,7 +227,7 @@ namespace Alarm_Clock
             }
         }
 
-        // For testing purposes this method adds seconds to the date time
+        // For testing purposes this method adds 60 seconds to the current date time
         private DateTime timeMultiplier(DateTime myDate)
         {
             myDate = myDate.AddSeconds(timeMult);
@@ -387,7 +390,7 @@ namespace Alarm_Clock
             bool[] days = checkDays(daysList);
 
             bool repeating =false;
-
+            //Checks the option for repeating
             if(checkBox.IsChecked == true)
             {
                 repeating = true;
@@ -454,11 +457,10 @@ namespace Alarm_Clock
 
             userAlarm.alarm_button.Content = temp;
             userAlarm.alarm_title.Content = alarm_name.Text;
-
-
+            //Checks to see which days have been selected for the alarm to ring
+            //Update the visual on the alarm to notify user of their days selection
             updateControl(userAlarm, days);
-            
-
+            //Update linked list that contains all alarms
             uAlarms.AddLast(userAlarm);
 
             // Updating Stack Panel
@@ -471,7 +473,9 @@ namespace Alarm_Clock
             stream.Close();
             slideMenuToggle(slideMenu, menuTogg);
         }
-
+    
+        //Takes in a boolean list of days according to which days the user has selected
+        //Will update user control to bold days that where chosen
        private void updateControl(UserAlarm ala, bool[] date)
         {
             int counter = 0;
@@ -523,7 +527,9 @@ namespace Alarm_Clock
 
         }
        
-
+        //Will take in a list of buttons (day buttons from the slide menu) and
+        //check if it was selected. Return a list of boolean of whether the days
+        //were selected or not. Order: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
         private bool[] checkDays(Button[] list)
         {
             bool[] read = new bool[7];
@@ -542,10 +548,9 @@ namespace Alarm_Clock
             return read;
         }
 
-
-     
-
-
+        // This method deletes a selected alarm
+        // this is the delete method for the button beside the change button
+        // 
         private void setAlarm_delete_Click(object sender, RoutedEventArgs e)
         {
             this.deleteAlarm();
@@ -565,6 +570,9 @@ namespace Alarm_Clock
             
         }
 
+        // This method calls the compare time in Alarm Rings class
+        // it converts the time into from each alarm into a string 
+        // and calls compare Time
         private void alarmCheck(AlarmRing ring)
         {
             // Getting the alarm itme in "hh:mm" format
@@ -590,11 +598,15 @@ namespace Alarm_Clock
             }
         }
 
+        // This method sets the current Useralarm to be the currAlarm
         public void setCurrentAlarm(UserAlarm al)
         {
             currAlarm = al;
         }
 
+        // This method describes the edit functionality when a user
+        // clicks a specific alarm that was already created
+        // similar to creating an alarm.
         private void editAlarm_save_Click(object sender, RoutedEventArgs e)
         {
              currAlarm.getAlarm().setHour(createAlarmHour);
@@ -617,9 +629,6 @@ namespace Alarm_Clock
 
             currAlarm.getAlarm().setRepeat(repeating);
             
-            // currAlarm.getAlarm().setRingerPath(AlarmSelectSound.Text);
-
-
             String s = AlarmSelectSound.Text;
 
             if (s.Equals("Default"))//if user selected default alarm sound 
@@ -933,6 +942,8 @@ namespace Alarm_Clock
             //#FFF1E4D8
 
         }
+        //Takes in a button argument and check whether it was selected( color is light sea green)
+        //If pressed again, it will revert to its original color
         private void changeColor(Button name)
         {
             if (name.Background != Brushes.LightSeaGreen)
@@ -950,7 +961,7 @@ namespace Alarm_Clock
             this.SnoozeError.Visibility = Visibility.Hidden;
             this.butSnoozeErr.Visibility = Visibility.Hidden;
         }
-
+        //Check if the days button were selected, if so then toggle between colors
         private void Sun_Select(object sender, RoutedEventArgs e)
         {
             changeColor(sun_button);
@@ -969,7 +980,6 @@ namespace Alarm_Clock
         private void wed_click(object sender, RoutedEventArgs e)
         {
             changeColor(wed_button);
-
         }
 
         private void thurs_click(object sender, RoutedEventArgs e)
@@ -986,7 +996,7 @@ namespace Alarm_Clock
         {
             changeColor(sat_button);
         }
-
+        //Toggle between viewing the days of the week when the repeat checkbox is selected
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
             sun_button.Visibility = Visibility.Visible;

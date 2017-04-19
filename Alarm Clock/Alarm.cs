@@ -38,7 +38,7 @@ namespace Alarm_Clock
         
         
 
-        // Constructor initializes the time
+        // Constructor initializes the time when loading from file
         protected Alarm(SerializationInfo info, StreamingContext context)
         {
             if (info == null) throw new System.ArgumentNullException("info");
@@ -291,6 +291,8 @@ namespace Alarm_Clock
             this.ringerPath = path;
         }
 
+        // This method deals with the serialization of each alarm object
+        // it serializes all the fields needed for alarm.
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("AlarmID", this.id);
