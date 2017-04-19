@@ -211,6 +211,8 @@ namespace Alarm_Clock
             myDate = myDate.AddSeconds(1);
             timeMult = 0;
         }
+
+        // This method gets called whenever a new day rolls in
         private void resetDismissed()
         {
             if (uAlarms.Last() != null)
@@ -221,11 +223,14 @@ namespace Alarm_Clock
                 }
             }
         }
+
+        // For testing purposes this method adds seconds to the date time
         private DateTime timeMultiplier(DateTime myDate)
         {
             myDate = myDate.AddSeconds(timeMult);
             return myDate;
         }
+
         private void plusButton_Click(object sender, RoutedEventArgs e)
         {
             editAlarm_save.Visibility = Visibility.Hidden;
@@ -246,6 +251,9 @@ namespace Alarm_Clock
         }
        
         /* This method closes the program down if the escape key is hit
+         * adds a minute to the current date time when B key is hit
+         * adds 24 hours to the current date time when C key is hit
+         * 
          */
         private void MainWindow_KeyUp(object sender, KeyEventArgs e)
         {
@@ -366,6 +374,9 @@ namespace Alarm_Clock
                 setAlarm_amORpm.Content = "AM";
             }
         }
+
+        // This method saves all the current relevant information that the user selected when 
+        // creating an alarm (such as the time, whether it is repeating or not, etc.
 
         public void setAlarm_save_Click(object sender, RoutedEventArgs e)
         {
@@ -711,6 +722,12 @@ namespace Alarm_Clock
             
 
         }
+
+        // Method that describes the actions taken when a user snooze an alarm
+        // The method updates the time to be one minute after the original tiime
+        // The original time is stored for visual purposes while the time that is checked by
+        // the alarmCheck method is the new updated time
+
         public void snooze_Click(object sender, RoutedEventArgs e)
         {
 
